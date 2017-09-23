@@ -24,9 +24,9 @@ webpackConfig.module.loaders.push({
   },
 });
 
-webpackConfig.module.loaders.push({
-  test: /\.(scss|css)$/,
-  loaders: ['style-loader', 'css-loader', 'sass-loader'],
-});
+// webpackConfig.module.loaders.push({
+//   test: /\.(scss|css)$/,
+//   loaders: ['style-loader', 'css-loader', 'sass-loader'],
+// });
 
 module.exports = webpackConfig;
