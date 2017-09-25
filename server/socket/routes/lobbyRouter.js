@@ -11,6 +11,8 @@ const lobbyRouter = (game, client) => {
   //client joins a room
   //this should have the client leave the lobby and join the room (adding user to game object)
 
+  
+
 };
 
 module.exports = lobbyRouter;
