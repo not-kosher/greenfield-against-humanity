@@ -1,2 +1,13 @@
-// Function that is called from app.js
-// listens to client connection and pass client to both of router files
+const gameRoomRouter = require('./routes/gameRoomRouter.js');
+const lobbyRouter = require('./routes/lobbyRouter.js');
+
+const socketSetup = io => {
+  io.listen(8000);
+
+  const game = io.of('/game');
+
+  gameRoomRouter(game);
+  lobbyRouter(game);
+};
+
+module.exports = socketSetup;
