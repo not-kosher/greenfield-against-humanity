@@ -3,14 +3,16 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
+const server = require('http').createServer(app); 
 
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log('App now listening on port ' + process.env.PORT || 3000);
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log('App now listening on port ' + PORT);
 });
 
 //link socket
-const io = require('socket.io')(app);
+const io = require('socket.io')(server);
 const setupSocket = require('./socket');
-setupSocket(io);
+setupSocket(io);  
