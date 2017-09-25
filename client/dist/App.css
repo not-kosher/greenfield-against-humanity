@@ -1,0 +1,80 @@
+#app {
+    background-color: black;
+    color: white;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    height: 1000px;
+
+}
+
+.Logo {
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
+select {
+    background-color: black;
+    color: white;
+}
+
+
+/* Lobby */
+
+
+.Title {
+    font-size: 45px;
+    display: inline-flex;
+    padding-bottom: 15px;
+}
+
+
+.AddRoom {
+    display: inline-block;
+    vertical-align: top;
+    margin: 30px;
+    padding: 5px;
+    font-size: 22px;
+}
+
+.ClassFormContainer {
+    display: block;
+}
+
+.RoomList {
+    display: inline-block;
+    width: 650px;
+    vertical-align: top;
+    margin: 20px 0 0 50px;
+
+}
+
+.RoomEntry {
+    display: block;
+    border: 2px solid;
+    border-color: white;
+    padding: 5px; 
+
+}
+
+.roommame {
+    font-size: 30px;
+    
+}
+
+.created {
+    font-size: 18px;
+    display: block;
+}
+
+.joinbutton {
+    float: right;
+    font-size: 20px;
+    margin: 10.5px;
+    width: 50px;
+    height: 34;
+    border: 2px solid;
+    text-align: center;
+    border-color: white;
+    padding: 4px;
+
+}

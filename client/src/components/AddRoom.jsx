@@ -2,13 +2,18 @@ import React from 'react';
 
 const AddRoom = () => {
     return (
-        <div>
-            <div>Create A Room</div>
-            <input id='roomname' />
-            <select>
-                <option value="basic">Basic</option>
-            </select>
-  
+        <div className='AddRoom'>
+            <div className='ClassFormContainer'>
+                <div>Create A Room:</div>
+                <input id='roomname' />
+                <div>
+                    <span>Select a Deck:  </span>
+                    <select>
+                        <option value="basic">Basic</option>
+                    </select>
+                </div>
+                <div>Submit</div>
+            </div>
         </div>
     );
 };

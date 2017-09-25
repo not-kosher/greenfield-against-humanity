@@ -9,7 +9,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='App'>
         <Switch>
           <Route exact path='/' component={Lobby} />
         </Switch>
