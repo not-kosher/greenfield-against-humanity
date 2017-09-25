@@ -4,18 +4,26 @@ const enterLobby = (io, client) => {
   client.emit('allRooms', 'rooms array here');
 };
 
-const createRoom = (io, client, roomname) => {
-  //client creates a room 
-  //have logic on frontend to prevent an invalid roomname submission 
-  //(lobby, any existing room and no characters)
-  //this should create a new room (including a game object with alk data stored at key <roomname>),
-  //also set that user as the room creator 
-  //have the client leave the lobby, and join that room
+const createRoom = (io, client, roomname, username) => {  
+  client.leave('lobby');
+
+  //create a new game object at the key roomname, and pass in the username
+  //so this is creating an instance and then putting that instance on an activeGames object
+
+  client.join(roomname);
 };
 
-const joinRoom = (io, client, roomname) => {
-  //client joins a room
-  //this should have the client leave the lobby and join the room (adding user to game object)
+const joinRoom = (io, client, roomname, username) => {
+  client.leave('lobby');
+  //------TODO--------
+  //add the username to the game object at roomname key
+
+  client.join(roomname);
+  //emit just to the client that they have joined room
+  //this will then trigger the page to render
+  client.emit('canJoinRoom', roomname);
+  //emit to people curently in the room the new object to rerender their page
+  client.broadcast.to(roomname).emit('updateGameStatus', 'game object gets sent here');
 };
 
 module.exports = {
