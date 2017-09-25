@@ -1,4 +1,4 @@
-const lobbyRouter = game => {
+const lobbyRouter = (game, client) => {
 
 };
 
