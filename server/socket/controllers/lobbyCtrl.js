@@ -4,7 +4,7 @@ const enterLobby = (io, client) => {
   client.emit('allRooms', 'rooms array here');
 };
 
-const createRoom = (io, client, roomname, username) => {  
+const createRoom = (io, client, roomname, username, deck) => {    
   client.leave('lobby');
 
   //create a new game object at the key roomname, and pass in the username
