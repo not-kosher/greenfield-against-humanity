@@ -1,6 +1,6 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom'
-import Lobby from './Lobby'
+import { Switch, Route } from 'react-router-dom';
+import Lobby from './Lobby';
 
 class App extends React.Component {
   constructor() {
