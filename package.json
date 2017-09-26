@@ -1,0 +1,47 @@
+{
+  "name": "greenfield-against-humanity",
+  "version": "1.0.0",
+  "description": "Online multiplayer version of Cards Against Humanity",
+  "main": "server/app.js",
+  "scripts": {
+    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
+    "start": "node server/app.js",
+    "startmon": "nodemon server/app.js",
+    "dev": "webpack -d --watch",
+    "build": "webpack -p",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node server/db/seeding/seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/not-kosher/greenfield-against-humanity.git"
+  },
+  "author": "Not Kosher",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/not-kosher/greenfield-against-humanity/issues"
+  },
+  "homepage": "https://github.com/not-kosher/greenfield-against-humanity#readme",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.4",
+    "pg": "^7.3.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.2.2",
+    "sequelize": "^4.10.2",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "nodemon": "^1.12.1",
+    "webpack": "^3.6.0"
+  }
+}
