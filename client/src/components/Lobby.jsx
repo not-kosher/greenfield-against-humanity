@@ -33,7 +33,7 @@ class Lobby extends React.Component {
       this.props.history.push('/game');
     });
 
-    socket.emit('joinLobby');
+    socket.emit('enterLobby');
   }
 
   createRoom() {
