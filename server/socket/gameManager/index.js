@@ -15,14 +15,6 @@ class GameManager {
     });
   }
 
-  addPlayer(roomname, username) {
-    if (this.games[roomname]) {
-      this.games[roomname].addPlayer(username);
-    } else {
-      console.log('game room not found, did not add player');
-    }
-  }
-
   getRoom(roomname) {
     if (this.games[roomname]) {
       return this.games[roomname];
@@ -31,9 +23,14 @@ class GameManager {
     }
   }
 
+  // when a room creator closes a room to start a game
   closeRoom(roomname) {
-    // remove room from list of rooms
-    // when a room creator closes a room to start a game
+    if (this.games[roomname]) {
+      delete this.games[roomname];
+    }
+    this.rooms = this.rooms.filter((room) => {
+      return room.name !== roomname;
+    });
   }
 }
 
