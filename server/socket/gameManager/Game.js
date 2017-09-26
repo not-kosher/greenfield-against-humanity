@@ -4,14 +4,18 @@ class Game {
   constructor(roomname, username, deck) {
     this.name = roomname;
     this.turnPhase = 'loading';
-    this.deck = deck;
+    this.deck = {
+      blackCards: _.shuffle(deck.blackCards),
+      whiteCards: _.shuffle(deck.whiteCards)
+    };
     this.discarded = {
       blackCards: [],
       whiteCards: []
     };
     this.submittedCards = [];
-    this.blackCard = {};
+    this.blackCard;
     this.players = [];
+    this.czarIndex;
     this.playerCount = 0;
     this.addPlayer(username);
   }
@@ -22,33 +26,59 @@ class Game {
     this.players.push(player);
   }
 
-  shuffle() {
-    // shuffles the deck
-  }
-
   refillDeck() {
-    // refill the deck when it is empty
-    // if black or white cards are empty take from discard and put back in deck, reshuffle 
+    if (this.deck.blackCards.length === 0) {
+      this.deck.blackCards = _.shuffle(this.discarded.blackCards);
+      this.discarded.blackCards = [];
+    }
+    if (this.deck.whiteCards.length === 0) {
+      this.deck.whiteCards = _.shuffle(this.discarded.whiteCards);
+      this.discarded.whiteCards = [];
+    }
   }
 
   dealBlackCard() {
-    // move current black card to discard pile and draw the next one
-    // return the new black card
+    if (this.blackCard) {
+      this.discarded.blackCards.push(this.blackCard);
+    }
+    this.blackCard = this.deck.blackCards.pop();
+    // return this.blackCard;
   }
 
   discardSubmitted() {
-    // move submitted cards to the discard pile
-    // remove the show and chosen properties from them
+    // revert to original state of the white card before adding to discard pile
+    if (this.submittedCards.length) {
+      this.submittedCards.map((card) => {
+        delete card.show;
+        delete card.chosen;
+        delete card.username;
+        return card;
+      });
+      this.discarded.whiteCards.push(...(this.submittedCards));
+      this.submittedCards = [];
+    }
   }
 
   sortPlayers() {
-    // sort player array to determine order
+    // sort by time since the player last pooped
+    this.players.sort((a, b) => a.poopTime - b.poopTime);
+  }
+
+  advanceCzar() {
+    if (this.czarIndex === undefined) {
+      this.czarIndex = 0;
+      this.players[this.czarIndex].toggleCzar();
+    } else {
+      this.players[this.czarIndex].toggleCzar();
+      this.czarIndex = this.czarIndex % this.playerCount;
+      this.players[this.czarIndex].toggleCzar();
+    }
   }
 
   startTurn() {
-    // discard any submitted cards
-    // set next player to be the czar (or first player if none are)
-    // deal a black card
+    this.discardSubmitted();
+    this.dealBlackCard();
+    this.advanceCzar();
   }
 
   drawWhiteCard() {
