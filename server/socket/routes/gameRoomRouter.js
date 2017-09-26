@@ -9,13 +9,16 @@ const gameRoomRouter = (io, client) => {
   //turnPhase
   //playerArray
 
-  //enterRoom
+  //enterRoom roomname
+  //emit updatePlayers
+  client.on('enterRoom', roomname => gameRoomCtrl.enterRoom(io, client, roomname));
 
   //leaveRoom
 
   //startGame gets roomname
   //deal the black card (dont send back)
   //emit to room that gameHasStarted
+  client.on('startGame', roomname => gameRoomCtrl.startGame(io, client, roomname));
 
   //immeditely each client sends...
 
@@ -24,7 +27,7 @@ const gameRoomRouter = (io, client) => {
   //emit refillHand with card array
   //emit setupNewTurn with black card and czar
   //emit updatePhase
-  //emit updatePlayers
+  client.on('initializeGame', () => gameRoomCtrl.initializeGame(io, client));
 
   //cardSubmission gets roomname, username and array of submitted cards
   //add an object to the submittedCards array (including show = false, chosen = false)
@@ -33,6 +36,9 @@ const gameRoomRouter = (io, client) => {
   //to everybody send back the entire submittedCards object - emit updateSubmittedCards
   //server checks if all players have submitted
   //if so turnPhase switches to revelation (after a slight delay?) - emit updatePhase
+  client.on('cardSubmission', (roomname, username, cards) => {
+    gameRoomCtrl.cardSubmission(io, client, roomname, username, cards);
+  });
   
 
   //revealCard gets roomname, username of who submitted
@@ -40,18 +46,22 @@ const gameRoomRouter = (io, client) => {
   //send back entire submittedCards array -emit updateSubmittedCards
   //check if all cards are shown
   //if so then turnPhase switch to judgement - emit updatePhase
+  client.on('revealCard', (roomname, username) => gameRoomCtrl.revealCard(io, client, roomname, username));
 
   //winnerSelected gets roomname, username of winning card
   //go through submitted cards, find the user, and change that card chosen = true
   //also find player object and increasse their points by 1
   //send back players and submittedCards array - emit updatePlayers, and emit updateSubmittedCards
   //then change turnPhase to end - emit updatePhase
+  client.on('winnerSelected', (roomname, username) => {
+    gameRoomCtrl.winnerSelected(io, client, roomname, username);
+  });
 
-  //endTurn 
+  //endTurn roomname
   //set Czar to next person (maybe people should be in an array)
   //deal new black card for next round emit - setupNewTurn sending black card and new czar
   //change turnPhase to submission emit - updatePhase
-
+  client.on('endTurn', roomname => gameRoomCtrl.endTurn(io, client, roomname));
 
 
 
