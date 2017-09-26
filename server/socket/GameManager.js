@@ -49,10 +49,10 @@ class Game {
   }
 
   startTurn() {
+    // discard any submitted cards
     // set next player to be the czar (or first player if none are)
     // deal a black card
   }
-
 
   drawWhiteCard() {
     // removes the next white card from the deck and returns it
@@ -70,8 +70,9 @@ class Game {
     // return the new phase
   }
 
-  submitCard(player, cardtext) {
-    // finds the card in the player's hand
+  submitCard(player, cards) {
+    // cards is array 
+    // finds the card or cards in the player's hand
     // removes it from the players hand
     // add properties to the card object:
     // show: false, chosen: false, username: user who submitted
@@ -79,14 +80,18 @@ class Game {
     // return the submitted cards array
   }
   
-  // socket does the check for if all players have submitted cards?
+  haveAllSubmitted() {
+    // returns whether all players have submitted cards
+  }
 
   revealCard(username) {
     // look for card in the submitted cards array and set show to true
     // return the submitted cards array
   }
 
-  // socket does the check for all cards being revealed?
+  areAllCardsRevealed() {
+    // returns whether all submitted cards have been shown
+  }
 
   selectWinner(username) {
     // look for card in the submitted cards array and set chosen to true
