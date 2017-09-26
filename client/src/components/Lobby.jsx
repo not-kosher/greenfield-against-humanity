@@ -1,6 +1,7 @@
 import React from 'react';
 import AddRoom from './AddRoom';
 import RoomList from './RoomList';
+import socket from '../socket/index.js';
 
 class Lobby extends React.Component { 
   constructor(props) {
@@ -15,32 +16,35 @@ class Lobby extends React.Component {
 
   componentDidMount() {
     // add socket listeners
-    this.props.socket.on('allRooms', (rooms) => {
+    // room array of room objects with properties {name, createdBy}
+    socket.on('allRooms', (rooms) => {
       this.setState({
         rooms
       });
     });
-    this.props.socket.on('newRoom', (room) => {
+    // room object with properties as above
+    socket.on('newRoom', (room) => {
       this.setState({
         rooms: this.state.rooms.concat(room)
       });
     });
-    this.props.socket.on('canJoinRoom', (room) => {
+    socket.on('canJoinRoom', (room) => {
       // navigate to room by pushing to history, fix once route is in place
-      this.props.history.push('/room');
+      this.props.history.push('/game');
     });
 
-    this.props.socket.emit('joinLobby');
+    socket.emit('joinLobby');
   }
 
   createRoom() {
+    // TODO needs data validation for room name
     const roomname = document.getElementById('roomname').value;
     const deckname = document.getElementById('deckname').value;
-    this.props.socket.emit('createRoom', roomname, this.props.user, deckname);
+    socket.emit('createRoom', roomname, this.props.user, deckname);
   }
 
   joinRoom(roomname) {
-    this.props.socket.emit('joinRoom', roomname);
+    socket.emit('joinRoom', roomname);
   }
 
   render() {
@@ -48,7 +52,7 @@ class Lobby extends React.Component {
       <div className='Lobby'>
         <div className='Logo'>Greenfield Against Humanity</div>
         <AddRoom />
-        <RoomList />
+        <RoomList rooms={this.state.rooms} />
       </div>);
   }
 }
