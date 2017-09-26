@@ -1,4 +1,4 @@
-const gameRoomRouter = (game, client) => {
+const gameRoomRouter = (io, client) => {
 
 };
 
