@@ -6,6 +6,14 @@ class Player {
     this.cards = [];
     this.playerNum = count;
   }
+
+  toggleCzar() {
+    this.isCzar = !this.isCzar;
+  }
+
+  addPoint() {
+    this.points++;
+  }
 }
 
 module.exports = Player;
