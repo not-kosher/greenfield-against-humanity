@@ -17,14 +17,16 @@ class Game {
 class GameManager {
   constructor() {
     this.games = {};
+    this.rooms = [];
   }
 
   createGame(roomname, username, deck) {
-    //make new game instance
     const newGame = new Game(roomname, username, deck);
-    //add game instance to games object
     this.games.push(newGame);
+    this.rooms.push(roomname);
   }
+
+
 }
 
 

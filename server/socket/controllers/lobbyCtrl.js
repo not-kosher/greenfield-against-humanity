@@ -1,16 +1,18 @@
+const GameManager = require('../GameManager.js');
+
 const enterLobby = (io, client) => {
   client.join('lobby');
   //send this only to the client who joined the room
-  client.emit('allRooms', 'rooms array here');
+  client.emit('allRooms', GameManager.rooms);
 };
 
 const createRoom = (io, client, roomname, username, deck) => {    
   client.leave('lobby');
-
-  //create a new game object at the key roomname, and pass in the username
-  //so this is creating an instance and then putting that instance on an activeGames object
-
+  //NEED TO GRAB DECK FROM DB
+  GameManager.createGame(roomname, username, deck);
+  io.to('lobby').emit('newRoom', roomname);
   client.join(roomname);
+  client.emit('canJoinRoom', roomname);
 };
 
 const joinRoom = (io, client, roomname, username) => {
@@ -31,3 +33,4 @@ module.exports = {
   createRoom,
   joinRoom
 };
+
