@@ -8,7 +8,7 @@ const AddRoom = () => {
         <input id='roomname' />
         <div>
           <span>Select a Deck:  </span>
-          <select>
+          <select id='deckname' >
             <option value="basic">Basic</option>
           </select>
         </div>
