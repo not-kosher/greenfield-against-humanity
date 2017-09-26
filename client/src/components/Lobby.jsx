@@ -51,8 +51,8 @@ class Lobby extends React.Component {
     return (
       <div className='Lobby'>
         <div className='Logo'>Greenfield Against Humanity</div>
-        <AddRoom />
-        <RoomList rooms={this.state.rooms} />
+        <AddRoom createRoom={this.createRoom} />
+        <RoomList rooms={this.state.rooms} joinRoom={this.joinRoom} />
       </div>);
   }
 }
