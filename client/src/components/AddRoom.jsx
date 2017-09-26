@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AddRoom = () => {
+const AddRoom = ({ createRoom }) => {
   return (
     <div className='AddRoom'>
       <div className='ClassFormContainer'>
@@ -8,11 +8,11 @@ const AddRoom = () => {
         <input id='roomname' />
         <div>
           <span>Select a Deck:  </span>
-          <select>
-            <option value="basic">Basic</option>
+          <select id='deckname' >
+            <option>Base Set</option>
           </select>
         </div>
-        <div>Submit</div>
+        <div onClick={createRoom} >Submit</div>
       </div>
     </div>
   );
