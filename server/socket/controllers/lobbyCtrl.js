@@ -8,6 +8,7 @@ const enterLobby = (io, client) => {
 
 const createRoom = (io, client, roomname, username, deck) => {    
   client.leave('lobby');
+  //----TODO-------------------------
   //NEED TO GRAB DECK FROM DB
   GameManager.createGame(roomname, username, deck);
   io.to('lobby').emit('newRoom', roomname);

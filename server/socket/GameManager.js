@@ -34,7 +34,7 @@ class GameManager {
 
   createGame(roomname, username, deck) {
     const newGame = new Game(roomname, username, deck);
-    this.games.push(newGame);
+    this.games[roomname] = newGame;
     this.rooms.push(roomname);
   }
 
