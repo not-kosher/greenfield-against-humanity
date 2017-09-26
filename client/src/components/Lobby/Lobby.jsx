@@ -1,7 +1,7 @@
 import React from 'react';
 import AddRoom from './AddRoom';
 import RoomList from './RoomList';
-import socket from '../socket/index.js';
+import socket from '../../socket/index.js';
 
 
 class Lobby extends React.Component { 

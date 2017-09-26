@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Lobby from './Lobby';
-import GameRoom from './GameRoom';
+import Lobby from './Lobby/Lobby';
+import GameRoom from './GameRoom/GameRoom';
 
 class App extends React.Component {
   constructor() {
