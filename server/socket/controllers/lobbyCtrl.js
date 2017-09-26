@@ -1,4 +1,5 @@
 const GameManager = require('../GameManager.js');
+const db = require('../../db');
 
 const enterLobby = (io, client) => {
   client.join('lobby');
@@ -6,14 +7,32 @@ const enterLobby = (io, client) => {
   client.emit('allRooms', GameManager.rooms);
 };
 
-const createRoom = (io, client, roomname, username, deck) => {    
+const createRoom = (io, client, roomname, username, deckname) => {    
   client.leave('lobby');
-  //----TODO-------------------------
-  //NEED TO GRAB DECK FROM DB
-  GameManager.createGame(roomname, username, deck);
-  io.to('lobby').emit('newRoom', roomname);
-  client.join(roomname);
-  client.emit('canJoinRoom', roomname);
+
+  //get game deck from db and then create game
+  const gameDeck = {};
+  db.Deck.findOne({where: {name: deckname}})
+    .then(deck => {
+      db.WhiteCard.findAll({where: {deckId: deck.dataValues.id}})
+        .then(whiteCards => {
+          gameDeck.whiteCards = whiteCards.map(card => card.dataValues);
+
+          db.BlackCard.findAll({where: {deckId: deck.dataValues.id}})
+            .then(blackCards => {
+              gameDeck.blackCards = blackCards.map(card => card.dataValues);
+
+              //got deck, now create game and emit events
+              GameManager.createGame(roomname, username, gameDeck);
+              io.to('lobby').emit('newRoom', {name: roomname, createdBy: username});
+              client.join(roomname);
+              client.emit('canJoinRoom', roomname);
+            })
+            .catch(err => console.log('FAILED to get black cards: ', err));
+        })
+        .catch(err => console.log('FAILED to getb white cards: ', err));
+    })
+    .catch(err => console.log('FAILED to find DECK: ', err));
 };
 
 const joinRoom = (io, client, roomname, username) => {
@@ -23,8 +42,6 @@ const joinRoom = (io, client, roomname, username) => {
 
   //emit just to the client that they have joined room
   client.emit('canJoinRoom', roomname);
-  //emit to people curently in the room the new object to rerender their page
-  client.broadcast.to(roomname).emit('updateGameStatus', GameManager.games[roomname]);
 };
 
 module.exports = {
@@ -32,4 +49,5 @@ module.exports = {
   createRoom,
   joinRoom
 };
+
 
