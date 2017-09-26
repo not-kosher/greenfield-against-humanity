@@ -17,15 +17,13 @@ const createRoom = (io, client, roomname, username, deck) => {
 
 const joinRoom = (io, client, roomname, username) => {
   client.leave('lobby');
-  //------TODO--------
-  //add the username to the game object at roomname key
-
+  GameManager.addPlayer(roomname, username);
   client.join(roomname);
+
   //emit just to the client that they have joined room
-  //this will then trigger the page to render
   client.emit('canJoinRoom', roomname);
   //emit to people curently in the room the new object to rerender their page
-  client.broadcast.to(roomname).emit('updateGameStatus', 'game object gets sent here');
+  client.broadcast.to(roomname).emit('updateGameStatus', GameManager.games[roomname]);
 };
 
 module.exports = {
