@@ -3,6 +3,7 @@ import AddRoom from './AddRoom';
 import RoomList from './RoomList';
 import socket from '../socket/index.js';
 
+
 class Lobby extends React.Component { 
   constructor(props) {
     super(props);
@@ -53,6 +54,7 @@ class Lobby extends React.Component {
         <div className='Logo'>Greenfield Against Humanity</div>
         <AddRoom createRoom={this.createRoom} />
         <RoomList rooms={this.state.rooms} joinRoom={this.joinRoom} />
+
       </div>);
   }
 }

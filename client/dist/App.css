@@ -1,4 +1,4 @@
-#app {
+body {
     background-color: black;
     color: white;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -18,13 +18,23 @@ select {
 }
 
 
-/* Lobby */
+/* --------
+  !Lobby!
+--------- */
 
 
 .Title {
     font-size: 45px;
     display: inline-flex;
     padding-bottom: 15px;
+}
+
+.subtitle {
+    font-size: 30px;
+    display: block;
+    padding-bottom: 4px;
+    border-bottom: 2px solid;
+    border-color: white;
 }
 
 
@@ -77,4 +87,74 @@ select {
     border-color: white;
     padding: 4px;
 
+}
+
+/* ---------
+!Game Room!
+--------- */
+
+.RoomName {
+    font-size: 45px;
+    display: block;
+    padding-bottom: 15px;
+}
+
+.Card {
+
+  text-align: left;
+  display: inline-flex;
+  margin: 10px;
+  color: black;
+  height: 178px;
+  width: 127px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  /* visibility: hidden; */
+}
+
+.PlayerList {
+    display: inline-block;
+    border: 2px solid;
+    border-color: white;
+    padding: 5px; 
+    width: 200px;
+    margin-bottom: 600px;
+    margin-top: 5px;
+    vertical-align: top;
+    
+}
+
+.Hand {
+    display: inline-block;
+    width: 700spx;
+    margin: auto;
+}
+
+.PlayerEntry {
+    display: block;
+}
+
+.score {
+    text-align: right;
+}
+
+.Table {
+    display: inline-block;
+    width: 700px;
+    
+}
+
+.BlackCard {
+    text-align: left;
+    display: inline-flex;
+    margin: 10px;
+    color: white;
+    height: 178px;
+    width: 127px;
+    background-color: black;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: white;
+    padding: 10px;
 }

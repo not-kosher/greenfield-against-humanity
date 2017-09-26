@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Lobby from './Lobby';
+import GameRoom from './GameRoom';
 
 class App extends React.Component {
   constructor() {
@@ -12,6 +13,7 @@ class App extends React.Component {
       <div className='App'>
         <Switch>
           <Route exact path='/' component={Lobby} />
+          <Route path='/game' component={GameRoom} />
         </Switch>
       </div>
     );
