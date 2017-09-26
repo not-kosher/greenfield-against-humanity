@@ -9,7 +9,7 @@ const AddRoom = ({ createRoom }) => {
         <div>
           <span>Select a Deck:  </span>
           <select id='deckname' >
-            <option value="basic">Base Set</option>
+            <option>Base Set</option>
           </select>
         </div>
         <div onClick={createRoom} >Submit</div>
