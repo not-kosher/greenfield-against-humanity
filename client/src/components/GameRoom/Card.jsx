@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Card = ({text}) => {
+const Card = ({card, submit}) => {
   return (
-    <div className="Card">
-      <h4><b>{text}</b></h4> 
+    <div className="Card" onClick={submit.bind(null, card)}>
+      <h4><b>{card.text}</b></h4> 
     </div>
   );
 };
