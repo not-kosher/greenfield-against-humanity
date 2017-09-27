@@ -1,4 +1,4 @@
-const GameManager = require('../GameManager.js');
+const GameManager = require('../gameManager');
 const db = require('../../db');
 
 const enterLobby = (io, client) => {
@@ -37,7 +37,7 @@ const createRoom = (io, client, roomname, username, deckname) => {
 
 const joinRoom = (io, client, roomname, username) => {
   client.leave('lobby');
-  GameManager.addPlayer(roomname, username);
+  GameManager.getRoom(roomname).addPlayer(username);
   client.join(roomname);
 
   //emit just to the client that they have joined room
