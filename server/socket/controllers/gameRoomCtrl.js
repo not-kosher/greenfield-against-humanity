@@ -11,7 +11,6 @@ const enterRoom = (io, client, roomname) => {
 const startGame = (io, client, roomname) => {
   const game = GameManager.getRoom(roomname);
   game.startTurn();
-  //could just do this for each client below?
   game.updatePhase('submission');
   io.to(roomname).emit('gameHasStarted');
 };
@@ -36,7 +35,8 @@ const cardSubmission = (io, client, roomname, username, cards) => {
 const revealCard = (io, client, roomname, username) => {
   const game = GameManager.getRoom(roomname);
   //do we want reveal card to return, or breakinto two lines?
-  io.to(roomname).emit('updateSubmittedCards', game.revealCard(username));
+  game.revealCard(username);
+  io.to(roomname).emit('updateSubmittedCards', game.submissions);
   if (game.areAllCardsRevealed()) {
     io.to(roomname).emit('updatePhase', game.updatePhase('judgement'));
   }

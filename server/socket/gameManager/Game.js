@@ -84,7 +84,7 @@ class Game {
       const discards = _.flatten(this.submissions.map((submission) => {
         return submission.cards;
       }));
-      this.discarded.whiteCards.push(...(discards));
+      this.discarded.whiteCards.push(...discards);
       this.submissions = [];
     }
   }
@@ -96,7 +96,7 @@ class Game {
       this.players[this.czarIndex].toggleCzar();
     } else {
       this.players[this.czarIndex].toggleCzar();
-      this.czarIndex = this.czarIndex % this.playerCount;
+      this.czarIndex = (this.czarIndex + 1) % this.playerCount;
       this.players[this.czarIndex].toggleCzar();
     }
   }
