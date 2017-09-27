@@ -11,9 +11,9 @@ class GameRoom extends React.Component {
     this.state = {
       user: '',
       room: '',
-      hand: [{text: 'Raptor attacks.'}, {text: 'Puppies!'}, {text: 'Praying the gay away.'}, {text: 'Sexy pillow fights.'}, {text: 'A micropenis.'}, {text: 'Being a dick to children.'}, {text: 'A tiny horse.'}],
-      blackCard: {text: 'What I love most about Hack Reactor is ____________.'},
-      submittedCards: [{text: 'Sean Penn.', chosen: false, shown: true}, {text: 'A sassy black woman.', chosen: false, shown: false}, {text: 'Walmart.', chosen: false, shown: false}],
+      hand: [],
+      blackCard: {},
+      submittedCards: [],
       turnPhase: '',
       playerArray: [],
       czar: '',
@@ -31,9 +31,9 @@ class GameRoom extends React.Component {
 
   componentDidMount() {
     this.setState({
-      user: (Math.random() * 100).toString(),
-      // user: this.props.match.params.username,
-      room: this.props.match.params.Room,
+      // user: (Math.random() * 100).toString(),
+      user: this.props.match.params.username,
+      room: this.props.match.params.room,
     });
     socket.on('gameHasStarted', () => {
       this.initializeGame();
@@ -50,6 +50,7 @@ class GameRoom extends React.Component {
       });
     });
     socket.on('updatePhase', (phase) => {
+      console.log('We are switching to phase: ', phase);
       this.setState({
         turnPhase: phase,
       });
@@ -68,7 +69,8 @@ class GameRoom extends React.Component {
       });
     });
     
-    socket.emit('enterRoom', this.state.room);
+    // note: need to find better way of grabbing room name
+    socket.emit('enterRoom', this.props.match.params.room);
   }
 
   startGame() {
@@ -114,7 +116,14 @@ class GameRoom extends React.Component {
         <div onClick={this.startGame}>Start Game</div>
         <div onClick={this.endTurn}>Next Turn</div>
         <PlayerList players={this.state.playerArray}/>
-        <Table select={this.winnerSelected} submit={this.cardSubmission} black={this.state.blackCard} cards={this.state.hand} submittedCards={this.state.submittedCards}/>
+        <Table 
+          select={this.winnerSelected} 
+          submit={this.cardSubmission} 
+          black={this.state.blackCard} 
+          cards={this.state.hand} 
+          submittedCards={this.state.submittedCards}
+          revealCard={this.revealCard}
+        />
 
       </div>
     );
