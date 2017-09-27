@@ -1,11 +1,12 @@
 import React from 'react';
 
 
-const PlayerEntry = () => {
+const PlayerEntry = ({player}) => {
   return (
     <div className='PlayerEntry'>
-      <div className='score'>Score</div>
+      <div className='score'>{player.score}</div>
       <div className='username'>
+        {player.username}
       </div>
     </div>
   );

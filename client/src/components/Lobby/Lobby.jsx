@@ -1,7 +1,7 @@
 import React from 'react';
 import AddRoom from './AddRoom';
 import RoomList from './RoomList';
-import socket from '../socket/index.js';
+import socket from '../../socket/index.js';
 
 
 class Lobby extends React.Component { 
@@ -9,6 +9,7 @@ class Lobby extends React.Component {
     super(props);
     this.state = {
       rooms: [],
+      
     };
 
     this.createRoom = this.createRoom.bind(this);
@@ -31,7 +32,7 @@ class Lobby extends React.Component {
     });
     socket.on('canJoinRoom', (room) => {
       // navigate to room by pushing to history, fix once route is in place
-      this.props.history.push('/game');
+      this.props.history.push(`/game/${room}/`);
     });
 
     socket.emit('enterLobby');
