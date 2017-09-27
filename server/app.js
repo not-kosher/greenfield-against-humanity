@@ -8,7 +8,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const deckRouter = require('./routes/deckRouter');
 const userRouter = require('./routes/userRouter');
-const userCtrl = require('./controllers/userController');
 
 const app = express();
 const server = require('http').createServer(app); 
@@ -33,9 +32,9 @@ app.use('/api/users', userRouter);
 app.use('api/decks', deckRouter);
 
 // passport config
-passport.use(new LocalStrategy(userCtrl.verify));
-passport.serializeUser();
-passport.deserializeUser();
+passport.use(new LocalStrategy(db.User.createStrategy()));
+passport.serializeUser(db.User.serializeUser());
+passport.deserializeUser(db.User.deserializeUser());
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
