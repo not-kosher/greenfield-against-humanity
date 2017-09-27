@@ -8,7 +8,6 @@ const PlayerList = ({ players }) => {
       {players.map((player) => {
         return <PlayerEntry player={player} />;
       })}
-      <PlayerEntry player={{username: 'dAAtAAmAAs', czar: false, score: 8}} />
     </div>
   );
 };
