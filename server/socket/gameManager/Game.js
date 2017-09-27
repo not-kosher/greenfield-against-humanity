@@ -12,7 +12,7 @@ class Game {
       blackCards: [],
       whiteCards: []
     };
-    this.submittedCards = [];
+    this.submissions = []; // array of submission objects {username, show, chosen, cards (an array of submitted cards)}
     this.blackCard;
     this.players = [];
     this.czarIndex;
@@ -37,33 +37,36 @@ class Game {
     }
   }
 
-  dealBlackCard() {
-    if (this.blackCard) {
-      this.discarded.blackCards.push(this.blackCard);
-    }
-    this.blackCard = this.deck.blackCards.pop();
-    // return this.blackCard;
-  }
-
-  discardSubmitted() {
-    // revert to original state of the white card before adding to discard pile
-    if (this.submittedCards.length) {
-      this.submittedCards.map((card) => {
-        delete card.show;
-        delete card.chosen;
-        delete card.username;
-        return card;
-      });
-      this.discarded.whiteCards.push(...(this.submittedCards));
-      this.submittedCards = [];
-    }
-  }
-
   sortPlayers() {
     // sort by time since the player last pooped
     this.players.sort((a, b) => a.poopTime - b.poopTime);
   }
 
+  // helper function for startTurn, doesn't have to be called in controller
+  dealBlackCard() {
+    if (this.blackCard) {
+      this.discarded.blackCards.push(this.blackCard);
+    }
+    if (!this.deck.blackCards.length) {
+      this.refillDeck();
+    }
+    this.blackCard = this.deck.blackCards.pop();
+    // return this.blackCard;
+  }
+
+  // helper function for startTurn, doesn't have to be called in controller
+  discardSubmitted() {
+    // pull the cards off the submission objects
+    if (this.submissions.length) {
+      const discards = _.flatten(this.submissions.map((submission) => {
+        return submission.cards;
+      }));
+      this.discarded.whiteCards.push(...(discards));
+      this.submissions = [];
+    }
+  }
+
+  // helper function for startTurn, doesn't have to be called in controller
   advanceCzar() {
     if (this.czarIndex === undefined) {
       this.czarIndex = 0;
@@ -76,28 +79,32 @@ class Game {
   }
 
   startTurn() {
-    this.discardSubmitted();
     this.dealBlackCard();
+    this.discardSubmitted();
     this.advanceCzar();
   }
 
   drawWhiteCard() {
-    // removes the next white card from the deck and returns it
+    if (!this.deck.whiteCards.length) {
+      this.refillDeck();
+    }
+    return this.deck.whiteCards.pop();
   }
 
   refillHand(username) {
-    // find the matching player in the list and fill their hand up to 7 cards
-    // draw a white card until hand is at 7
-    // return the new hand of that player
+    const player = this.players.find((player) => player.username === username);
+    while (player.cards.length < 7) {
+      player.cards.push(this.drawWhiteCard());
+    }
+    return player.cards;
   }
 
   updatePhase(phase) {
-    // set game's phase
-    // Submission, Revelation, Judgment, End
-    // return the new phase
+    this.turnPhase = phase;
+    return this.turnPhase;
   }
 
-  submitCard(player, cards) {
+  submitCard(username, cards) {
     // cards is array 
     // finds the card or cards in the player's hand
     // removes it from the players hand
@@ -108,7 +115,7 @@ class Game {
   }
   
   haveAllSubmitted() {
-    // returns whether all players have submitted cards
+    return this.submissions.length === this.playerCount - 1;
   }
 
   revealCard(username) {
@@ -117,7 +124,13 @@ class Game {
   }
 
   areAllCardsRevealed() {
-    // returns whether all submitted cards have been shown
+    const revealedCount = this.submissions.reduce((count, submission) => {
+      if (submission.show) {
+        count++;
+      }
+      return count;
+    }, 0);
+    return revealedCount === this.submissions.length;
   }
 
   selectWinner(username) {
