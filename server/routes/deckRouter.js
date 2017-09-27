@@ -1,17 +1,16 @@
 const router = require('express').Router();
 const controller = require('../controllers/deckController');
 
-// adds user to db, expects username sent in body as object {username: 'username'}
-router.post('/users', controller.addUser);
+// retrieve all decks user has access to when creating a room
+router.get('/:username', controller.retrieveAllDecks);
 
-// to retrieve all decks user has access to when creating a room
-router.get('/decks/:username', controller.retrieveAllDecks);
+// retrieve just the custom decks of a user for editing
+router.get('/custom/:username', controller.retrieveCustomDecks);
 
-// to retrieve just the custom decks of a user for editing
-router.get('/customdecks/:username', controller.retrieveCustomDecks);
+// add a new custom deck
+router.post('/custom/', controller.addDeck);
 
-router.post('/customdecks', controller.addDeck);
-
-router.post('/customdecks/:deckname', controller.addCard);
+// add a card to a custom deck
+router.post('/custom/:deckname', controller.addCard);
 
 module.exports = router;
