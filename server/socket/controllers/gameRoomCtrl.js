@@ -1,7 +1,9 @@
 const GameManager = require('../gameManager');
 
 const enterRoom = (io, client, roomname) => {
-  io.to(roomname).emit('updatePlayers', GameManager.getRoom(roomname).players);
+  const game = GameManager.getRoom(roomname);
+  //add player here instead of in lobby ctrl, need to pass in username then
+  io.to(roomname).emit('updatePlayers', game.players);
 };
 
 //add leave room here
@@ -9,6 +11,7 @@ const enterRoom = (io, client, roomname) => {
 const startGame = (io, client, roomname) => {
   const game = GameManager.getRoom(roomname);
   game.startTurn();
+  //could just do this for each client below?
   game.updatePhase('submission');
   io.to(roomname).emit('gameHasStarted');
 };
@@ -26,31 +29,32 @@ const cardSubmission = (io, client, roomname, username, cards) => {
   client.emit('refillHand', game.refillHand(username));
   io.to(roomname).emit('updateSubmittedCards', game.submissions);
   if (game.haveAllSubmitted()) {
-    io.to(roomname).emit('updatePhase', 'revelation');
+    io.to(roomname).emit('updatePhase', game.updatePhase('revelation'));
   }
 };
 
 const revealCard = (io, client, roomname, username) => {
   const game = GameManager.getRoom(roomname);
+  //do we want reveal card to return, or breakinto two lines?
   io.to(roomname).emit('updateSubmittedCards', game.revealCard(username));
   if (game.areAllCardsRevealed()) {
-    io.to(roomname).emit('updatePhase', 'judgement');
+    io.to(roomname).emit('updatePhase', game.updatePhase('judgement'));
   }
 };
 
 const winnerSelected = (io, client, roomname, username) => {
   const game = GameManager.getRoom(roomname);
-  game.selectWinner(username);
+  game.selectWinner(username); //this updates both submissions and players
   io.to(roomname).emit('updateSubmittedCards', game.submissions);
   io.to(roomname).emit('updatePlayers', game.players);
-  io.to(roomname).emit('updatePhase', 'end');
+  io.to(roomname).emit('updatePhase', game.updatePhase('end'));
 };
 
 const endTurn = (io, client, roomname) => {
   const game = GameManager.getRoom(roomname);
   game.startTurn();
   io.to(roomname).emit('setupNewTurn', game.blackCard, game.getCzar());
-  io.to(roomname).emit('updatePhase', 'submission');
+  io.to(roomname).emit('updatePhase', game.updatePhase('submission'));
 };
 
 
