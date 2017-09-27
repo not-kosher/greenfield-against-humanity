@@ -14,13 +14,13 @@ const createRoom = (io, client, roomname, username, deckname) => {
   const gameDeck = {};
   db.Deck.findOne({where: {name: deckname}})
     .then(deck => {
-      db.WhiteCard.findAll({where: {deckId: deck.dataValues.id}})
+      db.WhiteCard.findAll({where: {deckId: deck.id}})
         .then(whiteCards => {
-          gameDeck.whiteCards = whiteCards.map(card => card.dataValues);
+          gameDeck.whiteCards = whiteCards;
 
-          db.BlackCard.findAll({where: {deckId: deck.dataValues.id}})
+          db.BlackCard.findAll({where: {deckId: deck.id}})
             .then(blackCards => {
-              gameDeck.blackCards = blackCards.map(card => card.dataValues);
+              gameDeck.blackCards = blackCards;
 
               //got deck, now create game and emit events
               GameManager.createGame(roomname, username, gameDeck);
