@@ -4,7 +4,7 @@ class Player {
     this.isCzar = false;
     this.points = 0;
     this.cards = [];
-    this.playerNum = count;
+    this.poopTime = count;
   }
 
   toggleCzar() {
