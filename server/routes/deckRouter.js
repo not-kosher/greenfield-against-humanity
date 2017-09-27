@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const controller = require('../controllers/controller');
+const controller = require('../controllers/deckController');
 
 // adds user to db, expects username sent in body as object {username: 'username'}
 router.post('/users', controller.addUser);
