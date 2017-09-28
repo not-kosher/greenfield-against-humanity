@@ -68,8 +68,12 @@ class App extends React.Component {
           <Route render={(props) => (
             <UserAuthContainer {...props} isLoggedIn={this.state.isLoggedIn}>
               <Route path='/dashboard' component={Dashboard} />
-              <Route path='/lobby' component={Lobby} />
-              <Route path='/game/:room/:username' component={GameRoom} />
+              <Route path='/lobby' render={(props) => (
+                <Lobby {...props} username={this.state.username} />
+              )} />
+              <Route path='/game/:room' render={(props) => (
+                <GameRoom {...props} username={this.state.username} />
+              )} />
               <Route path='/deckbuilder' component={DeckBuilder} />
             </UserAuthContainer>
           )} />

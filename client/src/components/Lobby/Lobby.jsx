@@ -9,7 +9,7 @@ class Lobby extends React.Component {
     super(props);
     this.state = {
       rooms: [],
-      user: (Math.random() * 100).toString(),
+      // user: (Math.random() * 100).toString(),
     };
 
     this.createRoom = this.createRoom.bind(this);
@@ -35,7 +35,7 @@ class Lobby extends React.Component {
     });
     socket.on('canJoinRoom', (room) => {
       // navigate to room by pushing to history, fix once route is in place
-      this.props.history.push(`/game/${room}/${this.state.user}`);
+      this.props.history.push(`/game/${room}`);
     });
 
     socket.emit('enterLobby');
@@ -45,11 +45,11 @@ class Lobby extends React.Component {
     // TODO needs data validation for room name
     const roomname = document.getElementById('roomname').value;
     const deckname = document.getElementById('deckname').value;
-    socket.emit('createRoom', roomname, this.state.user, deckname);
+    socket.emit('createRoom', roomname, this.props.username, deckname);
   }
 
   joinRoom(roomname) {
-    socket.emit('joinRoom', roomname, this.state.user);
+    socket.emit('joinRoom', roomname, this.props.username);
   }
 
   render() {

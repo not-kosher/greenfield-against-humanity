@@ -32,7 +32,7 @@ class GameRoom extends React.Component {
   componentDidMount() {
     this.setState({
       // user: (Math.random() * 100).toString(),
-      user: this.props.match.params.username,
+      user: this.props.username,
       room: this.props.match.params.room,
     });
     socket.on('gameHasStarted', () => {
@@ -78,25 +78,25 @@ class GameRoom extends React.Component {
   }
 
   initializeGame() {
-    socket.emit('initializeGame', this.state.room, this.state.user);
+    socket.emit('initializeGame', this.state.room, this.props.username);
   }
 
   cardSubmission(card) {
     if (this.state.turnPhase === 'submission') {
       this.state.yourSumittedCards.push(card);
       if (this.state.yourSumittedCards.length === this.state.blackCard.pick) {
-        socket.emit('cardSubmission', this.state.room, this.state.user, this.state.yourSumittedCards);
+        socket.emit('cardSubmission', this.state.room, this.props.username, this.state.yourSumittedCards);
       }
     }
   }
   revealCard(card) {
-    if (this.state.turnPhase === 'revelation' && this.state.user === this.state.czar) {
+    if (this.state.turnPhase === 'revelation' && this.props.username === this.state.czar) {
       socket.emit('revealCard', this.state.room, card.username);
     }
   }
 
   winnerSelected(card) {
-    if (this.state.user === this.state.czar && this.state.turnPhase === 'judgement') {
+    if (this.props.username === this.state.czar && this.state.turnPhase === 'judgement') {
       socket.emit('winnerSelected', this.state.room, card.username);
     }
   }
