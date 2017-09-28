@@ -10,6 +10,7 @@ module.exports = {
   signup: (req, res) => {
     User.register(req.body.username, req.body.password, (err, newUser) => {
       if (err) {
+        console.log('Error signing up...', err);
         res.status(400).json('Error signing up');
       } else {
         passport.authenticate('local')(req, res, () => {

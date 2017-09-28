@@ -32,7 +32,7 @@ app.use('/api/users', userRouter);
 app.use('api/decks', deckRouter);
 
 // passport config
-passport.use(new LocalStrategy(db.User.createStrategy()));
+passport.use(new LocalStrategy(db.User.authenticate()));
 passport.serializeUser(db.User.serializeUser());
 passport.deserializeUser(db.User.deserializeUser());
 

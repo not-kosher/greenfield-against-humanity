@@ -9,7 +9,7 @@ const User = db.define('user', {
     unique: true,
   },
   hash: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false,
   },
   salt: {
@@ -19,11 +19,7 @@ const User = db.define('user', {
 });
 
 // Add passport functionality when referencing user model
-passport.attachToUser(User, {
-  usernameField: 'username',
-  hashField: 'hash',
-  saltField: 'salt',
-});
+passport.attachToUser(User);
 
 const WhiteCard = db.define('whiteCard', {
   text: {
