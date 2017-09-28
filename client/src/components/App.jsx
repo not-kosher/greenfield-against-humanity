@@ -21,6 +21,7 @@ class App extends React.Component {
 
     this.signup = this.signup.bind(this);
     this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   signup() {
@@ -68,7 +69,7 @@ class App extends React.Component {
           username: '',
           isLoggedIn: false
         });
-        // this.props.history.push('/');
+        this.props.history.push('/');
       })
       .catch((err) => {
         console.log('logout error', err);
@@ -84,7 +85,7 @@ class App extends React.Component {
           )} />
           <Route render={(props) => (
             <UserAuthContainer {...props} isLoggedIn={this.state.isLoggedIn}>
-              <Navbar username={this.state.username} />
+              <Navbar username={this.state.username} logout={this.logout} />
               <Route path='/dashboard' component={Dashboard} />
               <Route path='/lobby' render={(props) => (
                 <Lobby {...props} username={this.state.username} />
