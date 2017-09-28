@@ -1,26 +1,20 @@
 import React from 'react';
+import Login from './Login';
+import Signup from './Signup';
 
-class Landing extends React.Component {
-  constructor() {
-    super();
-  }
-
-  render() {
-    return (
-      <div>
-        <div className='Logo'>Greenfield Against Humanity</div>
-        <div className='landingContent'> 
-          <div className='Title'>Welcome, Dregs of Humanity</div>
-          <div>Text</div>
-          <div className='Login'>
-            <input className='username'/>
-            <input className='password'/>
-            <div>Submit</div>
-          </div>
+const Landing = (props) => {
+  return (
+    <div>
+      <div className='Logo'>Greenfield Against Humanity</div>
+      <div className='landingContent'> 
+        <div className='Title'>Welcome, Dregs of Humanity</div>
+        <div>
+          <Login login={props.login} />
+          <Signup signup={props.signup} />
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Landing;
