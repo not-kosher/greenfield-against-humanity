@@ -5,6 +5,27 @@ import Signup from './Signup';
 class Landing extends React.Component { 
   constructor(props) {
     super(props);
+    this.state = {
+      showLogin: false,
+      showSignup: false
+    };
+
+    this.toggleLogin = this.toggleLogin.bind(this);
+    this.toggleSignup = this.toggleSignup.bind(this);
+  }
+
+  toggleLogin() {
+    this.setState({
+      showLogin: true,
+      showSignup: false,
+    });
+  }
+
+  toggleSignup() {
+    this.setState({
+      showSignup: true,
+      showLogin: false
+    });
   }
   
   render() {
@@ -13,9 +34,17 @@ class Landing extends React.Component {
         <div className='Logo'>Greenfield Against Humanity</div>
         <div className='landingContent'> 
           <div className='Title'>Welcome, Dregs of Humanity</div>
+          <div className='button-container'>
+            <div className='login-button' onClick={this.toggleLogin}>
+              Login
+            </div>
+            <div className='signup-button' onClick={this.toggleSignup}>
+              Signup
+            </div>
+          </div>
           <div>
-            <Login login={this.props.login} />
-            <Signup signup={this.props.signup} />
+            {this.state.showLogin ? <Login login={this.props.login} /> : null}
+            {this.state.showSignup ? <Signup signup={this.props.signup} /> : null}
           </div>
         </div>
       </div>

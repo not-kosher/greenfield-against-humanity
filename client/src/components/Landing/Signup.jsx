@@ -4,7 +4,7 @@ const Signup = (props) => {
   return (
     <div>
       <form>
-        Signup:
+        Signup for a new account
         <div>
           <label>Username</label>
           <input type="text" id="username-signup"/>
