@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Landing from './Landing/Landing';
 import UserAuthContainer from './UserAuthContainer';
+import Navbar from './Navbar';
 import Dashboard from './Dashboard/Dashboard';
 import Lobby from './Lobby/Lobby';
 import GameRoom from './GameRoom/GameRoom';
@@ -68,6 +69,7 @@ class App extends React.Component {
           )} />
           <Route render={(props) => (
             <UserAuthContainer {...props} isLoggedIn={this.state.isLoggedIn}>
+              <Navbar username={this.state.username} />
               <Route path='/dashboard' component={Dashboard} />
               <Route path='/lobby' render={(props) => (
                 <Lobby {...props} username={this.state.username} />
