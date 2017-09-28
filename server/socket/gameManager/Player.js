@@ -1,10 +1,10 @@
 class Player {
-  constructor(username, count) {
+  constructor(username) {
     this.username = username;
     this.isCzar = false;
     this.points = 0;
     this.cards = [];
-    this.poopTime = count;
+    this.poopTime = undefined;
   }
 
   toggleCzar() {

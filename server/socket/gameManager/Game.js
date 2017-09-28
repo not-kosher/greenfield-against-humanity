@@ -37,7 +37,7 @@ class Game {
 
   addPlayer(username) {
     this.playerCount += 1;
-    let player = new Player(username, this.playerCount);
+    const player = new Player(username);
     this.players.push(player);
   }
 
@@ -67,6 +67,15 @@ class Game {
   updatePhase(phase) {
     this.turnPhase = phase;
     return this.turnPhase;
+  }
+
+  submitPoopTime(username, poopTime) {
+    const player = this.getPlayer(username);
+    player.poopTime = poopTime;
+  }
+
+  haveAllSubmittedPoopTime() {
+    return this.players.every(player => player.poopTime !== undefined);
   }
 
   sortPlayers() {
