@@ -19,7 +19,7 @@ const db = require('./db/index.js');
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({
-  secret: 'filthy cur',
+  secret: process.env.SESSION_SECRET || 'filthy cur',
   resave: false,
   saveUninitialized: false,
 }));
