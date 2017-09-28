@@ -2,7 +2,9 @@ import React from 'react';
 import Hand from './Hand';
 import PlayerList from './PlayerList';
 import Table from './Table';
+import Actions from './Actions';
 import socket from '../../socket/index.js';
+
 
 class GameRoom extends React.Component {
   constructor(props) {
@@ -13,11 +15,13 @@ class GameRoom extends React.Component {
       room: '',
       hand: [],
       blackCard: {},
+      roomCreator: '',
       submittedCards: [],
       turnPhase: '',
       playerArray: [],
       czar: '',
       yourSumittedCards: [],
+
     };
 
     this.startGame = this.startGame.bind(this); 
@@ -26,7 +30,7 @@ class GameRoom extends React.Component {
     this.revealCard = this.revealCard.bind(this);
     this.winnerSelected = this.winnerSelected.bind(this);
     this.endTurn = this.endTurn.bind(this);
-
+  
   }
 
   componentDidMount() {
@@ -53,27 +57,38 @@ class GameRoom extends React.Component {
       this.setState({
         turnPhase: phase,
       });
-      if (phase === 'end') {
-
+      if (phase === 'revelation') {
+        this.state.yourSumittedCards = [];
       }
     });
     socket.on('updateSubmittedCards', (submitted) => {
       this.setState({
         submittedCards: submitted,
       });
+      console.log(submitted);
+
     });
     socket.on('updatePlayers', (players) => {
       this.setState({
         playerArray: players
       });
+      if (players.length === 1) {
+        this.setState({
+          roomCreator: players[0].username
+        });
+      }
     });
     
     // note: need to find better way of grabbing room name
     socket.emit('enterRoom', this.props.match.params.room);
+
   }
 
   startGame() {
+    console.log(this.state.roomCreator);
+
     socket.emit('startGame', this.state.room);
+
   }
 
   initializeGame() {
@@ -81,7 +96,7 @@ class GameRoom extends React.Component {
   }
 
   cardSubmission(card) {
-    if (this.state.turnPhase === 'submission') {
+    if (this.state.turnPhase === 'submission' && this.state.user !== this.state.czar) {
       this.state.yourSumittedCards.push(card);
       if (this.state.yourSumittedCards.length === this.state.blackCard.pick) {
         socket.emit('cardSubmission', this.state.room, this.props.username, this.state.yourSumittedCards);
@@ -112,9 +127,8 @@ class GameRoom extends React.Component {
       <div>
         <div className='Logo'>Greenfield Against Humanity</div>
         <div className='RoomName'>{this.state.room}</div>
-        <div onClick={this.startGame}>Start Game</div>
-        <div onClick={this.endTurn}>Next Turn</div>
-        <PlayerList players={this.state.playerArray}/>
+        <Actions startGame={this.startGame} endTurn={this.endTurn} state={this.state}/>
+        <PlayerList players={this.state.playerArray} czar={this.state.czar}/>
         <Table 
           select={this.winnerSelected} 
           submit={this.cardSubmission} 

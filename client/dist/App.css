@@ -89,6 +89,8 @@ select {
 
 }
 
+ 
+
 /* ---------
 !Game Room!
 --------- */
@@ -104,14 +106,14 @@ select {
   text-align: left;
   vertical-align: top;
   display: inline-flex;
-  margin: 10px;
+  margin: 5px;
   color: black;
   height: 178px;
   width: 127px;
   background-color: white;
   border-radius: 10px;
   padding: 10px;
-  /* visibility: hidden; */
+  overflow-wrap: break-word;
 }
 
 .PlayerList {
@@ -123,12 +125,11 @@ select {
     margin-bottom: 600px;
     margin-top: 5px;
     vertical-align: top;
-    
 }
 
 .Hand {
     display: inline-block;
-    width: 700spx;
+    width: 700px;
     margin: auto;
 }
 
@@ -143,8 +144,18 @@ select {
 
 .Table {
     display: inline-block;
-    width: 700px;
+    width: 1000px;
     
+}
+
+.Submitted {
+    display: inline-flex;
+    width: 800px
+}
+
+.singleSubmission {
+    display: inline-flex;
+    padding: 12px;
 }
 
 .BlackCard {
@@ -160,7 +171,15 @@ select {
     border: 1px solid;
     border-color: white;
     padding: 10px;
+    overflow-wrap: break-word;
 }
+
+.Czar  {
+    display: block;
+    color: Red;
+    font-weight: bold;
+}
+
 
 .glow {
     -moz-box-shadow: 0 0 50px red;
