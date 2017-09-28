@@ -25,9 +25,6 @@ class GameManager {
 
   // when a room creator closes a room to start a game
   closeRoom(roomname) {
-    if (this.games[roomname]) {
-      delete this.games[roomname];
-    }
     this.rooms = this.rooms.filter((room) => {
       return room.name !== roomname;
     });

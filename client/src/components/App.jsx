@@ -31,7 +31,7 @@ class App extends React.Component {
         console.log('signup success', res);
         this.setState({
           username: document.getElementById('username-signup').value,
-          isLoggedIn: !this.state.isLoggedIn
+          isLoggedIn: true
         });
         // redirect to dashboard...
         this.props.history.push('/dashboard');
@@ -50,7 +50,7 @@ class App extends React.Component {
         console.log('login success', res);
         this.setState({
           username: document.getElementById('username-login').value,
-          isLoggedIn: !this.state.isLoggedIn
+          isLoggedIn: true
         });
         this.props.history.push('/dashboard');
       })
