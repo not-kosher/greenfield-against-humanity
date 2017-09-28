@@ -16,6 +16,9 @@ class Lobby extends React.Component {
     this.joinRoom = this.joinRoom.bind(this);
   }
 
+  // TODO need to remove listeners when component unmounts from router call
+  // probably also emit a leave lobby of some kind?
+  // otherwise the listeners will stack on each other
   componentDidMount() {
     // add socket listeners
     // room array of room objects with properties {name, createdBy}
