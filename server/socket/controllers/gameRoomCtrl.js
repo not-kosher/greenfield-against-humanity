@@ -15,6 +15,9 @@ const startGame = (io, client, roomname) => {
   io.to(roomname).emit('updatePlayers', game.players);
   io.to(roomname).emit('gameHasStarted');
 
+  //close room and update lobby
+  GameManager.closeRoom(roomname);
+  io.to('lobby').emit('allRooms', GameManager.rooms);
 };
 
 const initializeGame = (io, client, roomname, username) => {
