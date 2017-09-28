@@ -9,8 +9,8 @@ const Landing = (props) => {
       <div className='landingContent'> 
         <div className='Title'>Welcome, Dregs of Humanity</div>
         <div>
-          <Login />
-          <Signup />
+          <Login login={props.login} />
+          <Signup signup={props.signup} />
         </div>
       </div>
     </div>

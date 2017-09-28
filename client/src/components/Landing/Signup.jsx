@@ -7,13 +7,13 @@ const Signup = (props) => {
         Signup:
         <div>
           <label>Username</label>
-          <input type="text" id="username"/>
+          <input type="text" id="username-signup"/>
         </div>
         <div>
           <label>Password</label>
-          <input type="password" id="password"/>
+          <input type="password" id="password-signup"/>
         </div>
-        <div>
+        <div onClick={props.signup} >
           Submit
         </div>
       </form>

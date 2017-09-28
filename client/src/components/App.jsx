@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import axios from 'axios';
 
 import Landing from './Landing/Landing';
 import UserAuthContainer from './UserAuthContainer';
@@ -12,23 +13,66 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      username: '',
       isLoggedIn: false
     };
+
+    this.signup = this.signup.bind(this);
+    this.login = this.login.bind(this);
+  }
+
+  signup() {
+    axios.post('/api/users/signup', {
+      username: document.getElementById('username-signup').value,
+      password: document.getElementById('password-signup').value
+    })
+      .then((res) => {
+        console.log('signup success', res);
+        this.setState({
+          username: document.getElementById('username-signup').value,
+          isLoggedIn: !this.state.isLoggedIn
+        });
+        // redirect to dashboard...
+        this.props.history.push('/dashboard');
+      })
+      .catch((res) => {
+        console.log('signup error', res);
+      });
+  }
+
+  login() {
+    axios.post('/api/users/login', {
+      username: document.getElementById('username-login').value,
+      password: document.getElementById('password-login').value
+    })
+      .then((res) => {
+        console.log('login success', res);
+        this.setState({
+          username: document.getElementById('username-login').value,
+          isLoggedIn: !this.state.isLoggedIn
+        });
+        this.props.history.push('/dashboard');
+      })
+      .catch((res) => {
+        console.log('login error', res);
+      });
   }
 
   render() {
     return (
       <div className='App'>
         <Switch>
-          <Route exact path='/' component={Landing} />
+          <Route exact path='/' render={(props) => (
+            <Landing signup={this.signup} login={this.login} />
+          )} />
           <Route render={(props) => (
-            <UserAuthContainer isLoggedIn={this.state.isLoggedIn} />
-          )}>
-            <Route path='/dashboard' component={Dashboard} />
-            <Route path='/lobby' component={Lobby} />
-            <Route path='/game/:room/:username' component={GameRoom} />
-            <Route path='/deckbuilder' component={DeckBuilder} />
-          </Route>
+            <UserAuthContainer {...props} isLoggedIn={this.state.isLoggedIn}>
+              <Route path='/dashboard' component={Dashboard} />
+              <Route path='/lobby' component={Lobby} />
+              <Route path='/game/:room/:username' component={GameRoom} />
+              <Route path='/deckbuilder' component={DeckBuilder} />
+            </UserAuthContainer>
+          )} />
         </Switch>
       </div>
     );

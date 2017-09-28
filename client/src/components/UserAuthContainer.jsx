@@ -1,10 +1,6 @@
 import React from 'react';
 
 class UserAuthContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     if (!this.props.isLoggedIn) {
       this.props.history.push('/');
@@ -12,7 +8,8 @@ class UserAuthContainer extends React.Component {
   }
 
   render() {
-    return this.props.isLoggedIn ? this.props.children : null;
+    // note: there must be a better way to do this
+    return this.props.isLoggedIn ? (<div id='remove-later'>{this.props.children}</div>) : null;
   }
 
 }
