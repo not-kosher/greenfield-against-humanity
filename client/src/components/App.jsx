@@ -60,6 +60,21 @@ class App extends React.Component {
       });
   }
 
+  logout() {
+    axios.post('/api/users/logout')
+      .then((res) => {
+        console.log('logged out', res);
+        this.setState({
+          username: '',
+          isLoggedIn: false
+        });
+        // this.props.history.push('/');
+      })
+      .catch((err) => {
+        console.log('logout error', err);
+      });
+  }
+
   render() {
     return (
       <div className='App'>
