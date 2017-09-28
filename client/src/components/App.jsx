@@ -30,16 +30,14 @@ class App extends React.Component {
       password: document.getElementById('password-signup').value
     })
       .then((res) => {
-        console.log('signup success', res);
         this.setState({
           username: document.getElementById('username-signup').value,
           isLoggedIn: true
         });
-        // redirect to dashboard...
         this.props.history.push('/dashboard');
       })
-      .catch((res) => {
-        console.log('signup error', res);
+      .catch((err) => {
+        alert('There was an error signing up, please try again');
       });
   }
 
@@ -49,22 +47,20 @@ class App extends React.Component {
       password: document.getElementById('password-login').value
     })
       .then((res) => {
-        console.log('login success', res);
         this.setState({
           username: document.getElementById('username-login').value,
           isLoggedIn: true
         });
         this.props.history.push('/dashboard');
       })
-      .catch((res) => {
-        console.log('login error', res);
+      .catch((err) => {
+        alert('Username or password is incorrect, please try again');
       });
   }
 
   logout() {
     axios.post('/api/users/logout')
       .then((res) => {
-        console.log('logged out', res);
         this.setState({
           username: '',
           isLoggedIn: false
@@ -72,7 +68,7 @@ class App extends React.Component {
         this.props.history.push('/');
       })
       .catch((err) => {
-        console.log('logout error', err);
+        alert('There was an error logging out, please try again');
       });
   }
 
