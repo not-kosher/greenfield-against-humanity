@@ -31,7 +31,6 @@ class GameRoom extends React.Component {
 
   componentDidMount() {
     this.setState({
-      // user: (Math.random() * 100).toString(),
       user: this.props.username,
       room: this.props.match.params.room,
     });

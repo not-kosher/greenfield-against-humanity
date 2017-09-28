@@ -9,7 +9,6 @@ class Lobby extends React.Component {
     super(props);
     this.state = {
       rooms: [],
-      // user: (Math.random() * 100).toString(),
     };
 
     this.createRoom = this.createRoom.bind(this);
