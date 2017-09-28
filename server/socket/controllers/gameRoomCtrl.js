@@ -11,10 +11,14 @@ const enterRoom = (io, client, roomname) => {
 const startGame = (io, client, roomname) => {
   const game = GameManager.getRoom(roomname);
   game.startTurn();
+  io.to(roomname).emit('updatePlayers', game.players);
   game.updatePhase('submission');
   io.to(roomname).emit('updatePlayers', game.players);
   io.to(roomname).emit('gameHasStarted');
 
+  //close room and update lobby
+  GameManager.closeRoom(roomname);
+  io.to('lobby').emit('allRooms', GameManager.rooms); 
 };
 
 const initializeGame = (io, client, roomname, username) => {
@@ -58,6 +62,7 @@ const endTurn = (io, client, roomname) => {
   io.to(roomname).emit('setupNewTurn', game.blackCard, game.getCzar());
   io.to(roomname).emit('updatePlayers', game.players);
   io.to(roomname).emit('updateSubmittedCards', game.submissions);
+  io.to(roomname).emit('updatePlayers', game.players);
   io.to(roomname).emit('updatePhase', game.updatePhase('submission'));
 };
 

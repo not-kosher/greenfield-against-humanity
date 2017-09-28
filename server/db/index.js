@@ -1,12 +1,25 @@
 const Sequelize = require('sequelize');
 const db = require('./config');
+const passport = require('passport-local-sequelize');
 
 const User = db.define('user', {
   username: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
+  },
+  hash: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+  },
+  salt: {
+    type: Sequelize.STRING,
+    allowNull: false,
   },
 });
+
+// Add passport functionality when referencing user model
+passport.attachToUser(User);
 
 const WhiteCard = db.define('whiteCard', {
   text: {
