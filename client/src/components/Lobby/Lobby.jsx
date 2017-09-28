@@ -40,6 +40,10 @@ class Lobby extends React.Component {
     socket.emit('enterLobby');
   }
 
+  componentWillUnmount() {
+    socket.removeAllListeners();
+  }
+
   createRoom() {
     // TODO needs data validation for room name
     const roomname = document.getElementById('roomname').value;

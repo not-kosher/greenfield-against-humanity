@@ -9,7 +9,7 @@ class UserAuthContainer extends React.Component {
 
   render() {
     // note: there must be a better way to do this
-    return this.props.isLoggedIn ? (<div id='remove-later'>{this.props.children}</div>) : null;
+    return this.props.isLoggedIn ? (<div id='auth-container'>{this.props.children}</div>) : null;
   }
 
 }

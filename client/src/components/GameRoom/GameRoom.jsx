@@ -84,6 +84,10 @@ class GameRoom extends React.Component {
 
   }
 
+  componentWillUnmount() {
+    socket.removeAllListeners();
+  }
+
   startGame() {
     console.log(this.state.roomCreator);
 
