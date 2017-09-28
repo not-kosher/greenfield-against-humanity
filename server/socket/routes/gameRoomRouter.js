@@ -8,9 +8,6 @@ const gameRoomRouter = (io, client) => {
   client.on('messageSubmission', (roomname, username, text) => {
     gameRoomCtrl.messageSubmission(io, client, roomname, username, text);
   });
-  
-  //don't need startGame now with poopPrompt
-  // client.on('startGame', roomname => gameRoomCtrl.startGame(io, client, roomname));
 
   client.on('startPoopPrompt', roomname => gameRoomCtrl.startPoopPrompt(io, client, roomname));
   client.on('poopSubmission', (roomname, username, poopTime) => {
