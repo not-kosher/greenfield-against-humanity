@@ -32,12 +32,12 @@ class Landing extends React.Component {
     return (
       <div>
         <div className='landingContent'> 
-          <div className='Title'>Welcome, Dregs of Humanity</div>
+          <div className='landing-title'>Welcome, Dregs of Humanity</div>
           <div className='button-container'>
-            <div className='login-button' onClick={this.toggleLogin}>
+            <div className='auth-button' onClick={this.toggleLogin}>
               Login
             </div>
-            <div className='signup-button' onClick={this.toggleSignup}>
+            <div className='auth-button' onClick={this.toggleSignup}>
               Signup
             </div>
           </div>
