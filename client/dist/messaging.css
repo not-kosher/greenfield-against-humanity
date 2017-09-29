@@ -20,6 +20,14 @@
   border-bottom: 1px solid white;
 }
 
+.message-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.message-list::-webkit-scrollbar-thumb {
+  background: white;
+}
+
 .message {
   margin: 8px 5px;
   word-wrap: break-word;
