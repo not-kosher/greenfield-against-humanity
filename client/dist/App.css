@@ -133,6 +133,21 @@ select {
     margin: auto;
 }
 
+.selected {
+    border: 3px solid;
+    border-color: red;
+}
+
+.winnerContent {
+    display: block;
+    height: 150px;
+}
+
+.winner {
+    display: block;
+    /* vertical-align: bottom; */
+}
+
 .PlayerEntry {
     display: block;
 }
