@@ -75,13 +75,14 @@ class App extends React.Component {
   render() {
     return (
       <div className='App'>
+        <Navbar username={this.state.username} logout={this.logout} />
         <Switch>
           <Route exact path='/' render={(props) => (
             <Landing signup={this.signup} login={this.login} />
           )} />
           <Route render={(props) => (
             <UserAuthContainer {...props} isLoggedIn={this.state.isLoggedIn}>
-              <Navbar username={this.state.username} logout={this.logout} />
+              
               <Route path='/dashboard' component={Dashboard} />
               <Route path='/lobby' render={(props) => (
                 <Lobby {...props} username={this.state.username} />

@@ -5,18 +5,34 @@ body {
     height: 1000px;
 
 }
-
-.Logo {
-    font-size: 20px;
-    padding: 10px;
-    margin-bottom: 50px;
-}
-
+ 
 select {
     background-color: black;
     color: white;
 }
 
+/* --------
+  !Navbar!
+--------- */
+
+.navbar {
+    overflow: hidden;
+}
+
+.navbar-element {
+    display: block;
+    text-align: center;
+    float: right;
+    font-size: 17px;
+    padding: 10px;
+    margin-bottom: 50px;
+    text-decoration: none;
+}
+
+.Logo {
+    float: left;
+    font-size: 20px;
+}
 
 /* --------
   !Lobby!
