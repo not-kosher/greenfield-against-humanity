@@ -2,19 +2,19 @@ import React from 'react';
 
 const Signup = (props) => {
   return (
-    <div>
-      <form>
-        Signup for a new account
-        <div>
-          <label>Username</label>
-          <input type="text" id="username-signup"/>
+    <div className='auth-form-container'>
+      <form className='auth-form'>
+        <div className='form-description'>
+          Signup for a new account
         </div>
         <div>
-          <label>Password</label>
-          <input type="password" id="password-signup"/>
+          <input type="text" className='input-field' id="username-login" placeholder='Username'/>
         </div>
-        <div onClick={props.signup} >
-          Submit
+        <div>
+          <input type="password" className='input-field' id="password-login" placeholder='Password'/>
+        </div>
+        <div>
+          <input type="submit" className='input-field submit-button' value="Submit" onSubmit={props.signup}/>
         </div>
       </form>
     </div>

@@ -42,7 +42,8 @@ class App extends React.Component {
       });
   }
 
-  login() {
+  login(event) {
+    event.preventDefault();
     axios.post('/api/users/login', {
       username: document.getElementById('username-login').value,
       password: document.getElementById('password-login').value
