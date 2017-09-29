@@ -4,6 +4,7 @@ const Player = require('./Player');
 class Game {
   constructor(roomname, username, deck) {
     this.name = roomname;
+    this.messages = [];
     this.turnPhase = 'loading';
 
     this.deck = {
@@ -24,6 +25,14 @@ class Game {
     this.playerCount = 0;
 
     this.addPlayer(username);
+  }
+
+  addMessage(username, text) {
+    this.messages.push({username, text});
+  }
+
+  getLatestMessages() {
+    return this.messages.splice(this.messages.length - 100);
   }
 
   addPlayer(username) {
