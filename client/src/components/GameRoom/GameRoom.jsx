@@ -39,6 +39,9 @@ class GameRoom extends React.Component {
       user: this.props.username,
       room: this.props.match.params.room,
     });
+    socket.on('openPoopPrompt', () => {
+
+    });
     socket.on('gameHasStarted', () => {
       this.initializeGame();
     });
@@ -106,6 +109,10 @@ class GameRoom extends React.Component {
     socket.removeAllListeners();
   }
 
+  startPoopPrompt() {
+    socket.emit('startPoopPrompt', this.state.room);
+  }
+
   startGame() {
     console.log(this.state.roomCreator);
 
@@ -155,6 +162,11 @@ class GameRoom extends React.Component {
     return (
       <div>
         <div className='RoomName'>{this.state.room}</div>
+        <div id='poop' className='poopPrompt'>
+          <div className='poopContent'>
+            
+          </div>
+        </div>
         <Actions startGame={this.startGame} endTurn={this.endTurn} state={this.state}/>
         <PlayerList players={this.state.playerArray} czar={this.state.czar}/>
         <Table 
