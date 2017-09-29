@@ -9,7 +9,7 @@ const Table = ({ select, cards, black, submit, submittedCards, revealCard, state
       <div className='Submitted'>
         <BlackCard card={black} />
         {submittedCards.map((submission) => {
-          console.log(submission)
+          console.log(submission);
           return <Submissions submission={submission} select={select} revealCard={revealCard} />;
         })}
       </div>
