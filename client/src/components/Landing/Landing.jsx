@@ -31,7 +31,7 @@ class Landing extends React.Component {
   render() {
     return (
       <div>
-        <div className='landingContent'> 
+        <div className='landing'> 
           <div className='landing-title'>Welcome, Dregs of Humanity</div>
           <div className='button-container'>
             <div className='auth-button' onClick={this.toggleLogin}>

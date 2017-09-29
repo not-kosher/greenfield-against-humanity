@@ -70,9 +70,42 @@ select {
 }
 
 .auth-button {
-    display: inline;
+    display: inline-block;
+    width: 80px;
     padding: 15px;
     font-size: 20px;
+    cursor: pointer;
+    border: 2px solid;
+    border-color: white;
+    margin: 0px 15px;
+}
+
+.auth-form-container {
+    text-align: center;
+    padding: 30px;
+}
+
+.auth-form div {
+    font-size: 18px;
+    padding: 15px;
+}
+
+.input-field {
+    font-size: 15px;
+    width: 20%;
+    height: 30px;
+}
+
+.submit-button {
+    background: none;
+    color: white;
+    border: none;
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    border: 2px solid;
+    border-color: white;
 }
 
 /* --------
