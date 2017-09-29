@@ -25,13 +25,16 @@ class GameRoom extends React.Component {
       messages: []
     };
 
-    this.startGame = this.startGame.bind(this); 
+    this.startPoopPrompt = this.startPoopPrompt.bind(this);
+    this.poopSubmission = this.poopSubmission.bind(this); 
     this.initializeGame = this.initializeGame.bind(this);
+    this.showHand = this.showHand.bind(this);
     this.cardSubmission = this.cardSubmission.bind(this);
     this.revealCard = this.revealCard.bind(this);
     this.winnerSelected = this.winnerSelected.bind(this);
     this.endTurn = this.endTurn.bind(this);
     this.submitMessage = this.submitMessage.bind(this);
+  
   }
 
   componentDidMount() {
@@ -39,13 +42,21 @@ class GameRoom extends React.Component {
       user: this.props.username,
       room: this.props.match.params.room,
     });
+    socket.on('openPoopPrompt', () => {
+      var poop = document.getElementById('poop');
+      poop.style.display = 'block';
+    });
     socket.on('gameHasStarted', () => {
+      var poop = document.getElementById('poop');
+      poop.style.display = 'none';
       this.initializeGame();
     });
     socket.on('refillHand', (cards) => {
+      
       this.setState({
         hand: cards
       });
+      this.showHand();
     });
     socket.on('setupNewTurn', (blackCard, czar) => {
       this.setState({
@@ -106,16 +117,33 @@ class GameRoom extends React.Component {
     socket.removeAllListeners();
   }
 
-  startGame() {
-    console.log(this.state.roomCreator);
+  startPoopPrompt() {
+    socket.emit('startPoopPrompt', this.state.room);
+    var poop = document.getElementById('poop');
+    poop.style.display = 'block';
 
-    socket.emit('startGame', this.state.room);
+  }
 
+  poopSubmission() {
+    const poopHours = document.getElementById('poopHours').value;
+    var poop = document.getElementById('poop');
+    document.getElementById('prompt').style.display = 'none';
+    document.getElementById('waitingOnPoopers').style.display = 'block';
+    socket.emit('poopSubmission', this.state.room, this.state.user, poopHours);
   }
 
   initializeGame() {
     socket.emit('initializeGame', this.state.room, this.props.username);
   }
+
+  showHand() {
+    const cards = document.getElementsByClassName('Card');
+    for (var i = 0; i < cards.length; i++) {
+      console.log(cards[i]);
+      cards[i].classList.add('move');
+    }
+  }
+  
 
   cardSubmission(card) {
     if (this.state.turnPhase === 'submission' && this.state.user !== this.state.czar) {
@@ -155,7 +183,17 @@ class GameRoom extends React.Component {
     return (
       <div>
         <div className='RoomName'>{this.state.room}</div>
-        <Actions startGame={this.startGame} endTurn={this.endTurn} state={this.state}/>
+        <div id='poop' className='poopPrompt'>
+          <div className='poopContent'>
+            <div id='waitingOnPoopers'>Waiting for all players to submit</div>
+            <div id='prompt'>
+              <div className='poopQ'>How many hours has it been since you last pooped?</div>
+              <input id='poopHours' />
+              <div className='poopSubmit' onClick={this.poopSubmission}>Submit</div>
+            </div>
+          </div>
+        </div>
+        <Actions startPoopPrompt={this.startPoopPrompt} endTurn={this.endTurn} state={this.state}/>
         <PlayerList players={this.state.playerArray} czar={this.state.czar}/>
         <Table 
           state = {this.state}
