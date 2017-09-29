@@ -11,7 +11,7 @@ const Navbar = ({ username, logout }) => {
             Logout
           </div>
           <div className='welcome-message navbar-element'>
-            Welcome, <Link to='dashboard'>{username}</Link>
+            Welcome, <Link to='/dashboard'>{username}</Link>
           </div>
         </div>
       ) : null}
