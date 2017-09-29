@@ -219,6 +219,11 @@ select {
     padding-bottom: 15px;
 }
 
+.Action {
+    cursor: pointer;
+    display: inline-block;
+}
+
 .Card {
  
   text-align: left;
