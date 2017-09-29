@@ -25,7 +25,8 @@ class App extends React.Component {
     this.logout = this.logout.bind(this);
   }
 
-  signup() {
+  signup(e) {
+    e.preventDefault();
     axios.post('/api/users/signup', {
       username: document.getElementById('username-signup').value,
       password: document.getElementById('password-signup').value
@@ -42,8 +43,8 @@ class App extends React.Component {
       });
   }
 
-  login(event) {
-    event.preventDefault();
+  login(e) {
+    e.preventDefault();
     axios.post('/api/users/login', {
       username: document.getElementById('username-login').value,
       password: document.getElementById('password-login').value

@@ -3,7 +3,7 @@ import React from 'react';
 const Login = (props) => {
   return (
     <div className='auth-form-container'>
-      <form className='auth-form'>
+      <form className='auth-form' onSubmit={props.login}>
         <div className='form-description'>
           Login with your account
         </div>
@@ -14,7 +14,7 @@ const Login = (props) => {
           <input type="password" className='input-field' id="password-login" placeholder='Password'/>
         </div>
         <div>
-          <input type="submit" className='input-field submit-button' value="Submit" onSubmit={props.login}/>
+          <input type="submit" className='input-field submit-button' value="Submit"/>
         </div>
       </form>
     </div>
