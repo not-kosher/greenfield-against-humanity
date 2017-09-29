@@ -206,6 +206,26 @@ select {
   overflow-wrap: break-word;
 }
 
+.poopPrompt {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(230, 20, 20); 
+    background-color:  rgb(230, 20, 20); 
+}
+
+.poopContent {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+}
+
 .PlayerList {
     display: inline-block;
     border: 2px solid;
