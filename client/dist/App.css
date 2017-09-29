@@ -19,6 +19,16 @@ select {
     overflow: hidden;
 }
 
+.navbar a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+    color: rgb(245, 245, 245);
+}
+
 .navbar-element {
     display: block;
     text-align: center;
@@ -33,6 +43,22 @@ select {
     float: left;
     font-size: 20px;
 }
+
+.navbar .a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.navbar .logout-button:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* --------
+  !Landing!
+--------- */
+
+
 
 /* --------
   !Lobby!
