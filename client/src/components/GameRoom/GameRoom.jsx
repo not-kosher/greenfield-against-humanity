@@ -3,6 +3,7 @@ import Hand from './Hand';
 import PlayerList from './PlayerList';
 import Table from './Table';
 import Actions from './Actions';
+import MessageBoard from './MessageBoard';
 import socket from '../../socket/index.js';
 
 
@@ -21,7 +22,7 @@ class GameRoom extends React.Component {
       playerArray: [],
       czar: '',
       yourSumittedCards: [],
-
+      messages: []
     };
 
     this.startGame = this.startGame.bind(this); 
@@ -30,7 +31,7 @@ class GameRoom extends React.Component {
     this.revealCard = this.revealCard.bind(this);
     this.winnerSelected = this.winnerSelected.bind(this);
     this.endTurn = this.endTurn.bind(this);
-  
+    this.submitMessage = this.submitMessage.bind(this);
   }
 
   componentDidMount() {
@@ -86,10 +87,15 @@ class GameRoom extends React.Component {
         });
       }
     });
+    socket.on('updateMessages', (messages) => {
+      this.setState({messages});
+    });
     
     // note: need to find better way of grabbing room name
     socket.emit('enterRoom', this.props.match.params.room);
 
+    //get elements
+    this.messageInput = document.getElementById('message-input');
   }
 
   componentWillUnmount() {
@@ -133,6 +139,12 @@ class GameRoom extends React.Component {
     }
   }
 
+  submitMessage(e) {
+    e.preventDefault();
+    socket.emit('messageSubmission', this.state.room, this.props.username, this.messageInput.value);
+    this.messageInput.value = '';
+  }
+
 
   render() {
     return (
@@ -149,7 +161,7 @@ class GameRoom extends React.Component {
           submittedCards={this.state.submittedCards}
           revealCard={this.revealCard}
         />
-
+        <MessageBoard messages={this.state.messages} submitMessage={this.submitMessage}/>
       </div>
     );
   }
