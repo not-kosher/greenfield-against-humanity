@@ -58,7 +58,22 @@ select {
   !Landing!
 --------- */
 
+.landing-title {
+    text-align: center;
+    font-size: 45px;
+    padding-bottom: 50px;
+}
 
+.button-container {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.auth-button {
+    display: inline;
+    padding: 15px;
+    font-size: 20px;
+}
 
 /* --------
   !Lobby!
