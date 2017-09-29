@@ -1,16 +1,25 @@
 .message-board {
   height: 300px;
   width: 400px;
+<<<<<<< HEAD
   border: 2px solid white;
+=======
+  padding: 10px;
+>>>>>>> master
 }
 
 .message-list-container {
   height: 90%;
+<<<<<<< HEAD
   width: calc(100% - 1px);
+=======
+  width: 100%;
+>>>>>>> master
   overflow: hidden;
 }
 
 .message-list {
+<<<<<<< HEAD
   height: calc(100% - 1px);
   width: 100%;
   color: white;
@@ -18,11 +27,23 @@
   overflow-y: scroll;
   overflow-x: hidden;
   border-bottom: 1px solid white;
+=======
+  height: 100%;
+  width: 95%;
+  margin: 0 auto;
+  border: 2px solid white;
+  color: white;
+  font-size: 0.8em;
+  overflow-y: scroll;
+>>>>>>> master
 }
 
 .message {
   margin: 8px 5px;
+<<<<<<< HEAD
   word-wrap: break-word;
+=======
+>>>>>>> master
 }
 
 .message-username {
@@ -31,6 +52,7 @@
 }
 
 .message-input-form {
+<<<<<<< HEAD
   height: 9%;
   width: calc(100% - 1px);
 }
@@ -49,6 +71,16 @@
 
 .message-input:focus {
   outline: none;
+=======
+  height: 5%;
+  width: 95%;
+  margin: 5% auto 0 auto;
+}
+
+.message-input {
+  height: 100%;
+  width: 100%;
+>>>>>>> master
 }
 
 .message-input-button {
