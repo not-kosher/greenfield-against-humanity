@@ -19,6 +19,16 @@ select {
     overflow: hidden;
 }
 
+.navbar a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+    color: rgb(245, 245, 245);
+}
+
 .navbar-element {
     display: block;
     text-align: center;
@@ -32,6 +42,70 @@ select {
 .Logo {
     float: left;
     font-size: 20px;
+}
+
+.navbar .a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.navbar .logout-button:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* --------
+  !Landing!
+--------- */
+
+.landing-title {
+    text-align: center;
+    font-size: 45px;
+    padding-bottom: 50px;
+}
+
+.button-container {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.auth-button {
+    display: inline-block;
+    width: 80px;
+    padding: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    border: 2px solid;
+    border-color: white;
+    margin: 0px 15px;
+}
+
+.auth-form-container {
+    text-align: center;
+    padding: 30px;
+}
+
+.auth-form div {
+    font-size: 20px;
+    padding: 15px;
+}
+
+.input-field {
+    font-size: 16px;
+    width: 20%;
+    height: 30px;
+}
+
+.submit-button {
+    background: none;
+    color: white;
+    border: none;
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    border: 2px solid;
+    border-color: white;
 }
 
 /* --------
