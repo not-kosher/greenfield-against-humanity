@@ -91,6 +91,7 @@ class GameRoom extends React.Component {
       }
     });
     socket.on('updateMessages', (messages) => {
+      console.log('updateing messages: ', messages);
       this.setState({messages});
     });
     
@@ -148,6 +149,7 @@ class GameRoom extends React.Component {
 
   submitMessage(e) {
     e.preventDefault();
+    console.log('submiting message: ', this.messageInput.value);
     socket.emit('messageSubmission', this.state.room, this.props.username, this.messageInput.value);
     this.messageInput.value = '';
   }
