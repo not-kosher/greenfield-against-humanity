@@ -8,6 +8,13 @@ const enterRoom = (io, client, roomname) => {
 
 //add leave room here
 
+const messageSubmission = (io, client, roomname, username, text) => {
+  const game = GameManager.getRoom(roomname);
+  game.addMessage(username, text);
+  io.to(roomname).emit('updateMessages', game.getLatestMessages());
+};
+
+
 const startGame = (io, client, roomname) => {
   const game = GameManager.getRoom(roomname);
   game.startTurn();
@@ -69,6 +76,7 @@ const endTurn = (io, client, roomname) => {
 
 module.exports = {
   enterRoom,
+  messageSubmission,
   startGame,
   initializeGame,
   cardSubmission,
