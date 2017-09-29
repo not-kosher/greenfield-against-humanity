@@ -4,7 +4,7 @@ const Login = (props) => {
   return (
     <div>
       <form>
-        Login:
+        Login with your account
         <div>
           <label>Username</label>
           <input type="text" id="username-login"/>
