@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Actions = ({ endTurn, startGame, state }) => {
+const Actions = ({ endTurn, startPoopPrompt, state }) => {
   if (state.user === state.roomCreator && state.turnPhase === '') {
     return (
-      <div className={'Action'}>
-        <div onClick={startGame}>Start Game</div>
+      <div id='Start' className={'Action'}>
+        <div onClick={startPoopPrompt}>Start Game</div>
       </div>
     );
   } else if (state.user === state.czar) {
