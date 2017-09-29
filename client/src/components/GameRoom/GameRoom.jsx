@@ -25,7 +25,8 @@ class GameRoom extends React.Component {
       messages: []
     };
 
-    this.startGame = this.startGame.bind(this); 
+    this.startPoopPrompt = this.startPoopPrompt.bind(this);
+    this.poopSubmission = this.poopSubmission.bind(this); 
     this.initializeGame = this.initializeGame.bind(this);
     this.cardSubmission = this.cardSubmission.bind(this);
     this.revealCard = this.revealCard.bind(this);
@@ -41,8 +42,11 @@ class GameRoom extends React.Component {
     });
     socket.on('openPoopPrompt', () => {
       var poop = document.getElementById('poop');
+      poop.style.display = 'block';
     });
     socket.on('gameHasStarted', () => {
+      var poop = document.getElementById('poop');
+      poop.style.display = 'none';
       this.initializeGame();
     });
     socket.on('refillHand', (cards) => {
@@ -110,14 +114,20 @@ class GameRoom extends React.Component {
   }
 
   startPoopPrompt() {
-    socket.emit('startPoopPrompt', this.state.room);
-  }
-
-  startGame() {
     console.log(this.state.roomCreator);
 
-    socket.emit('startGame', this.state.room);
+    socket.emit('startPoopPrompt', this.state.room);
+    var poop = document.getElementById('poop');
+    poop.style.display = 'block';
 
+  }
+
+  poopSubmission() {
+    const poopHours = document.getElementById('poopHours').value;
+    var poop = document.getElementById('poop');
+    document.getElementById('prompt').style.display = 'none';
+    document.getElementById('waitingOnPoopers').style.display = 'block';
+    socket.emit('poopSubmission', this.state.room, this.state.user, poopHours);
   }
 
   initializeGame() {
@@ -164,10 +174,15 @@ class GameRoom extends React.Component {
         <div className='RoomName'>{this.state.room}</div>
         <div id='poop' className='poopPrompt'>
           <div className='poopContent'>
-            
+            <div id='waitingOnPoopers'>Waiting for all players to submit</div>
+            <div id='prompt'>
+              <div>How many hours has it been since you last pooped?</div>
+              <input id='poopHours' />
+              <div className='poopSubmit' onClick={this.poopSubmission}>Submit</div>
+            </div>
           </div>
         </div>
-        <Actions startGame={this.startGame} endTurn={this.endTurn} state={this.state}/>
+        <Actions startPoopPrompt={this.startPoopPrompt} endTurn={this.endTurn} state={this.state}/>
         <PlayerList players={this.state.playerArray} czar={this.state.czar}/>
         <Table 
           state = {this.state}
