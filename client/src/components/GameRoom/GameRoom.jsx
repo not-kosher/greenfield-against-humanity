@@ -39,7 +39,7 @@ class GameRoom extends React.Component {
       room: this.props.match.params.room,
     });
     socket.on('openPoopPrompt', () => {
-
+      var poop = document.getElementById('poop')
     });
     socket.on('gameHasStarted', () => {
       this.initializeGame();
