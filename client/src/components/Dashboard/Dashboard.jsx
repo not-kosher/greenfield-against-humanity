@@ -7,15 +7,17 @@ const Dashboard = (props) => {
       <div>
         <div className='dashboardContent'> 
           <div className='Title'>Welcome, you filthy cur</div>
-          <div>
-            <Link to='lobby'>
-              Play a game
-            </Link>
-          </div>
-          <div>
-            <Link to='deckbuilder'>
-              Build a deck
-            </Link>
+          <div className='dashboard-menu'>
+            <div className='dashboard-menu-item'>
+              <Link to='lobby'>
+                Play a game
+              </Link>
+            </div>
+            <div className='dashboard-menu-item'>
+              <Link to='deckbuilder'>
+                Build a deck
+              </Link>
+            </div>
           </div>
         </div>
       </div>

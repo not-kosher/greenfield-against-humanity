@@ -12,7 +12,7 @@ const AddRoom = ({ createRoom }) => {
             <option>Base Set</option>
           </select>
         </div>
-        <div onClick={createRoom} >Submit</div>
+        <div onClick={createRoom} className='submit-room'>Submit</div>
       </div>
     </div>
   );
