@@ -32,7 +32,7 @@ class Game {
   }
 
   getLatestMessages() {
-    return this.messages.splice(this.messages.length - 100);
+    return this.messages.slice(this.messages.length - 100);
   }
 
   addPlayer(username) {
