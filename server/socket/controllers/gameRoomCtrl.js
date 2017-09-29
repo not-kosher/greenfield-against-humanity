@@ -16,18 +16,25 @@ const messageSubmission = (io, client, roomname, username, text) => {
   io.to(roomname).emit('updateMessages', game.getLatestMessages());
 };
 
-
-const startGame = (io, client, roomname) => {
-  const game = GameManager.getRoom(roomname);
-  game.startTurn();
-  io.to(roomname).emit('updatePlayers', game.players);
-  game.updatePhase('submission');
-  io.to(roomname).emit('updatePlayers', game.players);
-  io.to(roomname).emit('gameHasStarted');
+const startPoopPrompt = (io, client, roomname) => {
+  io.to(roomname).emit('openPoopPrompt');
 
   //close room and update lobby
   GameManager.closeRoom(roomname);
   io.to('lobby').emit('allRooms', GameManager.rooms); 
+};
+
+const poopSubmission = (io, client, roomname, username, poopTime) => {
+  const game = GameManager.getRoom(roomname);
+  game.submitPoopTime(username, poopTime);
+
+  if (game.haveAllSubmittedPoopTime()) {
+    game.sortPlayers();
+    game.startTurn();
+    io.to(roomname).emit('updatePlayers', game.players);
+    game.updatePhase('submission');
+    io.to(roomname).emit('gameHasStarted');
+  }
 };
 
 const initializeGame = (io, client, roomname, username) => {
@@ -79,7 +86,8 @@ const endTurn = (io, client, roomname) => {
 module.exports = {
   enterRoom,
   messageSubmission,
-  startGame,
+  startPoopPrompt,
+  poopSubmission,
   initializeGame,
   cardSubmission,
   revealCard,
