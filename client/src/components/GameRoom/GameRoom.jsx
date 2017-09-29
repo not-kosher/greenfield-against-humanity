@@ -129,7 +129,6 @@ class GameRoom extends React.Component {
   render() {
     return (
       <div>
-        <div className='Logo'>Greenfield Against Humanity</div>
         <div className='RoomName'>{this.state.room}</div>
         <Actions startGame={this.startGame} endTurn={this.endTurn} state={this.state}/>
         <PlayerList players={this.state.playerArray} czar={this.state.czar}/>

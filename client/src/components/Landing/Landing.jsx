@@ -31,7 +31,6 @@ class Landing extends React.Component {
   render() {
     return (
       <div>
-        <div className='Logo-landing'>Greenfield Against Humanity</div>
         <div className='landingContent'> 
           <div className='Title'>Welcome, Dregs of Humanity</div>
           <div className='button-container'>

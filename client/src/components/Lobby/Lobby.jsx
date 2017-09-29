@@ -58,7 +58,6 @@ class Lobby extends React.Component {
   render() {
     return (
       <div className='Lobby'>
-        <div className='Logo'>Greenfield Against Humanity</div>
         <AddRoom createRoom={this.createRoom} />
         <RoomList rooms={this.state.rooms} joinRoom={this.joinRoom} />
 
