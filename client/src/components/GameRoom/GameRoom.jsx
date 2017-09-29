@@ -28,11 +28,13 @@ class GameRoom extends React.Component {
     this.startPoopPrompt = this.startPoopPrompt.bind(this);
     this.poopSubmission = this.poopSubmission.bind(this); 
     this.initializeGame = this.initializeGame.bind(this);
+    this.showHand = this.showHand.bind(this);
     this.cardSubmission = this.cardSubmission.bind(this);
     this.revealCard = this.revealCard.bind(this);
     this.winnerSelected = this.winnerSelected.bind(this);
     this.endTurn = this.endTurn.bind(this);
     this.submitMessage = this.submitMessage.bind(this);
+  
   }
 
   componentDidMount() {
@@ -50,9 +52,11 @@ class GameRoom extends React.Component {
       this.initializeGame();
     });
     socket.on('refillHand', (cards) => {
+      
       this.setState({
         hand: cards
       });
+      this.showHand();
     });
     socket.on('setupNewTurn', (blackCard, czar) => {
       this.setState({
@@ -114,8 +118,6 @@ class GameRoom extends React.Component {
   }
 
   startPoopPrompt() {
-    console.log(this.state.roomCreator);
-
     socket.emit('startPoopPrompt', this.state.room);
     var poop = document.getElementById('poop');
     poop.style.display = 'block';
@@ -133,6 +135,15 @@ class GameRoom extends React.Component {
   initializeGame() {
     socket.emit('initializeGame', this.state.room, this.props.username);
   }
+
+  showHand() {
+    const cards = document.getElementsByClassName('Card');
+    for (var i = 0; i < cards.length; i++) {
+      console.log(cards[i]);
+      cards[i].classList.add('move');
+    }
+  }
+  
 
   cardSubmission(card) {
     if (this.state.turnPhase === 'submission' && this.state.user !== this.state.czar) {
@@ -176,7 +187,7 @@ class GameRoom extends React.Component {
           <div className='poopContent'>
             <div id='waitingOnPoopers'>Waiting for all players to submit</div>
             <div id='prompt'>
-              <div>How many hours has it been since you last pooped?</div>
+              <div className='poopQ'>How many hours has it been since you last pooped?</div>
               <input id='poopHours' />
               <div className='poopSubmit' onClick={this.poopSubmission}>Submit</div>
             </div>
