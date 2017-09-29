@@ -1,0 +1,45 @@
+.message-board {
+  height: 300px;
+  width: 400px;
+  padding: 10px;
+}
+
+.message-list-container {
+  height: 90%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.message-list {
+  height: 100%;
+  width: 95%;
+  margin: 0 auto;
+  border: 2px solid white;
+  color: white;
+  font-size: 0.8em;
+  overflow-y: scroll;
+}
+
+.message {
+  margin: 8px 5px;
+}
+
+.message-username {
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.message-input-form {
+  height: 5%;
+  width: 95%;
+  margin: 5% auto 0 auto;
+}
+
+.message-input {
+  height: 100%;
+  width: 100%;
+}
+
+.message-input-button {
+  display: none;
+}

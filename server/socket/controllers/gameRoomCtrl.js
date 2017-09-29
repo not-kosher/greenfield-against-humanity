@@ -4,9 +4,18 @@ const enterRoom = (io, client, roomname) => {
   const game = GameManager.getRoom(roomname);
   //add player here instead of in lobby ctrl, need to pass in username then
   io.to(roomname).emit('updatePlayers', game.players);
+  //send client the messages on the board
+  client.emit('updateMessages', game.getLatestMessages());
 };
 
 //add leave room here
+
+const messageSubmission = (io, client, roomname, username, text) => {
+  const game = GameManager.getRoom(roomname);
+  game.addMessage(username, text);
+  io.to(roomname).emit('updateMessages', game.getLatestMessages());
+};
+
 
 const startGame = (io, client, roomname) => {
   const game = GameManager.getRoom(roomname);
@@ -69,6 +78,7 @@ const endTurn = (io, client, roomname) => {
 
 module.exports = {
   enterRoom,
+  messageSubmission,
   startGame,
   initializeGame,
   cardSubmission,
