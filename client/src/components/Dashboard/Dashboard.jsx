@@ -5,7 +5,6 @@ const Dashboard = (props) => {
   return (
     <div className='Dashboard'>
       <div>
-        <div className='Logo'>Greenfield Against Humanity</div>
         <div className='dashboardContent'> 
           <div className='Title'>Welcome, you filthy cur</div>
           <div>

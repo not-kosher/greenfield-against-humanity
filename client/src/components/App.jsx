@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Landing from './Landing/Landing';
 import UserAuthContainer from './UserAuthContainer';
+import Navbar from './Navbar';
 import Dashboard from './Dashboard/Dashboard';
 import Lobby from './Lobby/Lobby';
 import GameRoom from './GameRoom/GameRoom';
@@ -21,6 +22,7 @@ class App extends React.Component {
 
     this.signup = this.signup.bind(this);
     this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   signup() {
@@ -29,16 +31,14 @@ class App extends React.Component {
       password: document.getElementById('password-signup').value
     })
       .then((res) => {
-        console.log('signup success', res);
         this.setState({
           username: document.getElementById('username-signup').value,
           isLoggedIn: true
         });
-        // redirect to dashboard...
         this.props.history.push('/dashboard');
       })
-      .catch((res) => {
-        console.log('signup error', res);
+      .catch((err) => {
+        alert('There was an error signing up, please try again');
       });
   }
 
@@ -48,27 +48,42 @@ class App extends React.Component {
       password: document.getElementById('password-login').value
     })
       .then((res) => {
-        console.log('login success', res);
         this.setState({
           username: document.getElementById('username-login').value,
           isLoggedIn: true
         });
         this.props.history.push('/dashboard');
       })
-      .catch((res) => {
-        console.log('login error', res);
+      .catch((err) => {
+        alert('Username or password is incorrect, please try again');
+      });
+  }
+
+  logout() {
+    axios.post('/api/users/logout')
+      .then((res) => {
+        this.setState({
+          username: '',
+          isLoggedIn: false
+        });
+        this.props.history.push('/');
+      })
+      .catch((err) => {
+        alert('There was an error logging out, please try again');
       });
   }
 
   render() {
     return (
       <div className='App'>
+        <Navbar username={this.state.username} logout={this.logout} />
         <Switch>
           <Route exact path='/' render={(props) => (
             <Landing signup={this.signup} login={this.login} />
           )} />
           <Route render={(props) => (
             <UserAuthContainer {...props} isLoggedIn={this.state.isLoggedIn}>
+              
               <Route path='/dashboard' component={Dashboard} />
               <Route path='/lobby' render={(props) => (
                 <Lobby {...props} username={this.state.username} />
