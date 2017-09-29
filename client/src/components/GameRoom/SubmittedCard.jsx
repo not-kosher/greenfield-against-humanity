@@ -9,7 +9,10 @@ const SubmittedCard = ({ select, card, submission, revealCard }) => {
 
     return (
       <div className={classNames({'Card': true, 'glow': true})} onClick={select.bind(null, submission)}>
-        <h4><b>{card.text}</b></h4> 
+        <div className={'winnerContent'}>
+          <h4><b>{card.text}</b></h4> 
+          <h4 className={'winner'}><b>{submission.username}</b></h4> 
+        </div>
       </div>
     );
 
@@ -20,7 +23,7 @@ const SubmittedCard = ({ select, card, submission, revealCard }) => {
       </div>
     );
   } else {
-    return (<div className="Card" onClick={revealCard.bind(null, submission)} />);
+    return (<div className="Card" onClick={revealCard.bind(null, submission)}/>);
   }
 };
 

@@ -53,6 +53,10 @@ class GameRoom extends React.Component {
       });
     });
     socket.on('updatePhase', (phase) => {
+      const selected = document.getElementsByClassName('selected');
+      for (var i = 0; i < selected.length; i++) {
+        selected[i].classList.remove('selected');
+      }
       console.log('We are switching to phase: ', phase);
       this.setState({
         turnPhase: phase,
@@ -62,6 +66,10 @@ class GameRoom extends React.Component {
       }
     });
     socket.on('updateSubmittedCards', (submitted) => {
+      const selected = document.getElementsByClassName('selected');
+      for (var i = 0; i < selected.length; i++) {
+        selected[i].classList.remove('selected');
+      }
       this.setState({
         submittedCards: submitted,
       });
@@ -134,6 +142,7 @@ class GameRoom extends React.Component {
         <Actions startGame={this.startGame} endTurn={this.endTurn} state={this.state}/>
         <PlayerList players={this.state.playerArray} czar={this.state.czar}/>
         <Table 
+          state = {this.state}
           select={this.winnerSelected} 
           submit={this.cardSubmission} 
           black={this.state.blackCard} 
