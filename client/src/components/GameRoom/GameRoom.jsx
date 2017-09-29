@@ -88,8 +88,10 @@ class GameRoom extends React.Component {
       }
     });
     socket.on('updateMessages', (messages) => {
-      console.log('updateing messages: ', messages);
       this.setState({messages});
+
+      //if at the bottom, scroll more to reveal
+      this.messageList.scrollTop = this.messageList.scrollHeight;     
     });
     
     // note: need to find better way of grabbing room name
@@ -97,6 +99,7 @@ class GameRoom extends React.Component {
 
     //get elements
     this.messageInput = document.getElementById('message-input');
+    this.messageList = document.getElementById('message-list');
   }
 
   componentWillUnmount() {
