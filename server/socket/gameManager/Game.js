@@ -2,10 +2,17 @@ const _ = require('lodash');
 const Player = require('./Player');
 
 class Game {
-  constructor(roomname, username, deck) {
+  constructor(roomname, username, deck, pointsToWin = 2) {
     this.name = roomname;
     this.messages = [];
     this.turnPhase = 'loading';
+    this.blackCard;
+    this.players = [];
+    this.czarIndex;
+    this.playerCount = 0;
+    this.pointsToWin = pointsToWin;
+    this.numStaying = 0; // used at end of game to check for restart
+    this.winner;
 
     this.deck = {
       blackCards: _.shuffle(deck.blackCards),
@@ -18,11 +25,6 @@ class Game {
 
     // array of submission objects with {username, show, chosen, cards (an array of submitted cards)}
     this.submissions = [];
-
-    this.blackCard;
-    this.players = [];
-    this.czarIndex;
-    this.playerCount = 0;
 
     this.addPlayer(username);
   }
@@ -182,6 +184,37 @@ class Game {
     this.getPlayer(username).addPoint();
   }
 
+  didSomebodyWin() {
+    // checks if winner is defined
+    // go back and set winner whenevr a player's point reaches points to win
+  }
+
+  getWinner() {
+    // returns the winner
+  }
+
+  removePlayer(username) {
+    // removes the player from the list of players
+    // decrements player count
+    // if that player was the creator, assign creator undefined
+  }
+
+  updateCreator() {
+    // sets creator to the next person if it is undefined and returns the new creator
+  }
+
+  increaseNumStaying() {
+    // increment numstaying
+  }
+
+  allPlayersDecided() {
+    // checks numstaying equal to playercount
+  }
+
+  resetGame() {
+    // set game back to original values
+    // re-assign creator if necessary
+  }
 }
 
 module.exports = Game;

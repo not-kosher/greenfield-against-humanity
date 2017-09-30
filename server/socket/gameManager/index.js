@@ -23,11 +23,19 @@ class GameManager {
     }
   }
 
-  // when a room creator closes a room to start a game
   closeRoom(roomname) {
     this.rooms = this.rooms.filter((room) => {
       return room.name !== roomname;
     });
+  }
+
+  endGame(roomname) {
+    // removes game from games collection
+  }
+
+  addToLobby(roomname) {
+    // searches for room in games and adds back to the lobby
+    // needs to know created by still for displaying on front end
   }
 }
 
