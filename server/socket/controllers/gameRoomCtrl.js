@@ -93,6 +93,7 @@ const playerIsStaying = (io, client, roomname, username) => {
   
   if (game.allPlayersDecided()) {
     game.reset();
+    io.to(roomname).emit('updatePlayers', game.players);
     io.to(roomname).emit('gameReset');
   }
 };
@@ -102,6 +103,10 @@ const playerIsLeaving = (io, client, roomname, username) => {
   game.removePlayer(username);
   client.leave(roomname);
   client.join('lobby');
+
+  if (!game.createdBy) {
+    io.to(roomname).emit('updateCreator', game.updateCreator());
+  }
 
   //if no more players, remove all reference to this room/game
   if (game.players.length === 0) {
@@ -117,6 +122,7 @@ const playerIsLeaving = (io, client, roomname, username) => {
     //if all players decided reset
     if (game.allPlayersDecided()) {
       game.reset();
+      io.to(roomname).emit('updatePlayers', game.players);
       io.to(roomname).emit('gameReset');
     }
   }

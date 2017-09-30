@@ -51,6 +51,8 @@ class GameRoom extends React.Component {
       poop.style.display = 'block';
     });
     socket.on('gameHasStarted', () => {
+      document.getElementById('prompt').style.display = 'block';
+      document.getElementById('waitingOnPoopers').style.display = 'none';
       var poop = document.getElementById('poop');
       poop.style.display = 'none';
       this.initializeGame();
@@ -112,11 +114,25 @@ class GameRoom extends React.Component {
       this.setState({
         winner: winner,
       });
+
       const endGamePrompt = document.getElementById('End');
       endGamePrompt.style.display = 'block';
     });
     socket.on('gameReset', () => {
-
+      this.setState({
+        hand: [],
+        blackCard: {},
+        submittedCards: [],
+        turnPhase: '',
+        czar: '',
+        yourSumittedCards: [],
+        winner: '',
+      });
+    });
+    socket.on('updateCreator', (roomCreator) => {
+      this.setState({
+        roomCreator,
+      });
     });
     
     // note: need to find better way of grabbing room name
@@ -192,9 +208,9 @@ class GameRoom extends React.Component {
 
   playerIsStaying() {
     socket.emit('playerIsStaying', this.state.room, this.state.user);
-    const endPromptContent = doctument.getElementById('endPrompt');
+    const endPromptContent = document.getElementById('endPromptContent');
     endPromptContent.style.display = 'none';
-    const waitingMessage = document.getElementById('endWait');
+    const waitingMessage = document.getElementById('endWaiting');
     waitingMessage.style.display = 'block';
   }
 
@@ -220,7 +236,9 @@ class GameRoom extends React.Component {
             </div>
           </div>
         </div>
-        <EndGamePrompt winner={this.state.winner} playerIsLeaving={this.playerIsLeaving} playerIsStaying={this.playerIsStaying}/>
+        {this.state.winner && 
+          <EndGamePrompt winner={this.state.winner} playerIsLeaving={this.playerIsLeaving} playerIsStaying={this.playerIsStaying}/>
+        }
         <Actions startPoopPrompt={this.startPoopPrompt} endTurn={this.endTurn} state={this.state}/>
         <PlayerList players={this.state.playerArray} czar={this.state.czar}/>
         <Table 

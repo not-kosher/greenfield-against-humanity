@@ -14,6 +14,12 @@ class Player {
   addPoint() {
     this.points++;
   }
+
+  reset() {
+    this.isCzar = false;
+    this.points = 0;
+    this.poopTime = undefined;
+  }
 }
 
 module.exports = Player;

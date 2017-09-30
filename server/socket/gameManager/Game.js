@@ -2,7 +2,7 @@ const _ = require('lodash');
 const Player = require('./Player');
 
 class Game {
-  constructor(roomname, username, deck, pointsToWin = 2) {
+  constructor(roomname, username, deck, pointsToWin = 1) {
     this.name = roomname;
     this.createdBy = username;
     this.messages = [];
@@ -226,14 +226,15 @@ class Game {
   }
 
   increaseNumStaying() {
-    return this.numStaying++;
+    this.numStaying++;
   }
 
   allPlayersDecided() {
+    console.log(this.numStaying, ' and ', this.players.length);
     return this.numStaying === this.players.length;
   }
 
-  resetGame() {
+  reset() {
     // set game back to original values
     this.czarIndex = undefined;
     this.numStaying = 0;
@@ -243,7 +244,10 @@ class Game {
     // discard all cards
     this.discardBlackCard();
     this.discardSubmitted();
-    this.players.forEach((player) => this.discardHand(player));
+    this.players.forEach((player) => {
+      this.discardHand(player);
+      player.reset(); // also reset player's attributes
+    });
 
     // refill deck and shuffle
     this.deck.blackCards = _.shuffle(this.deck.blackCards.concat(this.discarded.blackCards));
