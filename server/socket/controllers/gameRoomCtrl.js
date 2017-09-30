@@ -88,7 +88,28 @@ const endTurn = (io, client, roomname) => {
 };
 
 const playerIsStaying = (io, client, roomname, username) => {
+  const game = GameManager.getRoom(roomname);
+  game.removePlayer(username);
+  client.leave(roomname);
+  client.join('lobby');
 
+  //if no more players, remove all reference to this room/game
+  if (game.players.length === 0) {
+    GameManager.endGame(roomname);
+  } else {
+    io.to(roomname).emit('updatePlayers', game.players);
+
+    //if now 2 players, reopen room for more players to join
+    if (game.players.length === 2) {
+      GameManager.addToLobby(roomname);
+    }
+
+    //if all players decided reset
+    if (game.allPlayersDecided()) {
+      game.reset();
+      io.to(roomname).emit('gameReset');
+    }
+  }
 };
 
 const playerIsLeaving = (io, client, roomname, username) => {
