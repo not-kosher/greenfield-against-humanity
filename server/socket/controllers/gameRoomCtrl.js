@@ -8,8 +8,6 @@ const enterRoom = (io, client, roomname) => {
   client.emit('updateMessages', game.getLatestMessages());
 };
 
-//add leave room here
-
 const messageSubmission = (io, client, roomname, username, text) => {
   const game = GameManager.getRoom(roomname);
   game.addMessage(username, text);
@@ -67,9 +65,16 @@ const revealCard = (io, client, roomname, username) => {
 const winnerSelected = (io, client, roomname, username) => {
   const game = GameManager.getRoom(roomname);
   game.selectWinner(username); //this updates both submissions and players
+
+  if (game.getWinner()) {
+    io.to(roomname).emit('updateWinner', game.getWinner());
+    io.to(roomname).emit('updatePhase', game.updatePhase('gameOver'));
+  } else {
+    io.to(roomname).emit('updatePhase', game.updatePhase('end'));
+  }
+
   io.to(roomname).emit('updateSubmittedCards', game.submissions);
   io.to(roomname).emit('updatePlayers', game.players);
-  io.to(roomname).emit('updatePhase', game.updatePhase('end'));
 };
 
 const endTurn = (io, client, roomname) => {
@@ -82,6 +87,40 @@ const endTurn = (io, client, roomname) => {
   io.to(roomname).emit('updatePhase', game.updatePhase('submission'));
 };
 
+const playerIsStaying = (io, client, roomname, username) => {
+  const game = GameManager.getRoom(roomname);
+  game.increaseNumStaying();
+  
+  if (game.allPlayersDecided()) {
+    game.reset();
+    io.to(roomname).emit('gameReset');
+  }
+};
+
+const playerIsLeaving = (io, client, roomname, username) => {
+  const game = GameManager.getRoom(roomname);
+  game.removePlayer(username);
+  client.leave(roomname);
+  client.join('lobby');
+
+  //if no more players, remove all reference to this room/game
+  if (game.players.length === 0) {
+    GameManager.endGame(roomname);
+  } else {
+    io.to(roomname).emit('updatePlayers', game.players);
+
+    //if now 2 players, reopen room for more players to join
+    if (game.players.length === 2) {
+      GameManager.addToLobby(roomname);
+    }
+
+    //if all players decided reset
+    if (game.allPlayersDecided()) {
+      game.reset();
+      io.to(roomname).emit('gameReset');
+    }
+  }
+};
 
 module.exports = {
   enterRoom,
@@ -92,6 +131,8 @@ module.exports = {
   cardSubmission,
   revealCard,
   winnerSelected,
-  endTurn
+  endTurn,
+  playerIsStaying,
+  playerIsLeaving
 };
 

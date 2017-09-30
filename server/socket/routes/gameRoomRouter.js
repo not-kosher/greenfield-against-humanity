@@ -3,8 +3,6 @@ const gameRoomCtrl = require('../controllers/gameRoomCtrl.js');
 const gameRoomRouter = (io, client) => {
   client.on('enterRoom', roomname => gameRoomCtrl.enterRoom(io, client, roomname));
 
-  //add leaveRoom here
-
   client.on('messageSubmission', (roomname, username, text) => {
     gameRoomCtrl.messageSubmission(io, client, roomname, username, text);
   });
@@ -23,6 +21,14 @@ const gameRoomRouter = (io, client) => {
     gameRoomCtrl.winnerSelected(io, client, roomname, username);
   });  
   client.on('endTurn', roomname => gameRoomCtrl.endTurn(io, client, roomname));
+
+  client.on('playerIsStaying', (roomname, username) => {
+    gameRoomCtrl.playerIsStaying(io, client, roomname, username);
+  });
+
+  client.on('playerIsLeaving', (roomname, username) => {
+    gameRoomCtrl.playerIsLeaving(io, client, roomname, username);
+  });
 };
 
 module.exports = gameRoomRouter;
