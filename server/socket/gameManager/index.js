@@ -30,12 +30,14 @@ class GameManager {
   }
 
   endGame(roomname) {
-    // removes game from games collection
+    delete games[roomname];
   }
 
   addToLobby(roomname) {
-    // searches for room in games and adds back to the lobby
-    // needs to know created by still for displaying on front end
+    this.rooms.push({
+      name: roomname,
+      createdBy: this.games[roomname].createdBy
+    });
   }
 }
 

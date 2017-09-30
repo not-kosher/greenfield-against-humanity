@@ -4,12 +4,12 @@ const Player = require('./Player');
 class Game {
   constructor(roomname, username, deck, pointsToWin = 2) {
     this.name = roomname;
+    this.createdBy = username;
     this.messages = [];
     this.turnPhase = 'loading';
     this.blackCard;
     this.players = [];
     this.czarIndex;
-    this.playerCount = 0;
     this.pointsToWin = pointsToWin;
     this.numStaying = 0; // used at end of game to check for restart
     this.winner;
@@ -23,7 +23,9 @@ class Game {
       whiteCards: []
     };
 
-    // array of submission objects with {username, show, chosen, cards (an array of submitted cards)}
+    // array of submission objects with 
+    // {username, show, chosen, cards}
+    // cards is array of submitted white card objects
     this.submissions = [];
 
     this.addPlayer(username);
@@ -38,7 +40,6 @@ class Game {
   }
 
   addPlayer(username) {
-    this.playerCount += 1;
     const player = new Player(username);
     this.players.push(player);
   }
@@ -116,7 +117,7 @@ class Game {
       this.players[this.czarIndex].toggleCzar();
     } else {
       this.players[this.czarIndex].toggleCzar();
-      this.czarIndex = (this.czarIndex + 1) % this.playerCount;
+      this.czarIndex = (this.czarIndex + 1) % this.players.length;
       this.players[this.czarIndex].toggleCzar();
     }
   }
@@ -160,7 +161,7 @@ class Game {
   }
   
   haveAllSubmitted() {
-    return this.submissions.length === this.playerCount - 1;
+    return this.submissions.length === this.players.length - 1;
   }
 
   revealCard(username) {
@@ -181,39 +182,42 @@ class Game {
 
   selectWinner(username) {
     this.getSubmission(username).chosen = true;
-    this.getPlayer(username).addPoint();
-  }
-
-  didSomebodyWin() {
-    // checks if winner is defined
-    // go back and set winner whenevr a player's point reaches points to win
+    const winner = this.getPlayer(username);
+    winner.addPoint();
+    if (winner.points === this.pointsToWin) {
+      this.winner = winner.username;
+    }
   }
 
   getWinner() {
-    // returns the winner
+    return this.winner;
   }
 
   removePlayer(username) {
-    // removes the player from the list of players
-    // decrements player count
-    // if that player was the creator, assign creator undefined
+    this.players = this.players.filter((player) => player.username !== username);
+    if (this.createdBy === username) {
+      this.createdBy = undefined;
+    }
   }
 
   updateCreator() {
-    // sets creator to the next person if it is undefined and returns the new creator
+    if (!this.createdBy && this.players.length) {
+      this.createdBy = this.players[0].username;
+    }
+    return this.createdBy;
   }
 
   increaseNumStaying() {
-    // increment numstaying
+    return this.numStaying++;
   }
 
   allPlayersDecided() {
-    // checks numstaying equal to playercount
+    return this.numStaying === this.players.length;
   }
 
   resetGame() {
     // set game back to original values
-    // re-assign creator if necessary
+
   }
 }
 
