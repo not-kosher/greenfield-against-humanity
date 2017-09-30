@@ -238,6 +238,7 @@ class Game {
     this.czarIndex = undefined;
     this.numStaying = 0;
     this.winner = undefined;
+    this.turnPhase = 'loading';
 
     // discard all cards
     this.discardBlackCard();
