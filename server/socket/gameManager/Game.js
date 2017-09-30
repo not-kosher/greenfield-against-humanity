@@ -86,10 +86,22 @@ class Game {
     this.players.sort((a, b) => a.poopTime - b.poopTime);
   }
 
+  discardBlackCard() {
+    if (this.blackCard) {
+      this.discarded.blackCards.push(this.blackCard);
+      this.blackCard = undefined;
+    }
+  }
+
+  discardHand(player) {
+    this.discarded.whiteCards = this.discarded.whiteCards.concat(player.cards);
+    player.cards = [];
+  }
+
   // helper function for this.startTurn, doesn't have to be called in controller
   dealBlackCard() {
     if (this.blackCard) {
-      this.discarded.blackCards.push(this.blackCard);
+      this.discardBlackCard();
     }
     if (!this.deck.blackCards.length) {
       this.refillDeck();
@@ -97,7 +109,7 @@ class Game {
     this.blackCard = this.deck.blackCards.pop();
     // return this.blackCard;
   }
-
+  
   // helper function for this.startTurn, doesn't have to be called in controller
   discardSubmitted() {
     // pull the cards off the submission objects
@@ -194,7 +206,13 @@ class Game {
   }
 
   removePlayer(username) {
-    this.players = this.players.filter((player) => player.username !== username);
+    this.players = this.players.filter((player) => {
+      // discard the player's hand before they leave
+      if (player.username === username) {
+        this.discardHand(player);
+      }
+      return player.username !== username;
+    });
     if (this.createdBy === username) {
       this.createdBy = undefined;
     }
@@ -217,7 +235,21 @@ class Game {
 
   resetGame() {
     // set game back to original values
+    this.czarIndex = undefined;
+    this.numStaying = 0;
+    this.winner = undefined;
 
+    // discard all cards
+    this.discardBlackCard();
+    this.discardSubmitted();
+    this.players.forEach((player) => this.discardHand(player));
+
+    // refill deck and shuffle
+    this.deck.blackCards = _.shuffle(this.deck.blackCards.concat(this.discarded.blackCards));
+    this.deck.whiteCards = _.shuffle(this.deck.whiteCards.concat(this.discarded.whiteCards));
+
+    this.discarded.blackCards = [];
+    this.discarded.whiteCards = [];
   }
 }
 
