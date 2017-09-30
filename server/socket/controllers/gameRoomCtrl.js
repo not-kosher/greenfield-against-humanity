@@ -8,8 +8,6 @@ const enterRoom = (io, client, roomname) => {
   client.emit('updateMessages', game.getLatestMessages());
 };
 
-//add leave room here
-
 const messageSubmission = (io, client, roomname, username, text) => {
   const game = GameManager.getRoom(roomname);
   game.addMessage(username, text);
@@ -67,9 +65,16 @@ const revealCard = (io, client, roomname, username) => {
 const winnerSelected = (io, client, roomname, username) => {
   const game = GameManager.getRoom(roomname);
   game.selectWinner(username); //this updates both submissions and players
+
+  if (game.getWinner()) {
+    io.to(roomname).emit('updateWinner', game.getWinner());
+    io.to(roomname).emit('updatePhase', game.updatePhase('gameOver'));
+  } else {
+    io.to(roomname).emit('updatePhase', game.updatePhase('end'));
+  }
+
   io.to(roomname).emit('updateSubmittedCards', game.submissions);
   io.to(roomname).emit('updatePlayers', game.players);
-  io.to(roomname).emit('updatePhase', game.updatePhase('end'));
 };
 
 const endTurn = (io, client, roomname) => {
@@ -82,6 +87,14 @@ const endTurn = (io, client, roomname) => {
   io.to(roomname).emit('updatePhase', game.updatePhase('submission'));
 };
 
+const playerIsStaying = (io, client, roomname, username) => {
+
+};
+
+const playerIsLeaving = (io, client, roomname, username) => {
+
+};
+
 
 module.exports = {
   enterRoom,
@@ -92,6 +105,8 @@ module.exports = {
   cardSubmission,
   revealCard,
   winnerSelected,
-  endTurn
+  endTurn,
+  playerIsStaying,
+  playerIsLeaving
 };
 
