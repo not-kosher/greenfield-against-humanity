@@ -103,6 +103,10 @@ const playerIsLeaving = (io, client, roomname, username) => {
   client.leave(roomname);
   client.join('lobby');
 
+  if (!game.createdBy) {
+    io.to(roomname).emit('updateCreator', game.updateCreator());
+  }
+
   //if no more players, remove all reference to this room/game
   if (game.players.length === 0) {
     GameManager.endGame(roomname);
