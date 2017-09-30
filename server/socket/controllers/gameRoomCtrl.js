@@ -93,6 +93,7 @@ const playerIsStaying = (io, client, roomname, username) => {
   
   if (game.allPlayersDecided()) {
     game.reset();
+    io.to(roomname).emit('updatePlayers', game.players);
     io.to(roomname).emit('gameReset');
   }
 };
@@ -121,6 +122,7 @@ const playerIsLeaving = (io, client, roomname, username) => {
     //if all players decided reset
     if (game.allPlayersDecided()) {
       game.reset();
+      io.to(roomname).emit('updatePlayers', game.players);
       io.to(roomname).emit('gameReset');
     }
   }

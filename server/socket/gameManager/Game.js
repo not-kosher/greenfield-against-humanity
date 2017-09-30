@@ -244,7 +244,10 @@ class Game {
     // discard all cards
     this.discardBlackCard();
     this.discardSubmitted();
-    this.players.forEach((player) => this.discardHand(player));
+    this.players.forEach((player) => {
+      this.discardHand(player);
+      player.reset(); // also reset player's attributes
+    });
 
     // refill deck and shuffle
     this.deck.blackCards = _.shuffle(this.deck.blackCards.concat(this.discarded.blackCards));

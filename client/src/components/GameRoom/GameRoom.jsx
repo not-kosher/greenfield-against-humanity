@@ -51,6 +51,8 @@ class GameRoom extends React.Component {
       poop.style.display = 'block';
     });
     socket.on('gameHasStarted', () => {
+      document.getElementById('prompt').style.display = 'block';
+      document.getElementById('waitingOnPoopers').style.display = 'none';
       var poop = document.getElementById('poop');
       poop.style.display = 'none';
       this.initializeGame();
