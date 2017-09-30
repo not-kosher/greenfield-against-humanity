@@ -112,6 +112,7 @@ class GameRoom extends React.Component {
       this.setState({
         winner: winner,
       });
+
       const endGamePrompt = document.getElementById('End');
       endGamePrompt.style.display = 'block';
     });
@@ -233,7 +234,7 @@ class GameRoom extends React.Component {
             </div>
           </div>
         </div>
-        {this.state.turnPhase === 'gameOver' && 
+        {this.state.winner && 
           <EndGamePrompt winner={this.state.winner} playerIsLeaving={this.playerIsLeaving} playerIsStaying={this.playerIsStaying}/>
         }
         <Actions startPoopPrompt={this.startPoopPrompt} endTurn={this.endTurn} state={this.state}/>
