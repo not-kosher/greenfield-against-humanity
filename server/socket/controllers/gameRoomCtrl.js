@@ -89,6 +89,16 @@ const endTurn = (io, client, roomname) => {
 
 const playerIsStaying = (io, client, roomname, username) => {
   const game = GameManager.getRoom(roomname);
+  game.increaseNumStaying();
+  
+  if (game.allPlayersDecided()) {
+    game.reset();
+    io.to(roomname).emit('gameReset');
+  }
+};
+
+const playerIsLeaving = (io, client, roomname, username) => {
+  const game = GameManager.getRoom(roomname);
   game.removePlayer(username);
   client.leave(roomname);
   client.join('lobby');
@@ -111,17 +121,6 @@ const playerIsStaying = (io, client, roomname, username) => {
     }
   }
 };
-
-const playerIsLeaving = (io, client, roomname, username) => {
-  const game = GameManager.getRoom(roomname);
-  game.increaseNumStaying();
-  
-  if (game.allPlayersDecided()) {
-    game.reset();
-    io.to(roomname).emit('gameReset');
-  }
-};
-
 
 module.exports = {
   enterRoom,
