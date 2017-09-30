@@ -4,6 +4,7 @@ import PlayerList from './PlayerList';
 import Table from './Table';
 import Actions from './Actions';
 import MessageBoard from './MessageBoard';
+import EndGamePrompt from './EndGamePrompt';
 import socket from '../../socket/index.js';
 
 
@@ -22,7 +23,8 @@ class GameRoom extends React.Component {
       playerArray: [],
       czar: '',
       yourSumittedCards: [],
-      messages: []
+      messages: [],
+      winner: '',
     };
 
     this.startPoopPrompt = this.startPoopPrompt.bind(this);
@@ -34,6 +36,8 @@ class GameRoom extends React.Component {
     this.winnerSelected = this.winnerSelected.bind(this);
     this.endTurn = this.endTurn.bind(this);
     this.submitMessage = this.submitMessage.bind(this);
+    this.playerIsLeaving = this.playerIsLeaving.bind(this);
+    this.playerIsStaying = this.playerIsStaying.bind(this);
   
   }
 
@@ -104,6 +108,16 @@ class GameRoom extends React.Component {
       //if at the bottom, scroll more to reveal
       this.messageList.scrollTop = this.messageList.scrollHeight;     
     });
+    socket.on('updateWinner', (winner) => {
+      this.setState({
+        winner: winner,
+      });
+      const endGamePrompt = document.getElementById('End');
+      endGamePrompt.style.display = 'block';
+    });
+    socket.on('gameReset', () => {
+
+    });
     
     // note: need to find better way of grabbing room name
     socket.emit('enterRoom', this.props.match.params.room);
@@ -171,6 +185,19 @@ class GameRoom extends React.Component {
     }
   }
 
+  playerIsLeaving() {
+    socket.emit('playerIsLeaving', this.state.room, this.state.user);
+    this.props.history.push('/lobby');
+  }
+
+  playerIsStaying() {
+    socket.emit('playerIsStaying', this.state.room, this.state.user);
+    const endPromptContent = doctument.getElementById('endPrompt');
+    endPromptContent.style.display = 'none';
+    const waitingMessage = document.getElementById('endWait');
+    waitingMessage.style.display = 'block';
+  }
+
   submitMessage(e) {
     e.preventDefault();
     console.log('submiting message: ', this.messageInput.value);
@@ -193,6 +220,7 @@ class GameRoom extends React.Component {
             </div>
           </div>
         </div>
+        <EndGamePrompt winner={this.state.winner} playerIsLeaving={this.playerIsLeaving} playerIsStaying={this.playerIsStaying}/>
         <Actions startPoopPrompt={this.startPoopPrompt} endTurn={this.endTurn} state={this.state}/>
         <PlayerList players={this.state.playerArray} czar={this.state.czar}/>
         <Table 

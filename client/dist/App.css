@@ -379,6 +379,24 @@ select {
     font-weight: bold;
 }
 
+.EndGame {
+    display: none; 
+    position: center; 
+    z-index: 1; 
+    top: 0;
+    width: 35%; 
+    height: 20%; 
+    overflow: auto; 
+    padding: 5px;
+    background-color: black; 
+    border: 2px solid;
+    border-color: white;
+}
+
+#endWaiting {
+    display: none;
+}
+
 .move {
     visibility: visible;
     -webkit-animation: slideIn 3000ms linear both;
