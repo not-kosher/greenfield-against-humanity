@@ -26,5 +26,11 @@ Deck.sync({ force: true })
       card.deckId = 1;
       return card;
     });
-    BlackCard.bulkCreate(blacks);
+    return BlackCard.bulkCreate(blacks);
+  })
+  .then(() => {
+    console.log('Successfully seeded database');
+  })
+  .catch((err) => {
+    console.log('Failed to seed databse: ', err);
   });
