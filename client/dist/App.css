@@ -157,6 +157,23 @@ select {
     margin: 30px;
     padding: 5px;
     font-size: 22px;
+    width: 15%;
+    min-width: 200px;
+}
+
+.addroom-input-container {
+    margin: 15px 0px;
+}
+
+.addroom-label {
+    display: block;
+    font-size: 16px;
+}
+
+.addroom-input {
+    width: 100%;
+    height: 24px;
+    font-size: 16px;
 }
 
 .ClassFormContainer {
