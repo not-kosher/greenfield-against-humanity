@@ -75,7 +75,6 @@ class GameRoom extends React.Component {
       for (var i = 0; i < selected.length; i++) {
         selected[i].classList.remove('selected');
       }
-      console.log('We are switching to phase: ', phase);
       this.setState({
         turnPhase: phase,
       });
@@ -91,7 +90,6 @@ class GameRoom extends React.Component {
       this.setState({
         submittedCards: submitted,
       });
-      console.log(submitted);
 
     });
     socket.on('updatePlayers', (players) => {
@@ -169,7 +167,6 @@ class GameRoom extends React.Component {
   showHand() {
     const cards = document.getElementsByClassName('Card');
     for (var i = 0; i < cards.length; i++) {
-      console.log(cards[i]);
       cards[i].classList.add('move');
     }
   }
@@ -177,12 +174,21 @@ class GameRoom extends React.Component {
 
   cardSubmission(card) {
     if (this.state.turnPhase === 'submission' && this.state.user !== this.state.czar) {
-      this.state.yourSumittedCards.push(card);
-      if (this.state.yourSumittedCards.length === this.state.blackCard.pick) {
+      let submitted = false;
+      this.state.yourSumittedCards.forEach((submittedCard) => {
+        if (submittedCard.id === card.id) {
+          submitted = true;
+        }
+      });
+      if (submitted === false) {
+        this.state.yourSumittedCards.push(card);
+      }
+      if (this.state.yourSumittedCards.length === 3) {
         socket.emit('cardSubmission', this.state.room, this.props.username, this.state.yourSumittedCards);
       }
     }
   }
+
   revealCard(card) {
     if (this.state.turnPhase === 'revelation' && this.props.username === this.state.czar) {
       socket.emit('revealCard', this.state.room, card.username);
@@ -216,7 +222,6 @@ class GameRoom extends React.Component {
 
   submitMessage(e) {
     e.preventDefault();
-    console.log('submiting message: ', this.messageInput.value);
     socket.emit('messageSubmission', this.state.room, this.props.username, this.messageInput.value);
     this.messageInput.value = '';
   }
