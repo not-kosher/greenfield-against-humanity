@@ -6,8 +6,8 @@ class GameManager {
     this.rooms = [];
   }
 
-  createGame(roomname, username, deck) {
-    const newGame = new Game(roomname, username, deck);
+  createGame(roomname, username, deck, pointsToWin) {
+    const newGame = new Game(roomname, username, deck, pointsToWin);
     this.games[roomname] = newGame;
     this.rooms.push({
       name: roomname,
