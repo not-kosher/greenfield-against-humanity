@@ -3,6 +3,7 @@ import Hand from './Hand';
 import PlayerList from './PlayerList';
 import Table from './Table';
 import Actions from './Actions';
+import PoopPrompt from './PoopPrompt';
 import MessageBoard from './MessageBoard';
 import EndGamePrompt from './EndGamePrompt';
 import socket from '../../socket/index.js';
@@ -183,7 +184,7 @@ class GameRoom extends React.Component {
       if (submitted === false) {
         this.state.yourSumittedCards.push(card);
       }
-      if (this.state.yourSumittedCards.length === 3) {
+      if (this.state.yourSumittedCards.length === this.state.blackCard.pick) {
         socket.emit('cardSubmission', this.state.room, this.props.username, this.state.yourSumittedCards);
       }
     }
@@ -231,16 +232,7 @@ class GameRoom extends React.Component {
     return (
       <div>
         <div className='RoomName'>{this.state.room}</div>
-        <div id='poop' className='poopPrompt'>
-          <div className='poopContent'>
-            <div id='waitingOnPoopers'>Waiting for all players to submit</div>
-            <div id='prompt'>
-              <div className='poopQ'>How many hours has it been since you last pooped?</div>
-              <input id='poopHours' />
-              <div className='poopSubmit' onClick={this.poopSubmission}>Submit</div>
-            </div>
-          </div>
-        </div>
+        <PoopPrompt poopSubmission={this.poopSubmission} />
         {this.state.winner && 
           <EndGamePrompt winner={this.state.winner} playerIsLeaving={this.playerIsLeaving} playerIsStaying={this.playerIsStaying}/>
         }
