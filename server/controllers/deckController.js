@@ -9,7 +9,7 @@ module.exports = {
             $or: {
               // look for decks either belonging to the specific user
               // or belonging to no one (are public)
-              userId: user.username,
+              userId: user.id,
               userId: null
             }
           }
