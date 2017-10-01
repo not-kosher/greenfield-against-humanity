@@ -1,0 +1,64 @@
+.message-board {
+  height: 300px;
+  width: 400px;
+  border: 2px solid white;
+}
+
+.message-list-container {
+  height: 90%;
+  width: calc(100% - 1px);
+  overflow: hidden;
+}
+
+.message-list {
+  height: calc(100% - 1px);
+  width: 100%;
+  color: white;
+  font-size: 0.8em;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-bottom: 1px solid white;
+}
+
+.message-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.message-list::-webkit-scrollbar-thumb {
+  background: white;
+}
+
+.message {
+  margin: 8px 5px;
+  word-wrap: break-word;
+}
+
+.message-username {
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.message-input-form {
+  height: 9%;
+  width: calc(100% - 1px);
+}
+
+.message-input {
+  height: calc(90% - 1px);
+  width: calc(99% - 1px);
+  color: white;
+  background: black;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  outline: none;
+  border: none;
+  font-size: 0.9em;
+  padding-left: 5px;
+}
+
+.message-input:focus {
+  outline: none;
+}
+
+.message-input-button {
+  display: none;
+}
