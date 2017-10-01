@@ -41,8 +41,9 @@ class Lobby extends React.Component {
     socket.removeAllListeners();
   }
 
-  createRoom() {
+  createRoom(e) {
     // TODO needs data validation for room name
+    e.preventDefault();
     const roomname = document.getElementById('roomname').value;
     const deckname = document.getElementById('deckname').value;
     socket.emit('createRoom', roomname, this.props.username, deckname);

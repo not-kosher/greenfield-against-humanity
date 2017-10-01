@@ -5,14 +5,20 @@ const AddRoom = ({ createRoom }) => {
     <div className='AddRoom'>
       <div className='ClassFormContainer'>
         <div>Create A Room:</div>
-        <input id='roomname' />
-        <div>
-          <span>Select a Deck:  </span>
-          <select id='deckname' >
-            <option>Base Set</option>
-          </select>
-        </div>
-        <div onClick={createRoom} className='submit-room'>Submit</div>
+        <form onSubmit={createRoom}>
+          <div>
+            <input id='roomname' placeholder='Enter room name'/>
+          </div>
+          <div>
+            <label>Select a Deck:  </label>
+            <select id='deckname' >
+              <option>Base Set</option>
+            </select>  
+          </div>
+          <div>
+            <input type='submit' value='Submit' className='submit-button'/>
+          </div>
+        </form>
       </div>
     </div>
   );
