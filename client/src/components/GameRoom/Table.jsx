@@ -8,7 +8,6 @@ const Table = ({ select, cards, black, submit, submittedCards, revealCard, state
     <div className='Table'>
       <div className='Submitted'>
         <BlackCard card={black} />
-        <BlackCard card={{text:  "The \u00FCbermensch."}} />
         {submittedCards.map((submission, key) => {
           return <Submissions submission={submission} select={select} revealCard={revealCard} key={key}/>;
         })}
