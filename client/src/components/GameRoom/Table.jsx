@@ -8,9 +8,8 @@ const Table = ({ select, cards, black, submit, submittedCards, revealCard, state
     <div className='Table'>
       <div className='Submitted'>
         <BlackCard card={black} />
-        {submittedCards.map((submission) => {
-          console.log(submission);
-          return <Submissions submission={submission} select={select} revealCard={revealCard} />;
+        {submittedCards.map((submission, key) => {
+          return <Submissions submission={submission} select={select} revealCard={revealCard} key={key}/>;
         })}
       </div>
       <Hand cards={cards} submit={submit} state={state}/>

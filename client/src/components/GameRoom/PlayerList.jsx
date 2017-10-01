@@ -5,8 +5,8 @@ const PlayerList = ({ players, czar }) => {
   return (
     <div className='PlayerList'>
       <div className='subtitle'>Friends</div>
-      {players.map((player) => {
-        return <PlayerEntry player={player} czar={czar}/>;
+      {players.map((player, key) => {
+        return <PlayerEntry player={player} czar={czar} key={key}/>;
       })}
     </div>
   );

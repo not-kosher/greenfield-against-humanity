@@ -5,7 +5,7 @@ const Submissions = ({ submission, select, revealCard }) => {
   return (
     <div className='singleSubmission'>
       {submission.cards.map((card) => {
-        return <SubmittedCard submission={submission} card={card} select={select} revealCard={revealCard} />;
+        return <SubmittedCard submission={submission} card={card} select={select} revealCard={revealCard} key ={card.id}/>;
       })}
     </div>
   );
