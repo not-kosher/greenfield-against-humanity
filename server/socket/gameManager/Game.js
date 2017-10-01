@@ -2,7 +2,7 @@ const _ = require('lodash');
 const Player = require('./Player');
 
 class Game {
-  constructor(roomname, username, deck, pointsToWin = 1) {
+  constructor(roomname, username, deck, pointsToWin = 10) {
     this.name = roomname;
     this.createdBy = username;
     this.messages = [];
