@@ -24,7 +24,8 @@ class GameRoom extends React.Component {
       turnPhase: '',
       playerArray: [],
       czar: '',
-      yourSumittedCards: [],
+      yourSubmittedCards: [],
+      submittedAlready: false,
       messages: [],
       winner: '',
       decidedEndGame: false,
@@ -82,7 +83,8 @@ class GameRoom extends React.Component {
         turnPhase: phase,
       });
       if (phase === 'revelation') {
-        this.state.yourSumittedCards = [];
+        this.state.yourSubmittedCards = [];
+        this.state.submittedAlready = false;
       }
     });
     socket.on('updateSubmittedCards', (submitted) => {
@@ -123,7 +125,8 @@ class GameRoom extends React.Component {
         submittedCards: [],
         turnPhase: '',
         czar: '',
-        yourSumittedCards: [],
+        yourSubmittedCards: [],
+        submittedAlready: false,
         winner: '',
         decidedEndGame: false,
       });
@@ -175,16 +178,17 @@ class GameRoom extends React.Component {
   cardSubmission(card) {
     if (this.state.turnPhase === 'submission' && this.state.user !== this.state.czar) {
       let submitted = false;
-      this.state.yourSumittedCards.forEach((submittedCard) => {
+      this.state.yourSubmittedCards.forEach((submittedCard) => {
         if (submittedCard.id === card.id) {
           submitted = true;
         }
       });
       if (submitted === false) {
-        this.state.yourSumittedCards.push(card);
+        this.state.yourSubmittedCards.push(card);
       }
-      if (this.state.yourSumittedCards.length === this.state.blackCard.pick) {
-        socket.emit('cardSubmission', this.state.room, this.props.username, this.state.yourSumittedCards);
+      if (this.state.yourSubmittedCards.length === this.state.blackCard.pick) {
+        this.state.submittedAlready = true;
+        socket.emit('cardSubmission', this.state.room, this.props.username, this.state.yourSubmittedCards);
       }
     }
   }
