@@ -45,8 +45,8 @@ class Lobby extends React.Component {
     // TODO needs data validation for room name
     e.preventDefault();
     const roomname = document.getElementById('roomname').value;
-    const pointsToWin = document.getElementById('points-to-win').value;
     const deckname = document.getElementById('deckname').value;
+    console.log('Points to win', pointsToWin);
     socket.emit('createRoom', roomname, this.props.username, deckname, pointsToWin);
   }
 
