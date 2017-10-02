@@ -87,6 +87,10 @@ class GameRoom extends React.Component {
       });
     });
     socket.on('updatePhase', (phase) => {
+      const alerts = document.getElementsByClassName('alert-message');
+      for (var i = 0; i < alerts.length; i++) {
+        alerts[i].classList.add('alert-animation');
+      }
       const selected = document.getElementsByClassName('selected');
       for (var i = 0; i < selected.length; i++) {
         selected[i].classList.remove('selected');
