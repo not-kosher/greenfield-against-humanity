@@ -3,8 +3,6 @@ body {
     color: white;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     height: 100vh;
-    /* scroll-behavior: none;
-    overflow-y: hidden; */
 }
  
 select {
@@ -260,7 +258,6 @@ select {
 
 .gameplay-window {
     height: 90%;
-    /* overflow-y: scroll; */
 }
 
 .Action {
@@ -281,7 +278,6 @@ select {
   border-radius: 10px;
   padding: 10px;
   overflow-wrap: break-word;
-  /* visibility: hidden; */
 }
 
 .SubmittedCard { 
@@ -346,8 +342,6 @@ select {
     border-color: white;
     padding: 5px; 
     width: calc(100% - 14px);
-    /* margin-bottom: 5px; */
-    /* margin-top: 5px; */
     vertical-align: top;
     height: calc(30% - 14px);
     overflow: scroll;
@@ -355,7 +349,6 @@ select {
 
 .Hand {
     display: inline-block;
-    /* width: 700px; */
     margin: auto;
 }
 
@@ -371,7 +364,6 @@ select {
 
 .winner {
     display: block;
-    /* vertical-align: bottom; */
 }
 
 .PlayerEntry {
@@ -385,8 +377,6 @@ select {
 
 .Table {
     display: inline-block;
-    /* width: 1000px;
-    height: 250px; */
 }
 
 .Submitted {
@@ -434,19 +424,13 @@ select {
 }
 
 .EndGame {
-    /* display: none;  */
     position: center; 
     z-index: 1; 
     top: 0;
-    /* width: 35%;  */
     height: 20%; 
     overflow: auto; 
     padding: 5px;
     background-color: black; 
-}
-
-#endWaiting {
-    /* display: none; */
 }
 
 .alert-message {

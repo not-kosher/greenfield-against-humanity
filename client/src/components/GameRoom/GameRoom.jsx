@@ -115,9 +115,6 @@ class GameRoom extends React.Component {
       this.setState({
         winner: winner,
       });
-
-      // const endGamePrompt = document.getElementById('End');
-      // endGamePrompt.style.display = 'block';
     });
     socket.on('gameReset', () => {
       this.setState({
@@ -220,10 +217,6 @@ class GameRoom extends React.Component {
       decidedEndGame: true
     });
     socket.emit('playerIsStaying', this.state.room, this.state.user);
-    // const endPromptContent = document.getElementById('endPromptContent');
-    // endPromptContent.style.display = 'none';
-    // const waitingMessage = document.getElementById('endWaiting');
-    // waitingMessage.style.display = 'block';
   }
 
   submitMessage(e) {
