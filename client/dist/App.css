@@ -112,14 +112,25 @@ select {
   !Dashboard!
 --------- */
 
+.dashboardContent {
+    text-align: center;
+}
 
 .dashboard-menu {
     display: block;
+    padding-top: 50px;
 }
 
 .dashboard-menu-item {
-    display: block;
-    padding: 20px;
+    display: inline-block;
+    display: inline-block;
+    width: 200px;
+    padding: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    border: 2px solid;
+    border-color: white;
+    margin: 0px 25px;
 }
 
 .dashboard-menu-item a {
