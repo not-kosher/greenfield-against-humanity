@@ -5,10 +5,9 @@ const EndGamePrompt = ({ winner, playerIsLeaving, playerIsStaying }) => {
     <div id='End' className='EndGame'>
       <div id='endWaiting'>Waiting on other players</div>
       <div id ='endPromptContent'>
-        <div>Game Over</div>
-        <div>{winner} is the most deplorable.</div>
-        <div id='Leave' className='button' onClick={playerIsLeaving}>Leave Game</div>
-        <div id='Stay' onClick={playerIsStaying}>Play Again</div>
+        <div className='alert-message'>Game Over! {winner} is the most deplorable.</div>
+        <div id='Leave' onClick={playerIsLeaving} className='alert-button' >Leave Game</div>
+        <div id='Stay' onClick={playerIsStaying} className='alert-button' >Play Again</div>
       </div>
     </div>
   );

@@ -230,24 +230,34 @@ class GameRoom extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='gameroom-wrapper'>
         <div className='RoomName'>{this.state.room}</div>
-        <PoopPrompt poopSubmission={this.poopSubmission} />
-        {this.state.winner && 
-          <EndGamePrompt winner={this.state.winner} playerIsLeaving={this.playerIsLeaving} playerIsStaying={this.playerIsStaying}/>
-        }
-        <Actions startPoopPrompt={this.startPoopPrompt} endTurn={this.endTurn} state={this.state}/>
-        <PlayerList players={this.state.playerArray} czar={this.state.czar}/>
-        <Table 
-          state = {this.state}
-          select={this.winnerSelected} 
-          submit={this.cardSubmission} 
-          black={this.state.blackCard} 
-          cards={this.state.hand} 
-          submittedCards={this.state.submittedCards}
-          revealCard={this.revealCard}
-        />
-        <MessageBoard messages={this.state.messages} submitMessage={this.submitMessage}/>
+        <div className='gameroom-container'>
+          <div className='player-pannel'>
+            <PlayerList players={this.state.playerArray} czar={this.state.czar}/>
+            <MessageBoard messages={this.state.messages} submitMessage={this.submitMessage}/>
+          </div>
+          <div className='game-container'>
+            <div className='game-alerts'>
+              <Actions startPoopPrompt={this.startPoopPrompt} endTurn={this.endTurn} state={this.state}/>
+              {this.state.winner && 
+                <EndGamePrompt winner={this.state.winner} playerIsLeaving={this.playerIsLeaving} playerIsStaying={this.playerIsStaying}/>
+              }
+            </div>
+            <div className='gameplay-window'>
+              <PoopPrompt poopSubmission={this.poopSubmission} />
+              <Table 
+                state = {this.state}
+                select={this.winnerSelected} 
+                submit={this.cardSubmission} 
+                black={this.state.blackCard} 
+                cards={this.state.hand} 
+                submittedCards={this.state.submittedCards}
+                revealCard={this.revealCard}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
