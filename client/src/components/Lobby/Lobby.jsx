@@ -58,7 +58,9 @@ class Lobby extends React.Component {
     return (
       <div className='Lobby'>
         <AddRoom createRoom={this.createRoom} />
-        <RoomList rooms={this.state.rooms} joinRoom={this.joinRoom} />
+        <div className='roomlist-container'>
+          <RoomList rooms={this.state.rooms} joinRoom={this.joinRoom} />
+        </div>
 
       </div>);
   }
