@@ -1,3 +1,4 @@
+require('dotenv').config();
 const data = require('./basecards.json');
 const { WhiteCard, BlackCard, Deck } = require('../index.js');
 
@@ -12,16 +13,24 @@ Deck.sync({ force: true })
     return WhiteCard.sync({ force: true });
   })
   .then(() => {
-    return BlackCard.sync({ force: true });
-  })
-  .then(() => {
     const whites = data.whiteCards.map((text) => {
       return { text, deckId: 1 };
     });
+    return WhiteCard.bulkCreate(whites);
+  })
+  .then(() => {
+    return BlackCard.sync({ force: true });
+  })
+  .then(() => {
     const blacks = data.blackCards.map((card) => {
       card.deckId = 1;
       return card;
     });
-    WhiteCard.bulkCreate(whites);
-    BlackCard.bulkCreate(blacks);
+    return BlackCard.bulkCreate(blacks);
+  })
+  .then(() => {
+    console.log('Successfully seeded database');
+  })
+  .catch((err) => {
+    console.log('Failed to seed databse: ', err);
   });

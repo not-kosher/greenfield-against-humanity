@@ -1,7 +1,6 @@
 .message-board {
-  height: 300px;
-  width: 400px;
   border: 2px solid white;
+  height: 65%;
 }
 
 .message-list-container {
@@ -40,12 +39,12 @@
 
 .message-input-form {
   height: 9%;
-  width: calc(100% - 1px);
+  width: calc(100% - 2px);
 }
 
 .message-input {
-  height: calc(90% - 1px);
-  width: calc(99% - 1px);
+  height: calc(90% - 2px);
+  width: calc(99% - 2px);
   color: white;
   background: black;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

@@ -57,6 +57,9 @@ Deck.hasMany(BlackCard);
 WhiteCard.belongsTo(Deck);
 BlackCard.belongsTo(Deck);
 
+User.hasMany(Deck);
+Deck.belongsTo(User);
+
 db.sync();
 
 module.exports = {

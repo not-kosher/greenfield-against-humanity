@@ -2,8 +2,7 @@ body {
     background-color: black;
     color: white;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    height: 1000px;
-
+    height: 100vh;
 }
  
 select {
@@ -19,6 +18,7 @@ select {
 
 .navbar {
     overflow: hidden;
+    height: 8vh;
 }
 
 .navbar a {
@@ -32,7 +32,6 @@ select {
     float: right;
     font-size: 17px;
     padding: 10px;
-    margin-bottom: 50px;
     text-decoration: none;
 }
 
@@ -111,14 +110,25 @@ select {
   !Dashboard!
 --------- */
 
+.dashboardContent {
+    text-align: center;
+}
 
 .dashboard-menu {
     display: block;
+    padding-top: 50px;
 }
 
 .dashboard-menu-item {
-    display: block;
-    padding: 20px;
+    display: inline-block;
+    display: inline-block;
+    width: 200px;
+    padding: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    border: 2px solid;
+    border-color: white;
+    margin: 0px 25px;
 }
 
 .dashboard-menu-item a {
@@ -157,6 +167,23 @@ select {
     margin: 30px;
     padding: 5px;
     font-size: 22px;
+    width: 15%;
+    min-width: 200px;
+}
+
+.addroom-input-container {
+    margin: 15px 0px;
+}
+
+.addroom-label {
+    display: block;
+    font-size: 16px;
+}
+
+.addroom-input {
+    width: 100%;
+    height: 24px;
+    font-size: 16px;
 }
 
 .ClassFormContainer {
@@ -213,10 +240,35 @@ select {
 --------- */
 
 
+.gameroom-wrapper {
+    height: 92vh;
+}
+
 .RoomName {
     font-size: 45px;
     display: block;
     padding-bottom: 15px;
+    height: 10%;
+}
+
+.gameroom-container {
+    height: 90%;
+}
+
+.player-pannel {
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+
+.game-container {
+    width: 80%;
+    height: 100%; 
+    float: right;
+}
+
+.gameplay-window {
+    height: 90%;
 }
 
 .Action {
@@ -237,7 +289,6 @@ select {
   border-radius: 10px;
   padding: 10px;
   overflow-wrap: break-word;
-  visibility: hidden;
 }
 
 .SubmittedCard { 
@@ -257,12 +308,8 @@ select {
 
 .poopPrompt {
     display: none; 
-    position: center; 
-    z-index: 1; 
-    top: 0;
-    width: 35%; 
-    height: 20%; 
-    overflow: auto; 
+    width: 50%; 
+    height: 60%;  
     padding: 5px;
     background-color: black; 
     border: 2px solid;
@@ -295,6 +342,7 @@ select {
     margin-top: 10px;
     padding: 5px;
     width: 60px;
+    cursor: pointer;
 }
 
 .poopQ {
@@ -305,15 +353,14 @@ select {
     border: 2px solid;
     border-color: white;
     padding: 5px; 
-    width: 200px;
-    margin-bottom: 600px;
-    margin-top: 5px;
+    width: calc(100% - 14px);
     vertical-align: top;
+    height: calc(30% - 14px);
+    overflow: scroll;
 }
 
 .Hand {
     display: inline-block;
-    width: 700px;
     margin: auto;
 }
 
@@ -329,7 +376,6 @@ select {
 
 .winner {
     display: block;
-    /* vertical-align: bottom; */
 }
 
 .PlayerEntry {
@@ -343,13 +389,11 @@ select {
 
 .Table {
     display: inline-block;
-    width: 1000px;
-    height: 250px;
 }
 
 .Submitted {
     display: inline-flex;
-    width: 800px
+    /* width: 800px */
 }
 
 .singleSubmission {
@@ -379,34 +423,43 @@ select {
     font-weight: bold;
 }
 
-.EndGame {
-    display: none; 
-    position: center; 
-    z-index: 1; 
-    top: 0;
-    width: 35%; 
-    height: 20%; 
-    overflow: auto; 
-    padding: 5px;
-    background-color: black; 
+
+/* ---------
+!Game Alerts!
+--------- */
+
+
+.game-alerts {
+    height: 40px;
     border: 2px solid;
     border-color: white;
 }
 
-#endWaiting {
-    display: none;
+.alert-message {
+    float: left;
+    font-size: 16px;
+    margin-left: 15px;
+    margin-top: 10px;
 }
 
-.move {
+.alert-button {
+    float: right;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 15px;
+    margin-top: 10px;
+}
+
+/* .move {
     visibility: visible;
     -webkit-animation: slideIn 3000ms linear both;
     animation: slideIn 3000ms linear both;
     animation-name: slideIn
-  }
+  } */
   
   /* Generated with Bounce.js. Edit at https://goo.gl/TZCX8k */
   
-  @-webkit-keyframes slideIn { 
+  /* @-webkit-keyframes slideIn { 
     0% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 800, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 800, 0, 1); }
     0.43% { -webkit-transform: matrix3d(3.905, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 742.377, 0, 1); transform: matrix3d(3.905, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 742.377, 0, 1); }
     0.85% { -webkit-transform: matrix3d(4.554, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 688.432, 0, 1); transform: matrix3d(4.554, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 688.432, 0, 1); }
@@ -448,7 +501,7 @@ select {
     60.56% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.02, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.02, 0, 1); }
     82.78% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
     100% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
-  }
+  } */
 
   .glow {
     -moz-box-shadow: 0 0 50px red;

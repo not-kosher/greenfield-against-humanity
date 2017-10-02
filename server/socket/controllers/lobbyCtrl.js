@@ -7,7 +7,7 @@ const enterLobby = (io, client) => {
   client.emit('allRooms', GameManager.rooms);
 };
 
-const createRoom = (io, client, roomname, username, deckname) => {    
+const createRoom = (io, client, roomname, username, deckname, pointsToWin) => {    
   client.leave('lobby');
 
   //get game deck from db and then create game
@@ -23,7 +23,7 @@ const createRoom = (io, client, roomname, username, deckname) => {
               gameDeck.blackCards = blackCards;
 
               //got deck, now create game and emit events
-              GameManager.createGame(roomname, username, gameDeck);
+              GameManager.createGame(roomname, username, gameDeck, pointsToWin);
               io.to('lobby').emit('newRoom', {name: roomname, createdBy: username});
               client.join(roomname);
               client.emit('canJoinRoom', roomname);

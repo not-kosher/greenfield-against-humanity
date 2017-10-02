@@ -2,7 +2,7 @@ const _ = require('lodash');
 const Player = require('./Player');
 
 class Game {
-  constructor(roomname, username, deck, pointsToWin = 1) {
+  constructor(roomname, username, deck, pointsToWin = 10) {
     this.name = roomname;
     this.createdBy = username;
     this.messages = [];
@@ -10,7 +10,7 @@ class Game {
     this.blackCard;
     this.players = [];
     this.czarIndex;
-    this.pointsToWin = pointsToWin;
+    this.pointsToWin = +pointsToWin;
     this.numStaying = 0; // used at end of game to check for restart
     this.winner;
 
@@ -230,7 +230,6 @@ class Game {
   }
 
   allPlayersDecided() {
-    console.log(this.numStaying, ' and ', this.players.length);
     return this.numStaying === this.players.length;
   }
 

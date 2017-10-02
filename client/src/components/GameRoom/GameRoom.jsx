@@ -1,11 +1,13 @@
 import React from 'react';
+import socket from '../../socket/index.js';
 import Hand from './Hand';
 import PlayerList from './PlayerList';
 import Table from './Table';
 import Actions from './Actions';
+import PoopPrompt from './PoopPrompt';
 import MessageBoard from './MessageBoard';
 import EndGamePrompt from './EndGamePrompt';
-import socket from '../../socket/index.js';
+import GameAlerts from './GameAlerts';
 
 
 class GameRoom extends React.Component {
@@ -25,6 +27,7 @@ class GameRoom extends React.Component {
       yourSumittedCards: [],
       messages: [],
       winner: '',
+      decidedEndGame: false,
     };
 
     this.startPoopPrompt = this.startPoopPrompt.bind(this);
@@ -75,7 +78,6 @@ class GameRoom extends React.Component {
       for (var i = 0; i < selected.length; i++) {
         selected[i].classList.remove('selected');
       }
-      console.log('We are switching to phase: ', phase);
       this.setState({
         turnPhase: phase,
       });
@@ -91,7 +93,6 @@ class GameRoom extends React.Component {
       this.setState({
         submittedCards: submitted,
       });
-      console.log(submitted);
 
     });
     socket.on('updatePlayers', (players) => {
@@ -114,9 +115,6 @@ class GameRoom extends React.Component {
       this.setState({
         winner: winner,
       });
-
-      const endGamePrompt = document.getElementById('End');
-      endGamePrompt.style.display = 'block';
     });
     socket.on('gameReset', () => {
       this.setState({
@@ -127,6 +125,7 @@ class GameRoom extends React.Component {
         czar: '',
         yourSumittedCards: [],
         winner: '',
+        decidedEndGame: false,
       });
     });
     socket.on('updateCreator', (roomCreator) => {
@@ -169,20 +168,27 @@ class GameRoom extends React.Component {
   showHand() {
     const cards = document.getElementsByClassName('Card');
     for (var i = 0; i < cards.length; i++) {
-      console.log(cards[i]);
       cards[i].classList.add('move');
     }
   }
   
-
   cardSubmission(card) {
     if (this.state.turnPhase === 'submission' && this.state.user !== this.state.czar) {
-      this.state.yourSumittedCards.push(card);
+      let submitted = false;
+      this.state.yourSumittedCards.forEach((submittedCard) => {
+        if (submittedCard.id === card.id) {
+          submitted = true;
+        }
+      });
+      if (submitted === false) {
+        this.state.yourSumittedCards.push(card);
+      }
       if (this.state.yourSumittedCards.length === this.state.blackCard.pick) {
         socket.emit('cardSubmission', this.state.room, this.props.username, this.state.yourSumittedCards);
       }
     }
   }
+
   revealCard(card) {
     if (this.state.turnPhase === 'revelation' && this.props.username === this.state.czar) {
       socket.emit('revealCard', this.state.room, card.username);
@@ -207,16 +213,14 @@ class GameRoom extends React.Component {
   }
 
   playerIsStaying() {
+    this.setState({
+      decidedEndGame: true
+    });
     socket.emit('playerIsStaying', this.state.room, this.state.user);
-    const endPromptContent = document.getElementById('endPromptContent');
-    endPromptContent.style.display = 'none';
-    const waitingMessage = document.getElementById('endWaiting');
-    waitingMessage.style.display = 'block';
   }
 
   submitMessage(e) {
     e.preventDefault();
-    console.log('submiting message: ', this.messageInput.value);
     socket.emit('messageSubmission', this.state.room, this.props.username, this.messageInput.value);
     this.messageInput.value = '';
   }
@@ -224,33 +228,43 @@ class GameRoom extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='gameroom-wrapper'>
         <div className='RoomName'>{this.state.room}</div>
-        <div id='poop' className='poopPrompt'>
-          <div className='poopContent'>
-            <div id='waitingOnPoopers'>Waiting for all players to submit</div>
-            <div id='prompt'>
-              <div className='poopQ'>How many hours has it been since you last pooped?</div>
-              <input id='poopHours' />
-              <div className='poopSubmit' onClick={this.poopSubmission}>Submit</div>
+        <div className='gameroom-container'>
+          <div className='player-pannel'>
+            <PlayerList players={this.state.playerArray} czar={this.state.czar}/>
+            <MessageBoard messages={this.state.messages} submitMessage={this.submitMessage}/>
+          </div>
+          <div className='game-container'>
+            <div className='game-alerts'>
+              <GameAlerts 
+                turnPhase={this.state.turnPhase} 
+                user={this.state.user} 
+                czar={this.state.czar}
+                roomCreator={this.state.roomCreator}
+                winner={this.state.winner}
+                numToWaitFor={this.state.playerArray.length - 1 - this.state.submittedCards.length}
+                startPoopPrompt={this.startPoopPrompt}
+                endTurn={this.endTurn}
+                playerIsLeaving={this.playerIsLeaving}
+                playerIsStaying={this.playerIsStaying}
+                decided={this.state.decidedEndGame}
+              />
+            </div>
+            <div className='gameplay-window'>
+              <PoopPrompt poopSubmission={this.poopSubmission} />
+              <Table 
+                state = {this.state}
+                select={this.winnerSelected} 
+                submit={this.cardSubmission} 
+                black={this.state.blackCard} 
+                cards={this.state.hand} 
+                submittedCards={this.state.submittedCards}
+                revealCard={this.revealCard}
+              />
             </div>
           </div>
         </div>
-        {this.state.winner && 
-          <EndGamePrompt winner={this.state.winner} playerIsLeaving={this.playerIsLeaving} playerIsStaying={this.playerIsStaying}/>
-        }
-        <Actions startPoopPrompt={this.startPoopPrompt} endTurn={this.endTurn} state={this.state}/>
-        <PlayerList players={this.state.playerArray} czar={this.state.czar}/>
-        <Table 
-          state = {this.state}
-          select={this.winnerSelected} 
-          submit={this.cardSubmission} 
-          black={this.state.blackCard} 
-          cards={this.state.hand} 
-          submittedCards={this.state.submittedCards}
-          revealCard={this.revealCard}
-        />
-        <MessageBoard messages={this.state.messages} submitMessage={this.submitMessage}/>
       </div>
     );
   }
