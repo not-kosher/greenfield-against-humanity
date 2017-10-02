@@ -1,4 +1,5 @@
 import React from 'react';
+import socket from '../../socket/index.js';
 import Hand from './Hand';
 import PlayerList from './PlayerList';
 import Table from './Table';
@@ -6,7 +7,7 @@ import Actions from './Actions';
 import PoopPrompt from './PoopPrompt';
 import MessageBoard from './MessageBoard';
 import EndGamePrompt from './EndGamePrompt';
-import socket from '../../socket/index.js';
+import GameAlerts from './GameAlerts';
 
 
 class GameRoom extends React.Component {
@@ -238,12 +239,7 @@ class GameRoom extends React.Component {
             <MessageBoard messages={this.state.messages} submitMessage={this.submitMessage}/>
           </div>
           <div className='game-container'>
-            <div className='game-alerts'>
-              <Actions startPoopPrompt={this.startPoopPrompt} endTurn={this.endTurn} state={this.state}/>
-              {this.state.winner && 
-                <EndGamePrompt winner={this.state.winner} playerIsLeaving={this.playerIsLeaving} playerIsStaying={this.playerIsStaying}/>
-              }
-            </div>
+            <GameAlerts turnPhase={this.state.turnPhase} />
             <div className='gameplay-window'>
               <PoopPrompt poopSubmission={this.poopSubmission} />
               <Table 

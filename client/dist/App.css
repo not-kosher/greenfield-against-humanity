@@ -258,10 +258,6 @@ select {
     float: right;
 }
 
-.game-alerts {
-    height: 10%;
-}
-
 .gameplay-window {
     height: 90%;
     /* overflow-y: scroll; */
@@ -424,6 +420,18 @@ select {
     font-weight: bold;
 }
 
+
+/* ---------
+!Game Alerts!
+--------- */
+
+
+.game-alerts {
+    height: 10%;
+    border: 2px solid;
+    border-color: white;
+}
+
 .EndGame {
     display: none; 
     position: center; 
@@ -434,8 +442,6 @@ select {
     overflow: auto; 
     padding: 5px;
     background-color: black; 
-    border: 2px solid;
-    border-color: white;
 }
 
 #endWaiting {
