@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Actions = ({ endTurn, startPoopPrompt, turnPhase, user, roomCreator, czar }) => {
-  console.log('we should be here', roomCreator, turnPhase);
   if (user === roomCreator && turnPhase === '') {
     return (
       <div>

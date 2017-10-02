@@ -350,6 +350,7 @@ select {
     /* margin-top: 5px; */
     vertical-align: top;
     height: calc(30% - 14px);
+    overflow: scroll;
 }
 
 .Hand {
@@ -432,11 +433,6 @@ select {
     border-color: white;
 }
 
-.turn-phase {
-    float: left;
-    font-weight: bold;
-}
-
 .EndGame {
     display: none; 
     position: center; 
@@ -461,6 +457,7 @@ select {
 .alert-button {
     float: right;
     margin-right: 5px;
+    cursor: pointer;
 }
 
 /* .move {

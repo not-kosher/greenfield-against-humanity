@@ -25,8 +25,8 @@ class GameAlert extends React.Component {
         { this.props.winner && 
           <EndGamePrompt 
             winner={this.props.winner} 
-            playerIsLeaving={this.playerIsLeaving} 
-            playerIsStaying={this.playerIsStaying}/>
+            playerIsLeaving={this.props.playerIsLeaving} 
+            playerIsStaying={this.props.playerIsStaying}/>
         }
       </div>
     );
