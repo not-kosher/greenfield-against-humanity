@@ -8,16 +8,16 @@ const Dashboard = (props) => {
         <div className='dashboardContent'> 
           <div className='Title'>Welcome, you filthy cur</div>
           <div className='dashboard-menu'>
-            <div className='dashboard-menu-item'>
-              <Link to='lobby'>
+            <Link to='lobby'>
+              <div className='dashboard-menu-item'>
                 Play a game
-              </Link>
-            </div>
-            <div className='dashboard-menu-item'>
-              <Link to='deckbuilder'>
+              </div>
+            </Link>
+            <Link to='deckbuilder'>
+              <div className='dashboard-menu-item'>
                 Build a deck
-              </Link>
-            </div>
+              </div>
+            </Link>
           </div>
         </div>
       </div>

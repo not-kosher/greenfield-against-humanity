@@ -5,7 +5,8 @@ const RoomList = ({ rooms, joinRoom }) => {
   return (
     <div className='RoomList'>
       <div className='Title'>Rooms of Debauchery</div>
-      <div className='ClassFormContainer'>
+      <div className='roomlist-window'>
+
         {rooms.map((room) => (
           <RoomEntry key={room.name} room={room} joinRoom={joinRoom} />
         ))}
