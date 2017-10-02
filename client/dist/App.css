@@ -344,11 +344,14 @@ select {
 }
 
 #poopHours {
-
+    width: 30%;
+    height: 24px;
+    font-size: 16px;
+    margin: 10px;
 }
 
 .poopSubmit {
-    margin: 0 auto;
+    margin: 10px;
 }
 
 #waitingOnPoopers {
@@ -426,7 +429,7 @@ select {
     text-align: left;
     vertical-align: top;
     display: inline-flex;
-    margin: 0 10px;
+    margin: 10px;
     color: white;
     height: 178px;
     width: 127px;
