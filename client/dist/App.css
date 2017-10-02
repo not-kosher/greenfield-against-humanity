@@ -295,7 +295,7 @@ select {
      text-align: left;
      vertical-align: top;
      display: inline-flex;
-     margin: 5px;
+     margin: 0px 5px;
      color: black;
      height: 178px;
      width: 127px;
@@ -398,7 +398,7 @@ select {
 
 .singleSubmission {
     display: inline-flex;
-    padding: 12px;
+    padding: 10px;
 }
 
 .BlackCard {
