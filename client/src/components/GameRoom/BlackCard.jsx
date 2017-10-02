@@ -4,7 +4,7 @@ const BlackCard = ({card}) => {
   if (card.text) {
     return (
       <div className="BlackCard">
-        <h4><b>{card.text}</b></h4> 
+        <h4 className='card-text'><b>{card.text}</b></h4> 
       </div>
     );
   } else {

@@ -16,7 +16,7 @@ const Card = ({card, submit, state}) => {
         }
       }
     }}>
-      <h4><b>{card.text}</b></h4> 
+      <h4 className='card-text' ><b>{card.text}</b></h4> 
     </div>
   );
 };
