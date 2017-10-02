@@ -432,6 +432,11 @@ select {
     border-color: white;
 }
 
+.turn-phase {
+    float: left;
+    font-weight: bold;
+}
+
 .EndGame {
     display: none; 
     position: center; 

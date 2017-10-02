@@ -239,7 +239,17 @@ class GameRoom extends React.Component {
             <MessageBoard messages={this.state.messages} submitMessage={this.submitMessage}/>
           </div>
           <div className='game-container'>
-            <GameAlerts turnPhase={this.state.turnPhase} />
+            <GameAlerts 
+              turnPhase={this.state.turnPhase} 
+              user={this.state.user} 
+              czar={this.state.czar}
+              roomCreator={this.state.roomCreator}
+              winner={this.state.winner}
+              startPoopPrompt={this.startPoopPrompt}
+              endTurn={this.endTurn}
+              playerIsLeaving={this.playerIsLeaving}
+              playerIsStaying={this.playerIsStaying}
+            />
             <div className='gameplay-window'>
               <PoopPrompt poopSubmission={this.poopSubmission} />
               <Table 

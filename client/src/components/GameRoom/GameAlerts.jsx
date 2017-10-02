@@ -14,9 +14,19 @@ class GameAlert extends React.Component {
   render() {
     return (
       <div className='game-alerts'>
-        <Actions startPoopPrompt={this.startPoopPrompt} endTurn={this.endTurn} state={this.state}/>
-        { this.state.winner && 
-          <EndGamePrompt winner={this.state.winner} playerIsLeaving={this.playerIsLeaving} playerIsStaying={this.playerIsStaying}/>
+        <Actions 
+          startPoopPrompt={this.props.startPoopPrompt} 
+          endTurn={this.props.endTurn} 
+          turnPhase={this.props.turnPhase} 
+          user={this.props.user} 
+          czar={this.props.czar}
+          roomCreator={this.props.roomCreator}
+        />
+        { this.props.winner && 
+          <EndGamePrompt 
+            winner={this.props.winner} 
+            playerIsLeaving={this.playerIsLeaving} 
+            playerIsStaying={this.playerIsStaying}/>
         }
       </div>
     );
