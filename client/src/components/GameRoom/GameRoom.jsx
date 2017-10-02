@@ -156,7 +156,8 @@ class GameRoom extends React.Component {
 
   }
 
-  poopSubmission() {
+  poopSubmission(e) {
+    e.preventDefault();
     const poopHours = document.getElementById('poopHours').value;
     var poop = document.getElementById('poop');
     document.getElementById('prompt').style.display = 'none';
