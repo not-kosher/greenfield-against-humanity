@@ -1,13 +1,9 @@
 import React from 'react';
-import Actions from './Actions';
 import EndGamePrompt from './EndGamePrompt';
 
 class GameAlert extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      decided: false,
-    };
   }
 
   render() {
@@ -31,7 +27,7 @@ class GameAlert extends React.Component {
     } else if (this.props.user === this.props.czar && this.props.turnPhase === 'submission') {
       return (
         <div className='alert-message'>
-          {`Waiting on ${this.props.numToWaitFor} more minion${this.props.numToWaitFor > 1 ? 's' : ''} to submit a card.`}
+          {`Waiting on ${this.props.numToWaitFor} more minion${this.props.numToWaitFor > 1 ? 's' : ''} to submit.`}
         </div>
       );
     } else if (this.props.turnPhase === 'submission') {
@@ -84,7 +80,7 @@ class GameAlert extends React.Component {
     } else if (this.props.turnPhase === 'gameOver') {
       return (
         <EndGamePrompt 
-          decided={this.state.decided}
+          decided={this.props.decided}
           winner={this.props.winner} 
           playerIsLeaving={this.props.playerIsLeaving} 
           playerIsStaying={this.props.playerIsStaying}

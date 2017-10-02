@@ -27,6 +27,7 @@ class GameRoom extends React.Component {
       yourSumittedCards: [],
       messages: [],
       winner: '',
+      decidedEndGame: false,
     };
 
     this.startPoopPrompt = this.startPoopPrompt.bind(this);
@@ -115,8 +116,8 @@ class GameRoom extends React.Component {
         winner: winner,
       });
 
-      const endGamePrompt = document.getElementById('End');
-      endGamePrompt.style.display = 'block';
+      // const endGamePrompt = document.getElementById('End');
+      // endGamePrompt.style.display = 'block';
     });
     socket.on('gameReset', () => {
       this.setState({
@@ -127,6 +128,7 @@ class GameRoom extends React.Component {
         czar: '',
         yourSumittedCards: [],
         winner: '',
+        decidedEndGame: false,
       });
     });
     socket.on('updateCreator', (roomCreator) => {
@@ -173,7 +175,6 @@ class GameRoom extends React.Component {
     }
   }
   
-
   cardSubmission(card) {
     if (this.state.turnPhase === 'submission' && this.state.user !== this.state.czar) {
       let submitted = false;
@@ -215,11 +216,14 @@ class GameRoom extends React.Component {
   }
 
   playerIsStaying() {
+    this.setState({
+      decidedEndGame: true
+    });
     socket.emit('playerIsStaying', this.state.room, this.state.user);
-    const endPromptContent = document.getElementById('endPromptContent');
-    endPromptContent.style.display = 'none';
-    const waitingMessage = document.getElementById('endWaiting');
-    waitingMessage.style.display = 'block';
+    // const endPromptContent = document.getElementById('endPromptContent');
+    // endPromptContent.style.display = 'none';
+    // const waitingMessage = document.getElementById('endWaiting');
+    // waitingMessage.style.display = 'block';
   }
 
   submitMessage(e) {
@@ -251,6 +255,7 @@ class GameRoom extends React.Component {
                 endTurn={this.endTurn}
                 playerIsLeaving={this.playerIsLeaving}
                 playerIsStaying={this.playerIsStaying}
+                decided={this.state.decidedEndGame}
               />
             </div>
             <div className='gameplay-window'>
