@@ -69,6 +69,18 @@ class GameRoom extends React.Component {
       this.showHand();
     });
     socket.on('setupNewTurn', (blackCard, czar) => {
+      // toggle on tint for the new czar's cards
+      const cards = document.getElementsByClassName('Card');
+      if (this.state.user === czar) {
+        for (let i = 0; i < cards.length; i++) {
+          cards[i].classList.add('tint-card');
+        }
+      } else {
+        for (let i = 0; i < cards.length; i++) {
+          cards[i].classList.remove('tint-card');
+        }
+      }
+
       this.setState({
         blackCard: blackCard,
         czar: czar
