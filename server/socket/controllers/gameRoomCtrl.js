@@ -15,7 +15,9 @@ const messageSubmission = (io, client, roomname, username, text) => {
 };
 
 const startPoopPrompt = (io, client, roomname) => {
+  const game = GameManager.getRoom(roomname);
   io.to(roomname).emit('openPoopPrompt');
+  io.to(roomname).emit('updatePhase', game.updatePhase('ordering'));
 
   //close room and update lobby
   GameManager.closeRoom(roomname);
