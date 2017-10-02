@@ -10,7 +10,7 @@ class Game {
     this.blackCard;
     this.players = [];
     this.czarIndex;
-    this.pointsToWin = +pointsToWin;
+    this.pointsToWin = +pointsToWin || 10;
     this.numStaying = 0; // used at end of game to check for restart
     this.winner;
 
