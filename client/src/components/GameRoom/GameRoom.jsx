@@ -24,7 +24,8 @@ class GameRoom extends React.Component {
       turnPhase: '',
       playerArray: [],
       czar: '',
-      yourSumittedCards: [],
+      yourSubmittedCards: [],
+      submittedAlready: false,
       messages: [],
       winner: '',
       decidedEndGame: false,
@@ -68,12 +69,28 @@ class GameRoom extends React.Component {
       this.showHand();
     });
     socket.on('setupNewTurn', (blackCard, czar) => {
+      // toggle on tint for the new czar's cards
+      const cards = document.getElementsByClassName('Card');
+      if (this.state.user === czar) {
+        for (let i = 0; i < cards.length; i++) {
+          cards[i].classList.add('tint-card');
+        }
+      } else {
+        for (let i = 0; i < cards.length; i++) {
+          cards[i].classList.remove('tint-card');
+        }
+      }
+
       this.setState({
         blackCard: blackCard,
         czar: czar
       });
     });
     socket.on('updatePhase', (phase) => {
+      const alerts = document.getElementsByClassName('alert-message');
+      for (var i = 0; i < alerts.length; i++) {
+        alerts[i].classList.add('alert-animation');
+      }
       const selected = document.getElementsByClassName('selected');
       for (var i = 0; i < selected.length; i++) {
         selected[i].classList.remove('selected');
@@ -82,7 +99,8 @@ class GameRoom extends React.Component {
         turnPhase: phase,
       });
       if (phase === 'revelation') {
-        this.state.yourSumittedCards = [];
+        this.state.yourSubmittedCards = [];
+        this.state.submittedAlready = false;
       }
     });
     socket.on('updateSubmittedCards', (submitted) => {
@@ -123,7 +141,8 @@ class GameRoom extends React.Component {
         submittedCards: [],
         turnPhase: '',
         czar: '',
-        yourSumittedCards: [],
+        yourSubmittedCards: [],
+        submittedAlready: false,
         winner: '',
         decidedEndGame: false,
       });
@@ -153,7 +172,8 @@ class GameRoom extends React.Component {
 
   }
 
-  poopSubmission() {
+  poopSubmission(e) {
+    e.preventDefault();
     const poopHours = document.getElementById('poopHours').value;
     var poop = document.getElementById('poop');
     document.getElementById('prompt').style.display = 'none';
@@ -175,16 +195,17 @@ class GameRoom extends React.Component {
   cardSubmission(card) {
     if (this.state.turnPhase === 'submission' && this.state.user !== this.state.czar) {
       let submitted = false;
-      this.state.yourSumittedCards.forEach((submittedCard) => {
+      this.state.yourSubmittedCards.forEach((submittedCard) => {
         if (submittedCard.id === card.id) {
           submitted = true;
         }
       });
       if (submitted === false) {
-        this.state.yourSumittedCards.push(card);
+        this.state.yourSubmittedCards.push(card);
       }
-      if (this.state.yourSumittedCards.length === this.state.blackCard.pick) {
-        socket.emit('cardSubmission', this.state.room, this.props.username, this.state.yourSumittedCards);
+      if (this.state.yourSubmittedCards.length === this.state.blackCard.pick) {
+        this.state.submittedAlready = true;
+        socket.emit('cardSubmission', this.state.room, this.props.username, this.state.yourSubmittedCards);
       }
     }
   }

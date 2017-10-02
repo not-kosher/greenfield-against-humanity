@@ -6,7 +6,7 @@ const Card = ({card, submit, state}) => {
   return (
     <div className="Card" onClick={function(e) {
       submit(card);
-      if (state.turnPhase === 'submission' && state.user !== state.czar) {
+      if (state.turnPhase === 'submission' && state.user !== state.czar && !state.submittedAlready) {
         if ([...(e.target.classList)].includes('Card')) {
           e.target.classList.add('selected');
         } else if ([...(e.target.parentElement.classList)].includes('Card')) {
@@ -16,7 +16,7 @@ const Card = ({card, submit, state}) => {
         }
       }
     }}>
-      <h4><b>{card.text}</b></h4> 
+      <h4 className='card-text' ><b>{card.text}</b></h4> 
     </div>
   );
 };

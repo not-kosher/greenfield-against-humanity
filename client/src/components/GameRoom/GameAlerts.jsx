@@ -1,5 +1,6 @@
 import React from 'react';
 import EndGamePrompt from './EndGamePrompt';
+import classNames from 'classnames';
 
 class GameAlert extends React.Component {
   constructor(props) {
