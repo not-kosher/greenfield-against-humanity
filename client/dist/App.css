@@ -2,8 +2,9 @@ body {
     background-color: black;
     color: white;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    height: 1000px;
-
+    height: 100vh;
+    /* scroll-behavior: none;
+    overflow-y: hidden; */
 }
  
 select {
@@ -19,6 +20,7 @@ select {
 
 .navbar {
     overflow: hidden;
+    height: 8vh;
 }
 
 .navbar a {
@@ -32,7 +34,6 @@ select {
     float: right;
     font-size: 17px;
     padding: 10px;
-    margin-bottom: 50px;
     text-decoration: none;
 }
 
@@ -230,10 +231,40 @@ select {
 --------- */
 
 
+.gameroom-wrapper {
+    height: 92vh;
+}
+
 .RoomName {
     font-size: 45px;
     display: block;
     padding-bottom: 15px;
+    height: 10%;
+}
+
+.gameroom-container {
+    height: 90%;
+}
+
+.player-pannel {
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+
+.game-container {
+    width: 80%;
+    height: 100%; 
+    float: right;
+}
+
+.game-alerts {
+    height: 10%;
+}
+
+.gameplay-window {
+    height: 90%;
+    /* overflow-y: scroll; */
 }
 
 .Action {
@@ -254,7 +285,7 @@ select {
   border-radius: 10px;
   padding: 10px;
   overflow-wrap: break-word;
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 
 .SubmittedCard { 
@@ -274,12 +305,8 @@ select {
 
 .poopPrompt {
     display: none; 
-    position: center; 
-    z-index: 1; 
-    top: 0;
-    width: 35%; 
-    height: 20%; 
-    overflow: auto; 
+    width: 50%; 
+    height: 60%;  
     padding: 5px;
     background-color: black; 
     border: 2px solid;
@@ -322,15 +349,16 @@ select {
     border: 2px solid;
     border-color: white;
     padding: 5px; 
-    width: 200px;
-    margin-bottom: 600px;
-    margin-top: 5px;
+    width: calc(100% - 14px);
+    /* margin-bottom: 5px; */
+    /* margin-top: 5px; */
     vertical-align: top;
+    height: calc(30% - 14px);
 }
 
 .Hand {
     display: inline-block;
-    width: 700px;
+    /* width: 700px; */
     margin: auto;
 }
 
@@ -360,13 +388,13 @@ select {
 
 .Table {
     display: inline-block;
-    width: 1000px;
-    height: 250px;
+    /* width: 1000px;
+    height: 250px; */
 }
 
 .Submitted {
     display: inline-flex;
-    width: 800px
+    /* width: 800px */
 }
 
 .singleSubmission {
@@ -401,7 +429,7 @@ select {
     position: center; 
     z-index: 1; 
     top: 0;
-    width: 35%; 
+    /* width: 35%;  */
     height: 20%; 
     overflow: auto; 
     padding: 5px;
@@ -414,16 +442,26 @@ select {
     display: none;
 }
 
-.move {
+.alert-message {
+    float: left;
+    margin-left: 5px;
+}
+
+.alert-button {
+    float: right;
+    margin-right: 5px;
+}
+
+/* .move {
     visibility: visible;
     -webkit-animation: slideIn 3000ms linear both;
     animation: slideIn 3000ms linear both;
     animation-name: slideIn
-  }
+  } */
   
   /* Generated with Bounce.js. Edit at https://goo.gl/TZCX8k */
   
-  @-webkit-keyframes slideIn { 
+  /* @-webkit-keyframes slideIn { 
     0% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 800, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 800, 0, 1); }
     0.43% { -webkit-transform: matrix3d(3.905, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 742.377, 0, 1); transform: matrix3d(3.905, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 742.377, 0, 1); }
     0.85% { -webkit-transform: matrix3d(4.554, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 688.432, 0, 1); transform: matrix3d(4.554, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 688.432, 0, 1); }
@@ -465,7 +503,7 @@ select {
     60.56% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.02, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.02, 0, 1); }
     82.78% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
     100% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
-  }
+  } */
 
   .glow {
     -moz-box-shadow: 0 0 50px red;
