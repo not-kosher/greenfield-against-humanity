@@ -24,6 +24,12 @@ class GameAlert extends React.Component {
           Waiting for the game creator to start the game.
         </div>
       );
+    } else if (this.props.turnPhase === 'ordering') {
+      return (
+        <div className='alert-message'>
+          Only the emptiest of bowels can be the first card czar.
+        </div>
+      );
     } else if (this.props.user === this.props.czar && this.props.turnPhase === 'submission') {
       return (
         <div className='alert-message'>
