@@ -429,7 +429,7 @@ select {
     position: center; 
     z-index: 1; 
     top: 0;
-    width: 35%; 
+    /* width: 35%;  */
     height: 20%; 
     overflow: auto; 
     padding: 5px;
@@ -440,6 +440,16 @@ select {
 
 #endWaiting {
     display: none;
+}
+
+.alert-message {
+    float: left;
+    margin-left: 5px;
+}
+
+.alert-button {
+    float: right;
+    margin-right: 5px;
 }
 
 /* .move {

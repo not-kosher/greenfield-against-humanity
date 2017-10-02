@@ -113,7 +113,6 @@ class GameRoom extends React.Component {
       this.setState({
         winner: winner,
       });
-      console.log('Winner is ', winner);
 
       const endGamePrompt = document.getElementById('End');
       endGamePrompt.style.display = 'block';
