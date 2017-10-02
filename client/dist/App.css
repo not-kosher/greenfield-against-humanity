@@ -435,21 +435,11 @@ select {
     border-color: white;
 }
 
-.EndGame {
-    position: center; 
-    z-index: 1; 
-    top: 0;
-    height: 20%; 
-    overflow: auto; 
-    padding: 5px;
-    background-color: black; 
-}
-
 .alert-message {
     float: left;
     font-size: 16px;
     margin-left: 15px;
-    margin-top: 12px;
+    margin-top: 10px;
 }
 
 .alert-button {
@@ -457,7 +447,7 @@ select {
     cursor: pointer;
     font-size: 16px;
     margin-right: 15px;
-    margin-top: 12px;
+    margin-top: 10px;
 }
 
 /* .move {
