@@ -34,7 +34,6 @@ class GameRoom extends React.Component {
     this.startPoopPrompt = this.startPoopPrompt.bind(this);
     this.poopSubmission = this.poopSubmission.bind(this); 
     this.initializeGame = this.initializeGame.bind(this);
-    this.showHand = this.showHand.bind(this);
     this.cardSubmission = this.cardSubmission.bind(this);
     this.revealCard = this.revealCard.bind(this);
     this.winnerSelected = this.winnerSelected.bind(this);
@@ -55,6 +54,7 @@ class GameRoom extends React.Component {
       poop.style.display = 'block';
     });
     socket.on('gameHasStarted', () => {
+      //removes poop prompt for gameplay
       document.getElementById('prompt').style.display = 'block';
       document.getElementById('waitingOnPoopers').style.display = 'none';
       var poop = document.getElementById('poop');
@@ -62,11 +62,9 @@ class GameRoom extends React.Component {
       this.initializeGame();
     });
     socket.on('refillHand', (cards) => {
-      
       this.setState({
         hand: cards
       });
-      this.showHand();
     });
     socket.on('setupNewTurn', (blackCard, czar) => {
       // toggle on tint for the new czar's cards
@@ -87,10 +85,7 @@ class GameRoom extends React.Component {
       });
     });
     socket.on('updatePhase', (phase) => {
-      const alerts = document.getElementsByClassName('alert-message');
-      for (var i = 0; i < alerts.length; i++) {
-        alerts[i].classList.add('alert-animation');
-      }
+      //removes selected class from cards in the hands
       const selected = document.getElementsByClassName('selected');
       for (var i = 0; i < selected.length; i++) {
         selected[i].classList.remove('selected');
@@ -104,6 +99,7 @@ class GameRoom extends React.Component {
       }
     });
     socket.on('updateSubmittedCards', (submitted) => {
+      //removes selected class from cards in the hands
       const selected = document.getElementsByClassName('selected');
       for (var i = 0; i < selected.length; i++) {
         selected[i].classList.remove('selected');
@@ -184,16 +180,10 @@ class GameRoom extends React.Component {
   initializeGame() {
     socket.emit('initializeGame', this.state.room, this.props.username);
   }
-
-  showHand() {
-    const cards = document.getElementsByClassName('Card');
-    for (var i = 0; i < cards.length; i++) {
-      cards[i].classList.add('move');
-    }
-  }
   
   cardSubmission(card) {
     if (this.state.turnPhase === 'submission' && this.state.user !== this.state.czar) {
+      //checks to see card has already been submitted, prevents double submission
       let submitted = false;
       this.state.yourSubmittedCards.forEach((submittedCard) => {
         if (submittedCard.id === card.id) {
