@@ -12,7 +12,7 @@ A production build for this application is available here:
 
 https://limitless-beyond-58814.herokuapp.com/
 
-If you would like to run this application locally, see the Installation section below.
+If you would like to run this application locally, see the Local Installation section below.
 
 ## Local Installation
 
@@ -20,6 +20,7 @@ If you would like to run this application locally, see the Installation section 
 
 This application requires node and you can use npm to install all other dependencies, including:
 - React
+- Webpack
 - Express
 - Passport
 - Socket.io
@@ -64,15 +65,52 @@ Only the database URL is required for running locally, although other URLs shoul
 
 https://www.elephantsql.com/
 
+## File Structure
+
+### Front End
+
+All front end related files can be found in `/client`. 
+
+```
+client
+|-- dist (all static files, bundle.js compiled file ends up here)
+|-- src (all source files for react components and front-end socket)
+    |-- components
+    |   |-- ...all component jsx files
+    |-- socket
+    |   |-- index.js
+    |-- index.jsx (starter component)
+```
+
+### Back End
+
+All back end related files can be found in `/server`.
+
+```
+server
+|-- controllers (controller files for used by route handlers, 
+|   |            currently only utilizing user controller for user auth)
+|   |-- ...controller files
+|-- routes (route handler files, also only currently using 'users' route)
+|   |-- ...route files
+|-- db (database files)
+|   |-- config (db connection)
+|   |-- seeding (for seeding the base deck to the database)
+|-- socket (all back-end socket functionality)
+    |-- controllers (socket functions called by socket listeners)
+    |-- routes (socket listener events)
+    |-- gameManager (gameplay and game state trackers)
+```
+
 ## Credits
 
 This project was built for the Greenfield team sprint at Hack Reactor LA
 
 ### Team Members
 
-Tyler Vander Maas
-Lillian Anderson
-Philip Marazita
+- Tyler Vander Maas
+- Lillian Anderson
+- Philip Marazita
 
 ## Contact
 
