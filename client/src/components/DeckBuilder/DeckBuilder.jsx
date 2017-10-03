@@ -9,7 +9,7 @@ class DeckBuilder extends React.Component {
     return (
       <div>
         <div className='deckBuilderContent'> 
-          <div className='Title'>Build your own deck</div>
+          <div className='title'>Build your own deck</div>
           <div>coming soon...</div>
         </div>
       </div>
