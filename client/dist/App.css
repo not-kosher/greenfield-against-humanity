@@ -35,7 +35,7 @@ select {
     text-decoration: none;
 }
 
-.Logo {
+.logo {
     float: left;
     font-size: 20px;
 }
@@ -169,7 +169,7 @@ select {
     border-color: white;
 }
 
-.AddRoom {
+.add-room {
     display: inline-block;
     vertical-align: top;
     margin: 30px;
@@ -194,7 +194,7 @@ select {
     font-size: 16px;
 }
 
-.ClassFormContainer {
+.class-form-container {
     display: block;
 }
 
@@ -204,7 +204,7 @@ select {
     height: 82%;
 }
 
-.RoomList {
+.room-list {
     display: inline-block;
     width: 650px;
     text-align: center;
@@ -219,7 +219,7 @@ select {
     margin: 0 10px;
 }
 
-.roommame {
+.room-title {
     font-size: 30px; 
 }
 

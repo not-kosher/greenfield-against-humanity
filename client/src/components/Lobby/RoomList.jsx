@@ -3,7 +3,7 @@ import RoomEntry from './RoomEntry';
 
 const RoomList = ({ rooms, joinRoom }) => {
   return (
-    <div className='RoomList'>
+    <div className='room-list'>
       <div className='title'>Rooms of Debauchery</div>
       <div className='roomlist-window'>
 

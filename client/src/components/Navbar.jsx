@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Navbar = ({ username, logout }) => {
   return (
     <div className='navbar'>
-      <div className='Logo navbar-element'>Greenfield Against Humanity</div>
+      <div className='logo navbar-element'>Greenfield Against Humanity</div>
       {username ? (
         <div>
           <div className='logout-button navbar-element' onClick={logout}>
