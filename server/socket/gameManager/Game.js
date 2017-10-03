@@ -10,7 +10,7 @@ class Game {
     this.blackCard;
     this.players = [];
     this.czarIndex;
-    this.pointsToWin = +pointsToWin || 10;
+    this.pointsToWin = +pointsToWin || 10; //the + coerces pointsToWin to a number
     this.numStaying = 0; // used at end of game to check for restart
     this.winner;
 
@@ -25,7 +25,6 @@ class Game {
 
     // array of submission objects with 
     // {username, show, chosen, cards}
-    // cards is array of submitted white card objects
     this.submissions = [];
 
     this.addPlayer(username);
@@ -49,6 +48,7 @@ class Game {
       this.deck.blackCards = _.shuffle(this.discarded.blackCards);
       this.discarded.blackCards = [];
     }
+
     if (this.deck.whiteCards.length === 0) {
       this.deck.whiteCards = _.shuffle(this.discarded.whiteCards);
       this.discarded.whiteCards = [];
@@ -107,7 +107,6 @@ class Game {
       this.refillDeck();
     }
     this.blackCard = this.deck.blackCards.pop();
-    // return this.blackCard;
   }
   
   // helper function for this.startTurn, doesn't have to be called in controller
