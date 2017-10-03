@@ -1,8 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 
-
-
 const SubmittedCard = ({ select, card, submission, revealCard }) => {
   //renders submission based on turn phase
   if (submission.chosen === true && submission.show === true) {

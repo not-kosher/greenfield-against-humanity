@@ -1,7 +1,5 @@
 import React from 'react';
 
-
-
 const Card = ({card, submit, state}) => {
   return (
     <div className="card" onClick={function(e) {

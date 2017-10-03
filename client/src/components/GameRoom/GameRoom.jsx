@@ -3,12 +3,10 @@ import socket from '../../socket/index.js';
 import Hand from './Hand';
 import PlayerList from './PlayerList';
 import Table from './Table';
-
 import PoopPrompt from './PoopPrompt';
 import MessageBoard from './MessageBoard';
 import EndGamePrompt from './EndGamePrompt';
 import GameAlerts from './GameAlerts';
-
 
 class GameRoom extends React.Component {
   constructor(props) {
