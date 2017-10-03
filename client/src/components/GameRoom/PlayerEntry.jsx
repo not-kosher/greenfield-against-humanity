@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Img from 'react-image';
-
 
 const PlayerEntry = ({player, czar}) => {
   if (player.username === czar) {
