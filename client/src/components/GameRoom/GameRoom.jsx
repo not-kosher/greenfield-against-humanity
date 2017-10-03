@@ -66,7 +66,7 @@ class GameRoom extends React.Component {
     });
     socket.on('setupNewTurn', (blackCard, czar) => {
       // toggle on tint for the new czar's cards
-      const cards = document.getElementsByClassName('Card');
+      const cards = document.getElementsByClassName('card');
       if (this.state.user === czar) {
         for (let i = 0; i < cards.length; i++) {
           cards[i].classList.add('tint-card');
