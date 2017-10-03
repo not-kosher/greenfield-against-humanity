@@ -3,7 +3,6 @@ import socket from '../../socket/index.js';
 import Hand from './Hand';
 import PlayerList from './PlayerList';
 import Table from './Table';
-import Actions from './Actions';
 import PoopPrompt from './PoopPrompt';
 import MessageBoard from './MessageBoard';
 import EndGamePrompt from './EndGamePrompt';
@@ -85,11 +84,6 @@ class GameRoom extends React.Component {
       });
     });
     socket.on('updatePhase', (phase) => {
-      //removes selected class from cards in the hands
-      const selected = document.getElementsByClassName('selected');
-      for (var i = 0; i < selected.length; i++) {
-        selected[i].classList.remove('selected');
-      }
       this.setState({
         turnPhase: phase,
       });
@@ -99,7 +93,7 @@ class GameRoom extends React.Component {
       }
     });
     socket.on('updateSubmittedCards', (submitted) => {
-      //removes selected class from cards in the hands
+      //removes selected class from cards in the hands, sometimes it stays there....goodluck
       const selected = document.getElementsByClassName('selected');
       for (var i = 0; i < selected.length; i++) {
         selected[i].classList.remove('selected');

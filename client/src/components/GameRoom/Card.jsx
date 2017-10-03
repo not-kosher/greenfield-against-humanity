@@ -6,6 +6,10 @@ const Card = ({card, submit, state}) => {
   return (
     <div className="Card" onClick={function(e) {
       submit(card);
+      { /* this sets the red selective border around the card once it has been selected, the card element
+      has three divs in it, on click it would outline each individual div, this checks each element
+      if it is the card element it outlines it, if not if finds the proper card parent element and 
+      adds the outline  */ } 
       if (state.turnPhase === 'submission' && state.user !== state.czar && !state.submittedAlready) {
         if ([...(e.target.classList)].includes('Card')) {
           e.target.classList.add('selected');
