@@ -29,7 +29,9 @@ This application requires node and you can use npm to install all other dependen
 
 First fork a copy of this repo, then clone/download your forked copy or this repo by copying the link from github.  If cloning make a local copy using:
 
-```git clone <git link here>```
+```
+git clone <git link here>
+```
 
 Once dowloaded, navigate to the directory in a terminal window and run:
 
@@ -66,6 +68,17 @@ Only the database URL is required for running locally, although other URLs shoul
 https://www.elephantsql.com/
 
 ## File Structure
+
+At the root level the following file should be added:
+
+```
+.env (with environment variables as explained above)
+```
+
+### Notes about root files
+
+- This application uses pomander to enforce linter rules for coding style.  
+- webpack.config.js is already setup to use babel for compiling .jsx files into es2015-compatible code in the bundle.js file
 
 ### Front End
 
@@ -108,12 +121,10 @@ This project was built for the Greenfield team sprint at Hack Reactor LA
 
 ### Team Members
 
-- Tyler Vander Maas
-- Lillian Anderson
-- Philip Marazita
+- Tyler Vander Maas - tvmaasjazz@gmail.com
+- Lillian Anderson - lilliananderson@ucla.edu
+- Philip Marazita - pmarazita@gmail.com
 
 ## Contact
 
-tvmaasjazz@gmail.com
-lilliananderson@ucla.edu
-pmarazita@gmail.com
+Inquiries can be made to any of the team members' emails lsited above
