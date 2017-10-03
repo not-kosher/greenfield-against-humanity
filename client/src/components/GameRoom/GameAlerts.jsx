@@ -96,31 +96,6 @@ class GameAlert extends React.Component {
     } else {
       return null;
     }
-
-    // return (
-    //   <div className='game-alerts'>
-    //     <Actions 
-    //       startPoopPrompt={this.props.startPoopPrompt} 
-    //       endTurn={this.props.endTurn} 
-    //       turnPhase={this.props.turnPhase} 
-    //       user={this.props.user} 
-    //       czar={this.props.czar}
-    //       roomCreator={this.props.roomCreator}
-    //     />
-    //     { this.props.turnPhase === 'submission' ?
-    //       <div className='alert-message'>
-
-    //       </div>
-    //       : this.props.turnPhase === 'gameOver' ? 
-    //         <EndGamePrompt 
-    //           winner={this.props.winner} 
-    //           playerIsLeaving={this.props.playerIsLeaving} 
-    //           playerIsStaying={this.props.playerIsStaying}
-    //         />
-    //         : null
-    //     }
-    //   </div>
-    // );
   }
 }
 

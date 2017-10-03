@@ -2,12 +2,12 @@ import React from 'react';
 
 const AddRoom = ({ createRoom }) => {
   return (
-    <div className='AddRoom'>
-      <div className='ClassFormContainer'>
+    <div className='add-room'>
+      <div className='class-form-container'>
         <div className='form-title'>Create A Room:</div>
         <form onSubmit={createRoom} className='add-room-form'>
           <div className='addroom-input-container'>
-            <input id='roomname' placeholder='Enter room name' className='addroom-input'/>
+            <input id='room-title' placeholder='Enter room name' className='addroom-input'/>
           </div>
           <div className='addroom-input-container'>
             <label className='addroom-label'>Points to win:  </label>
