@@ -233,7 +233,7 @@ class GameRoom extends React.Component {
   render() {
     return (
       <div className='gameroom-wrapper'>
-        <div className='RoomName'>{this.state.room}</div>
+        <div className='room-name'>{this.state.room}</div>
         <div className='gameroom-container'>
           <div className='player-pannel'>
             <PlayerList players={this.state.playerArray} czar={this.state.czar}/>
