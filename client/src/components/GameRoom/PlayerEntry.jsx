@@ -4,7 +4,7 @@ import React from 'react';
 const PlayerEntry = ({player, czar}) => {
   if (player.username === czar) {
     return (
-      <div className='Czar'>
+      <div className='czar'>
         <div className='score'>{player.points}</div>
         <div className='username'>
           {player.username}
@@ -13,7 +13,7 @@ const PlayerEntry = ({player, czar}) => {
     );
   }
   return (
-    <div className='PlayerEntry'>
+    <div className='player-entry'>
       <div className='score'>{player.points}</div>
       <div className='username'>
         {player.username}

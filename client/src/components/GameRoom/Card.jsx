@@ -4,7 +4,7 @@ import React from 'react';
 
 const Card = ({card, submit, state}) => {
   return (
-    <div className="Card" onClick={function(e) {
+    <div className="card" onClick={function(e) {
       submit(card);
       { /* this sets the red selective border around the card once it has been selected, the card element
       has three divs in it, on click it would outline each individual div, this checks each element

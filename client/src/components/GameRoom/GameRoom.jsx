@@ -3,6 +3,7 @@ import socket from '../../socket/index.js';
 import Hand from './Hand';
 import PlayerList from './PlayerList';
 import Table from './Table';
+
 import PoopPrompt from './PoopPrompt';
 import MessageBoard from './MessageBoard';
 import EndGamePrompt from './EndGamePrompt';
@@ -55,7 +56,7 @@ class GameRoom extends React.Component {
     socket.on('gameHasStarted', () => {
       //removes poop prompt for gameplay
       document.getElementById('prompt').style.display = 'block';
-      document.getElementById('waitingOnPoopers').style.display = 'none';
+      document.getElementById('waiting-on-poopers').style.display = 'none';
       var poop = document.getElementById('poop');
       poop.style.display = 'none';
       this.initializeGame();
@@ -164,10 +165,10 @@ class GameRoom extends React.Component {
 
   poopSubmission(e) {
     e.preventDefault();
-    const poopHours = document.getElementById('poopHours').value;
+    const poopHours = document.getElementById('poop-hours').value;
     var poop = document.getElementById('poop');
     document.getElementById('prompt').style.display = 'none';
-    document.getElementById('waitingOnPoopers').style.display = 'block';
+    document.getElementById('waiting-on-poopers').style.display = 'block';
     socket.emit('poopSubmission', this.state.room, this.state.user, poopHours);
   }
 
