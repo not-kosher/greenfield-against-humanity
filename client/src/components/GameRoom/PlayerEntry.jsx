@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const PlayerEntry = ({player, czar}) => {
   if (player.username === czar) {
     return (

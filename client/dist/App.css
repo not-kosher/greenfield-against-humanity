@@ -317,7 +317,7 @@ select {
     border-color: red;
 }
 
-.SubmittedCard { 
+.submitted-card { 
      text-align: left;
      vertical-align: top;
      display: inline-flex;
@@ -389,7 +389,7 @@ select {
 }
 
 
-.winnerContent {
+.winner-content {
     display: block;
     height: 150px;
 }
@@ -407,16 +407,16 @@ select {
 
 }
 
-.Table {
+.table {
     display: inline-block;
 }
 
-.Submitted {
+.submitted {
     display: inline-flex;
     /* width: 800px */
 }
 
-.singleSubmission {
+.single-submission {
     display: inline-flex;
     padding: 10px;
 }

@@ -11,11 +11,11 @@ const Card = ({card, submit, state}) => {
       if it is the card element it outlines it, if not if finds the proper card parent element and 
       adds the outline  */ } 
       if (state.turnPhase === 'submission' && state.user !== state.czar && !state.submittedAlready) {
-        if ([...(e.target.classList)].includes('Card')) {
+        if ([...(e.target.classList)].includes('card')) {
           e.target.classList.add('selected');
-        } else if ([...(e.target.parentElement.classList)].includes('Card')) {
+        } else if ([...(e.target.parentElement.classList)].includes('card')) {
           e.target.parentElement.classList.add('selected');
-        } else if (([...(e.target.parentElement.parentElement.classList)].includes('Card'))) {
+        } else if (([...(e.target.parentElement.parentElement.classList)].includes('card'))) {
           e.target.parentElement.parentElement.classList.add('selected');
         }
       }
