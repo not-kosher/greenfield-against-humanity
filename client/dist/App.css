@@ -35,7 +35,7 @@ select {
     text-decoration: none;
 }
 
-.Logo {
+.logo {
     float: left;
     font-size: 20px;
 }
@@ -154,7 +154,7 @@ select {
 
 }
 
-.Title {
+.title {
     font-size: 45px;
     display: inline-flex;
     padding: 15px 0;
@@ -169,7 +169,7 @@ select {
     border-color: white;
 }
 
-.AddRoom {
+.add-room {
     display: inline-block;
     vertical-align: top;
     margin: 30px;
@@ -194,7 +194,7 @@ select {
     font-size: 16px;
 }
 
-.ClassFormContainer {
+.class-form-container {
     display: block;
 }
 
@@ -204,14 +204,14 @@ select {
     height: 82%;
 }
 
-.RoomList {
+.room-list {
     display: inline-block;
     width: 650px;
     text-align: center;
     height: 90vh;
 }
 
-.RoomEntry {
+.room-entry {
     border: 1px solid;
     border-color: white;
     padding: 5px; 
@@ -219,7 +219,7 @@ select {
     margin: 0 10px;
 }
 
-.roommame {
+.room-title {
     font-size: 30px; 
 }
 
@@ -228,7 +228,7 @@ select {
     display: block;
 }
 
-.joinbutton {
+.join-button {
     float: right;
     font-size: 20px;
     margin: 10.5px;
@@ -259,7 +259,7 @@ select {
     height: 92vh;
 }
 
-.RoomName {
+.room-name {
     font-size: 45px;
     display: block;
     padding-bottom: 15px;
@@ -286,12 +286,7 @@ select {
     height: 90%;
 }
 
-.Action {
-    cursor: pointer;
-    display: inline-block;
-}
-
-.Card {
+.card {
  
   text-align: left;
   vertical-align: top;
@@ -317,7 +312,7 @@ select {
     border-color: red;
 }
 
-.SubmittedCard { 
+.submitted-card { 
      text-align: left;
      vertical-align: top;
      display: inline-flex;
@@ -337,15 +332,14 @@ select {
     color: gray;
 }
 
-.poopPrompt {
+.poop-prompt {
     display: none; 
     width: 100%; 
     height: 100%;  
     padding: 5px;
 }
 
-
-.poopContent {
+.poop-content {
     display: block;
     margin: 15% auto; 
     padding: 10px;
@@ -353,7 +347,7 @@ select {
     text-align: center;
 }
 
-#poopHours {
+#poop-hours {
     width: 30%;
     height: 24px;
     font-size: 16px;
@@ -364,29 +358,15 @@ select {
     margin: 10px;
 }
 
-#waitingOnPoopers {
+#waiting-on-poopers {
     font-size: 30px;
     display: none;
 }
 
-#poopHours {
-    margin-top: 10px;
-}
-
-.poopSubmit {
-    display: block;
-    border: 2px solid;
-    border-color: white;
-    margin-top: 10px;
-    padding: 5px;
-    width: 60px;
-    cursor: pointer;
-}
-
-.poopQ {
+.poop-q {
     font-size: 30px;
 }
-.PlayerList {
+.player-list {
     display: inline-block;
     border: 2px solid;
     border-color: white;
@@ -397,13 +377,12 @@ select {
     overflow: scroll;
 }
 
-.Hand {
+.hand {
     display: inline-block;
     margin: auto;
 }
 
-
-.winnerContent {
+.winner-content {
     display: block;
     height: 150px;
 }
@@ -412,7 +391,7 @@ select {
     display: block;
 }
 
-.PlayerEntry {
+.player-entry {
     display: block;
 }
 
@@ -421,21 +400,21 @@ select {
 
 }
 
-.Table {
+.table {
     display: inline-block;
 }
 
-.Submitted {
+.submitted {
     display: inline-flex;
     /* width: 800px */
 }
 
-.singleSubmission {
+.single-submission {
     display: inline-flex;
     padding: 10px;
 }
 
-.BlackCard {
+.black-card {
     text-align: left;
     vertical-align: top;
     display: inline-flex;
@@ -451,7 +430,7 @@ select {
     overflow-wrap: break-word;
 }
 
-.Czar  {
+.czar  {
     display: block;
     color: Red;
     font-weight: bold;
@@ -474,31 +453,7 @@ select {
     font-size: 16px;
     margin-left: 15px;
     margin-top: 10px;
-    /* animation: color_change 2s linear both;
-    -webkit-animation: color_change 2s linear both; */
 }
-/* @-webkit-keyframes color_change {
-    from { color: red; }
-    to { color: white; }
-}
-@keyframes color_change {
-    from { color: red; }
-    to { color: white; }
-}
-
-.alert-animation {
-    animation: color_change 2s linear both;
-    -webkit-animation: color_change 2s linear both;
-}
-
-    @-webkit-keyframes color_change {
-        from { color: red; }
-        to { color: white; }
-    }
-    @keyframes color_change {
-        from { color: red; }
-        to { color: white; } */
-    /* } */
 
 .alert-button {
     float: right;

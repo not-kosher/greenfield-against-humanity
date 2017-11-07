@@ -36,12 +36,13 @@ passport.use(new LocalStrategy(db.User.authenticate()));
 passport.serializeUser(db.User.serializeUser());
 passport.deserializeUser(db.User.deserializeUser());
 
+//socket setup
+const io = require('socket.io')(server);
+const setupSocket = require('./socket');
+setupSocket(io); 
+
+//start app
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log('App now listening on port ' + PORT);
-});
-
-//link socket
-const io = require('socket.io')(server);
-const setupSocket = require('./socket');
-setupSocket(io);  
+}); 

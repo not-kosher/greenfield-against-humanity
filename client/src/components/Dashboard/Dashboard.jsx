@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 const Dashboard = (props) => {
   return (
-    <div className='Dashboard'>
+    <div className='dashboard'>
       <div>
         <div className='dashboardContent'> 
-          <div className='Title'>Welcome, you filthy cur</div>
+          <div className='title'>Welcome, you filthy cur</div>
           <div className='dashboard-menu'>
             <Link to='lobby'>
               <div className='dashboard-menu-item'>

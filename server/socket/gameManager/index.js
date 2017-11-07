@@ -30,7 +30,7 @@ class GameManager {
   }
 
   endGame(roomname) {
-    delete games[roomname];
+    delete this.games[roomname];
   }
 
   addToLobby(roomname) {

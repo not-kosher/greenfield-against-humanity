@@ -19,14 +19,8 @@ webpackConfig.module.loaders.push({
   exclude: /node_modules/,
   loader: 'babel-loader',
   options: { 
-    presets: ['es2015', 'react'],
-    plugins: ['transform-class-properties']
+    presets: ['es2015', 'react']
   },
 });
-
-// webpackConfig.module.loaders.push({
-//   test: /\.(scss|css)$/,
-//   loaders: ['style-loader', 'css-loader', 'sass-loader'],
-// });
 
 module.exports = webpackConfig;

@@ -44,7 +44,7 @@ class Lobby extends React.Component {
   createRoom(e) {
     // TODO needs data validation for room name
     e.preventDefault();
-    const roomname = document.getElementById('roomname').value;
+    const roomname = document.getElementById('room-title').value;
     const pointsToWin = document.getElementById('points-to-win').value || 10;
     const deckname = document.getElementById('deckname').value;
     socket.emit('createRoom', roomname, this.props.username, deckname, pointsToWin);
@@ -56,12 +56,11 @@ class Lobby extends React.Component {
 
   render() {
     return (
-      <div className='Lobby'>
+      <div className='lobby'>
         <AddRoom createRoom={this.createRoom} />
         <div className='roomlist-container'>
           <RoomList rooms={this.state.rooms} joinRoom={this.joinRoom} />
         </div>
-
       </div>);
   }
 }
