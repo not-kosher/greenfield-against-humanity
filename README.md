@@ -6,6 +6,11 @@ An online multiplayer version of Cards Against Humanity.  Submit to your indecen
 
 Greenfield Against Humanity is a way to play your favorite game online with your friends or with strangers.  Create and join game rooms, and set the number of points it takes to win based on how long you want to play!  Custom deck creation coming soon!
 
+## Demo
+Video demo coming soon!
+
+![alt text](https://i.imgur.com/ym5Xvxv.png "In-game screenshot")
+
 ## Usage
 
 A production build for this application is available here:
