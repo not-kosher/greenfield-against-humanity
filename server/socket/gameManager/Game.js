@@ -13,6 +13,7 @@ class Game {
     this.pointsToWin = +pointsToWin || 10; //the + coerces pointsToWin to a number
     this.numStaying = 0; // used at end of game to check for restart
     this.winner;
+    this.handSize = 10;
 
     this.deck = {
       blackCards: _.shuffle(deck.blackCards),
@@ -149,7 +150,7 @@ class Game {
 
   refillHand(username) {
     const player = this.getPlayer(username);
-    while (player.cards.length < 7) {
+    while (player.cards.length < this.handSize) {
       player.cards.push(this.drawWhiteCard());
     }
     return player.cards;
